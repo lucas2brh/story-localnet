@@ -1,8 +1,20 @@
 # Ignore environment variable files
 .env
+.env.*
+!.env.example
 
 # Ignore build artifacts
 build/
+dist/
+
+# Logs and runtime output
+*.log
+logs/
+tmp/
+.cache/
+
+# Local binaries
+/story
 
 # Blockscout runtime data (generated at runtime)
 blockscout/services/blockscout-db-data/
@@ -13,3 +25,7 @@ blockscout/services/dets/
 # ETC
 .vscode
 .DS_Store
+node_modules
+.idea
+
+pnpm-lock.yaml
