@@ -1,0 +1,122 @@
+[
+  {
+    "index": 1,
+    "tokens": 914123992692492,
+    "source_moniker": "synth-val-01",
+    "source_operator": "storyvaloper1syn0000000000000000000000000000000001"
+  },
+  {
+    "index": 2,
+    "tokens": 850135313204018,
+    "source_moniker": "synth-val-02",
+    "source_operator": "storyvaloper1syn0000000000000000000000000000000002"
+  },
+  {
+    "index": 3,
+    "tokens": 790625841279737,
+    "source_moniker": "synth-val-03",
+    "source_operator": "storyvaloper1syn0000000000000000000000000000000003"
+  },
+  {
+    "index": 4,
+    "tokens": 735282032390155,
+    "source_moniker": "synth-val-04",
+    "source_operator": "storyvaloper1syn0000000000000000000000000000000004"
+  },
+  {
+    "index": 5,
+    "tokens": 683812280981604,
+    "source_moniker": "synth-val-05",
+    "source_operator": "storyvaloper1syn0000000000000000000000000000000005"
+  },
+  {
+    "index": 6,
+    "tokens": 635945092228254,
+    "source_moniker": "synth-val-06",
+    "source_operator": "storyvaloper1syn0000000000000000000000000000000006"
+  },
+  {
+    "index": 7,
+    "tokens": 591429082032116,
+    "source_moniker": "synth-val-07",
+    "source_operator": "storyvaloper1syn0000000000000000000000000000000007"
+  },
+  {
+    "index": 8,
+    "tokens": 550029320527065,
+    "source_moniker": "synth-val-08",
+    "source_operator": "storyvaloper1syn0000000000000000000000000000000008"
+  },
+  {
+    "index": 9,
+    "tokens": 511527332078850,
+    "source_moniker": "synth-val-09",
+    "source_operator": "storyvaloper1syn0000000000000000000000000000000009"
+  },
+  {
+    "index": 10,
+    "tokens": 475720181161092,
+    "source_moniker": "synth-val-10",
+    "source_operator": "storyvaloper1syn0000000000000000000000000000000010"
+  },
+  {
+    "index": 11,
+    "tokens": 442419558231298,
+    "source_moniker": "synth-val-11",
+    "source_operator": "storyvaloper1syn0000000000000000000000000000000011"
+  },
+  {
+    "index": 12,
+    "tokens": 411449951482869,
+    "source_moniker": "synth-val-12",
+    "source_operator": "storyvaloper1syn0000000000000000000000000000000012"
+  },
+  {
+    "index": 13,
+    "tokens": 382648646845106,
+    "source_moniker": "synth-val-13",
+    "source_operator": "storyvaloper1syn0000000000000000000000000000000013"
+  },
+  {
+    "index": 14,
+    "tokens": 355862985611231,
+    "source_moniker": "synth-val-14",
+    "source_operator": "storyvaloper1syn0000000000000000000000000000000014"
+  },
+  {
+    "index": 15,
+    "tokens": 330952192686368,
+    "source_moniker": "synth-val-15",
+    "source_operator": "storyvaloper1syn0000000000000000000000000000000015"
+  },
+  {
+    "index": 16,
+    "tokens": 307785548339562,
+    "source_moniker": "synth-val-16",
+    "source_operator": "storyvaloper1syn0000000000000000000000000000000016"
+  },
+  {
+    "index": 17,
+    "tokens": 286240559955792,
+    "source_moniker": "synth-val-17",
+    "source_operator": "storyvaloper1syn0000000000000000000000000000000017"
+  },
+  {
+    "index": 18,
+    "tokens": 266202962035973,
+    "source_moniker": "synth-val-18",
+    "source_operator": "storyvaloper1syn0000000000000000000000000000000018"
+  },
+  {
+    "index": 19,
+    "tokens": 247568544444937,
+    "source_moniker": "synth-val-19",
+    "source_operator": "storyvaloper1syn0000000000000000000000000000000019"
+  },
+  {
+    "index": 20,
+    "tokens": 230238581791472,
+    "source_moniker": "synth-val-20",
+    "source_operator": "storyvaloper1syn0000000000000000000000000000000020"
+  }
+]
