@@ -2,9 +2,20 @@
 
 set -e
 
-# Nodes and their corresponding base IPs (split into two arrays)
-NODE_NAMES=("bootnode1" "validator1" "validator2" "validator3" "validator4")
-NODE_BASE_IPS=("10.0.0.10" "10.0.0.20" "10.0.0.22" "10.0.0.24" "10.0.0.26")
+# Parameters (env vars override defaults)
+NUM_VALIDATORS=${NUM_VALIDATORS:-4}
+STORY_NODE_CONTEXT=${STORY_NODE_CONTEXT:-../story}
+VALIDATOR_BASE_IP=${VALIDATOR_BASE_IP:-10.0.0.20}
+
+# Build node arrays: bootnode1 + N validators
+NODE_NAMES=("bootnode1")
+NODE_BASE_IPS=("10.0.0.10")
+
+IFS='.' read -r o1 o2 o3 o4 <<< "$VALIDATOR_BASE_IP"
+for i in $(seq 1 "$NUM_VALIDATORS"); do
+  NODE_NAMES+=("validator$i")
+  NODE_BASE_IPS+=("$o1.$o2.$o3.$((o4 + (i-1)*2))")
+done
 
 # Template content for the Docker Compose file with placeholders for replacement
 generate_compose_file() {
@@ -26,9 +37,9 @@ services:
     container_name: ${NODE_NAME}-common-init
     image: alpine
     command: >
-      sh -c "apk add --no-cache openssl && openssl rand -hex 32 > \/root/.story/geth/data/jwtsecret"
+      sh -c "apk add --no-cache openssl && openssl rand -hex 32 > /root/.story/geth/data/jwtsecret"
     volumes:
-      - db-${NODE_NAME}-geth-data:\/root/.story/geth/data
+      - db-${NODE_NAME}-geth-data:/root/.story/geth/data
 
   ${NODE_NAME}-geth-init:
     container_name: ${NODE_NAME}-geth-init
@@ -38,10 +49,10 @@ services:
       dockerfile: ../story-localnet/Dockerfile.story-geth
     entrypoint: ''
     command: >
-      /bin/sh -c "/usr/local/bin/geth --state.scheme=hash init --datadir=\/root/.story/geth/data \/root/.story/geth/config/genesis.json"
+      /bin/sh -c "/usr/local/bin/geth --state.scheme=hash init --datadir=/root/.story/geth/data /root/.story/geth/config/genesis.json"
     volumes:
-      - ./config/story/genesis-geth.json:\/root/.story/geth/config/genesis.json:ro
-      - db-${NODE_NAME}-geth-data:\/root/.story/geth/data
+      - ./config/story/genesis-geth.json:/root/.story/geth/config/genesis.json:ro
+      - db-${NODE_NAME}-geth-data:/root/.story/geth/data
     depends_on:
       - ${NODE_NAME}-common-init
 
@@ -56,13 +67,13 @@ services:
     entrypoint: >
       sh -c 'sleep 10 && geth "\$\$@"'
     command:
-      - --datadir=\/root/.story/geth/data
-      - --config=\/root/.story/geth/config/geth.toml
-      - --nodekey=\/root/.story/geth/config/nodekey
+      - --datadir=/root/.story/geth/data
+      - --config=/root/.story/geth/config/geth.toml
+      - --nodekey=/root/.story/geth/config/nodekey
       - --authrpc.addr=0.0.0.0
       - --authrpc.port=8551
       - --authrpc.vhosts=*
-      - --authrpc.jwtsecret=\/root/.story/geth/data/jwtsecret
+      - --authrpc.jwtsecret=/root/.story/geth/data/jwtsecret
       - --http
       - --http.vhosts=*
       - --http.addr=0.0.0.0
@@ -75,9 +86,9 @@ services:
       - --discovery.port=30303
       - --nat=extip:${GETH_IP}
     volumes:
-      - ./config/story/${NODE_NAME}/geth:\/root/.story/geth/config
-      - db-${NODE_NAME}-geth-data:\/root/.story/geth/data
-      - db-${NODE_NAME}-node-data:\/root/.story/story/data
+      - ./config/story/${NODE_NAME}/geth:/root/.story/geth/config
+      - db-${NODE_NAME}-geth-data:/root/.story/geth/data
+      - db-${NODE_NAME}-node-data:/root/.story/story/data
     networks:
       story-localnet:
         ipv4_address: ${GETH_IP}
@@ -89,9 +100,9 @@ services:
     container_name: ${NODE_NAME}-node-init
     image: alpine
     command: >
-      sh -c "echo '{\"height\": \"0\", \"round\": 0, \"step\": 0}' > \/root/.story/story/data/priv_validator_state.json"
+      sh -c "echo '{\"height\": \"0\", \"round\": 0, \"step\": 0}' > /root/.story/story/data/priv_validator_state.json"
     volumes:
-      - db-${NODE_NAME}-node-data:\/root/.story/story/data
+      - db-${NODE_NAME}-node-data:/root/.story/story/data
     depends_on:
       - ${NODE_NAME}-common-init
 
@@ -101,24 +112,24 @@ services:
     stop_grace_period: 50s
     image: story-node:localnet
     build:
-      context: ../story
+      context: ${STORY_NODE_CONTEXT}
       dockerfile: ../story-localnet/Dockerfile.story-node
     entrypoint: >
       sh -c 'sleep 10 && story run "\$\$@"'
     command:
       - --api-enable
       - --api-address=0.0.0.0:1317
-      - --engine-jwt-file=\/root/.story/geth/data/jwtsecret
+      - --engine-jwt-file=/root/.story/geth/data/jwtsecret
       - --engine-endpoint=http://${NODE_NAME}-geth:8551
       - --log_level=debug
     volumes:
-      - ./config/story/genesis-node.json:\/root/.story/story/config/genesis.json
-      - ./config/story/${NODE_NAME}/story/config.toml:\/root/.story/story/config/config.toml
-      - ./config/story/${NODE_NAME}/story/node_key.json:\/root/.story/story/config/node_key.json
-      - ./config/story/${NODE_NAME}/story/priv_validator_key.json:\/root/.story/story/config/priv_validator_key.json
-      - ./config/story/${NODE_NAME}/story/story.toml:\/root/.story/story/config/story.toml
-      - db-${NODE_NAME}-geth-data:\/root/.story/geth/data
-      - db-${NODE_NAME}-node-data:\/root/.story/story/data
+      - ./config/story/genesis-node.json:/root/.story/story/config/genesis.json
+      - ./config/story/${NODE_NAME}/story/config.toml:/root/.story/story/config/config.toml
+      - ./config/story/${NODE_NAME}/story/node_key.json:/root/.story/story/config/node_key.json
+      - ./config/story/${NODE_NAME}/story/priv_validator_key.json:/root/.story/story/config/priv_validator_key.json
+      - ./config/story/${NODE_NAME}/story/story.toml:/root/.story/story/config/story.toml
+      - db-${NODE_NAME}-geth-data:/root/.story/geth/data
+      - db-${NODE_NAME}-node-data:/root/.story/story/data
     networks:
       story-localnet:
         ipv4_address: ${NODE_IP}

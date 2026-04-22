@@ -1,14 +1,12 @@
 #!/bin/bash
 
-COMPOSE_FILES=(
-    "rpc1"
-    "bootnode1"
-    "validator1"
-    "validator2"
-    "validator3"
-    "validator4"
-    "monitoring"
-)
+COMPOSE_FILES=("rpc1" "bootnode1")
+for f in docker-compose-validator*.yml; do
+    name=${f#docker-compose-}
+    name=${name%.yml}
+    COMPOSE_FILES+=("$name")
+done
+COMPOSE_FILES+=("monitoring")
 
 stop_container() {
     local file=$1

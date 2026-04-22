@@ -23,10 +23,10 @@ docker compose -f docker-compose-bootnode1.yml up -d --no-build
 sleep 5
 
 # Start validators (no build needed, images already exist)
-docker compose -f docker-compose-validator1.yml up -d --no-build
-docker compose -f docker-compose-validator2.yml up -d --no-build
-docker compose -f docker-compose-validator3.yml up -d --no-build
-docker compose -f docker-compose-validator4.yml up -d --no-build
+# Pick up every docker-compose-validatorN.yml present
+for f in docker-compose-validator*.yml; do
+    docker compose -f "$f" up -d --no-build
+done
 
 # Start RPC node
 echo "🔗 Starting RPC node..."

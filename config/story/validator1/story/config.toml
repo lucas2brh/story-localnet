@@ -19,7 +19,7 @@ version = "0.38.9"
 proxy_app = "tcp://0.0.0.0:26658"
 
 # A custom human readable name for this node
-moniker = "odyssey-devnet-validator-1"
+moniker = "localnet-val-1"
 
 # Database backend: goleveldb | cleveldb | boltdb | rocksdb | badgerdb
 # * goleveldb (github.com/syndtr/goleveldb - most popular implementation)
@@ -214,7 +214,7 @@ laddr = "tcp://0.0.0.0:26656"
 # Address to advertise to peers for them to dial. If empty, will use the same
 # port as the laddr, and will introspect on the listener to figure out the
 # address. IP and port are required. Example: 159.89.10.97:26656
-external_address = "10.0.0.21:26656"
+external_address = "10.0.1.21:26656"
 
 # Comma separated list of seed nodes to connect to
 seeds = "a9017ff5321d6645295035e9a13a8c14d9fc28d9@10.0.0.11:26656"
