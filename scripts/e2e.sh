@@ -105,8 +105,9 @@ phase_4_invariant_scan() {
   total=$(docker ps --format '{{.Names}}' | grep -cE '^validator[0-9]+-node$' || true)
   [[ $total -gt 0 ]] || fail "no validator-node containers running"
   for c in $(docker ps --format '{{.Names}}' | grep -E '^validator[0-9]+-node$' | sort -V); do
-    docker logs "$c" 2>&1 | grep -q 'All upgrade invariants verified' \
-      || { misses=$((misses+1)); log "  MISS $c"; }
+    # grep -c reads entire stdin so docker logs doesn't SIGPIPE under pipefail
+    n=$(docker logs "$c" 2>&1 | grep -c 'All upgrade invariants verified' || true)
+    if [[ $n -eq 0 ]]; then misses=$((misses+1)); log "  MISS $c"; fi
     hits=$(docker logs "$c" 2>&1 | grep -cE 'panic|CONSENSUS FAILURE' || true)
     panics=$((panics + hits))
   done
