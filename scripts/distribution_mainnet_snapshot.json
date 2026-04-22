@@ -1,0 +1,27 @@
+{
+  "_note": "Synthetic pareto-shaped distribution (geometric ratio 0.93) in /cosmos/staking/v1beta1/validators response shape. Use as fallback when public mainnet REST is unreachable. Refresh from real mainnet when possible (see fetch_mainnet_distribution.sh).",
+  "_snapshot_date": "2026-04-21",
+  "_top_16_share": 0.898,
+  "validators": [
+    {"operator_address": "storyvaloper1syn0000000000000000000000000000000001", "tokens": "1000000000000000000", "description": {"moniker": "synth-val-01"}},
+    {"operator_address": "storyvaloper1syn0000000000000000000000000000000002", "tokens":  "930000000000000000", "description": {"moniker": "synth-val-02"}},
+    {"operator_address": "storyvaloper1syn0000000000000000000000000000000003", "tokens":  "864900000000000000", "description": {"moniker": "synth-val-03"}},
+    {"operator_address": "storyvaloper1syn0000000000000000000000000000000004", "tokens":  "804357000000000000", "description": {"moniker": "synth-val-04"}},
+    {"operator_address": "storyvaloper1syn0000000000000000000000000000000005", "tokens":  "748052000000000000", "description": {"moniker": "synth-val-05"}},
+    {"operator_address": "storyvaloper1syn0000000000000000000000000000000006", "tokens":  "695688000000000000", "description": {"moniker": "synth-val-06"}},
+    {"operator_address": "storyvaloper1syn0000000000000000000000000000000007", "tokens":  "646990000000000000", "description": {"moniker": "synth-val-07"}},
+    {"operator_address": "storyvaloper1syn0000000000000000000000000000000008", "tokens":  "601701000000000000", "description": {"moniker": "synth-val-08"}},
+    {"operator_address": "storyvaloper1syn0000000000000000000000000000000009", "tokens":  "559582000000000000", "description": {"moniker": "synth-val-09"}},
+    {"operator_address": "storyvaloper1syn0000000000000000000000000000000010", "tokens":  "520411000000000000", "description": {"moniker": "synth-val-10"}},
+    {"operator_address": "storyvaloper1syn0000000000000000000000000000000011", "tokens":  "483982000000000000", "description": {"moniker": "synth-val-11"}},
+    {"operator_address": "storyvaloper1syn0000000000000000000000000000000012", "tokens":  "450103000000000000", "description": {"moniker": "synth-val-12"}},
+    {"operator_address": "storyvaloper1syn0000000000000000000000000000000013", "tokens":  "418596000000000000", "description": {"moniker": "synth-val-13"}},
+    {"operator_address": "storyvaloper1syn0000000000000000000000000000000014", "tokens":  "389294000000000000", "description": {"moniker": "synth-val-14"}},
+    {"operator_address": "storyvaloper1syn0000000000000000000000000000000015", "tokens":  "362043000000000000", "description": {"moniker": "synth-val-15"}},
+    {"operator_address": "storyvaloper1syn0000000000000000000000000000000016", "tokens":  "336700000000000000", "description": {"moniker": "synth-val-16"}},
+    {"operator_address": "storyvaloper1syn0000000000000000000000000000000017", "tokens":  "313131000000000000", "description": {"moniker": "synth-val-17"}},
+    {"operator_address": "storyvaloper1syn0000000000000000000000000000000018", "tokens":  "291211000000000000", "description": {"moniker": "synth-val-18"}},
+    {"operator_address": "storyvaloper1syn0000000000000000000000000000000019", "tokens":  "270826000000000000", "description": {"moniker": "synth-val-19"}},
+    {"operator_address": "storyvaloper1syn0000000000000000000000000000000020", "tokens":  "251868000000000000", "description": {"moniker": "synth-val-20"}}
+  ]
+}
