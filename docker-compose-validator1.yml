@@ -10,8 +10,7 @@ services:
     container_name: validator1-common-init
     image: alpine
     command: >
-      sh -c "apk add --no-cache openssl && openssl rand -hex 32 >
-      /root/.story/geth/data/jwtsecret"
+      sh -c "apk add --no-cache openssl && openssl rand -hex 32 > /root/.story/geth/data/jwtsecret"
     volumes:
       - db-validator1-geth-data:/root/.story/geth/data
 
@@ -23,8 +22,7 @@ services:
       dockerfile: ../story-localnet/Dockerfile.story-geth
     entrypoint: ''
     command: >
-      /bin/sh -c "/usr/local/bin/geth --state.scheme=hash init
-      --datadir=/root/.story/geth/data /root/.story/geth/config/genesis.json"
+      /bin/sh -c "/usr/local/bin/geth --state.scheme=hash init --datadir=/root/.story/geth/data /root/.story/geth/config/genesis.json"
     volumes:
       - ./config/story/genesis-geth.json:/root/.story/geth/config/genesis.json:ro
       - db-validator1-geth-data:/root/.story/geth/data
@@ -59,14 +57,14 @@ services:
       - --metrics.port=6060
       - --port=30303
       - --discovery.port=30303
-      - --nat=extip:10.0.0.20
+      - --nat=extip:10.0.1.20
     volumes:
       - ./config/story/validator1/geth:/root/.story/geth/config
       - db-validator1-geth-data:/root/.story/geth/data
       - db-validator1-node-data:/root/.story/story/data
     networks:
       story-localnet:
-        ipv4_address: 10.0.0.20
+        ipv4_address: 10.0.1.20
     depends_on:
       - validator1-geth-init
     <<: *logging
@@ -75,8 +73,7 @@ services:
     container_name: validator1-node-init
     image: alpine
     command: >
-      sh -c "echo '{\"height\": \"0\", \"round\": 0, \"step\": 0}' >
-      /root/.story/story/data/priv_validator_state.json"
+      sh -c "echo '{\"height\": \"0\", \"round\": 0, \"step\": 0}' > /root/.story/story/data/priv_validator_state.json"
     volumes:
       - db-validator1-node-data:/root/.story/story/data
     depends_on:
@@ -88,7 +85,7 @@ services:
     stop_grace_period: 50s
     image: story-node:localnet
     build:
-      context: ../story
+      context: ../story-private-fork
       dockerfile: ../story-localnet/Dockerfile.story-node
     entrypoint: >
       sh -c 'sleep 10 && story run "$$@"'
@@ -108,7 +105,7 @@ services:
       - db-validator1-node-data:/root/.story/story/data
     networks:
       story-localnet:
-        ipv4_address: 10.0.0.21
+        ipv4_address: 10.0.1.21
     depends_on:
       - validator1-geth
       - validator1-node-init

@@ -10,8 +10,7 @@ services:
     container_name: bootnode1-common-init
     image: alpine
     command: >
-      sh -c "apk add --no-cache openssl && openssl rand -hex 32 >
-      /root/.story/geth/data/jwtsecret"
+      sh -c "apk add --no-cache openssl && openssl rand -hex 32 > /root/.story/geth/data/jwtsecret"
     volumes:
       - db-bootnode1-geth-data:/root/.story/geth/data
 
@@ -23,8 +22,7 @@ services:
       dockerfile: ../story-localnet/Dockerfile.story-geth
     entrypoint: ''
     command: >
-      /bin/sh -c "/usr/local/bin/geth --state.scheme=hash init
-      --datadir=/root/.story/geth/data /root/.story/geth/config/genesis.json"
+      /bin/sh -c "/usr/local/bin/geth --state.scheme=hash init --datadir=/root/.story/geth/data /root/.story/geth/config/genesis.json"
     volumes:
       - ./config/story/genesis-geth.json:/root/.story/geth/config/genesis.json:ro
       - db-bootnode1-geth-data:/root/.story/geth/data
@@ -75,8 +73,7 @@ services:
     container_name: bootnode1-node-init
     image: alpine
     command: >
-      sh -c "echo '{\"height\": \"0\", \"round\": 0, \"step\": 0}' >
-      /root/.story/story/data/priv_validator_state.json"
+      sh -c "echo '{\"height\": \"0\", \"round\": 0, \"step\": 0}' > /root/.story/story/data/priv_validator_state.json"
     volumes:
       - db-bootnode1-node-data:/root/.story/story/data
     depends_on:
@@ -88,7 +85,7 @@ services:
     stop_grace_period: 50s
     image: story-node:localnet
     build:
-      context: ../story
+      context: ../story-private-fork
       dockerfile: ../story-localnet/Dockerfile.story-node
     entrypoint: >
       sh -c 'sleep 10 && story run "$$@"'
