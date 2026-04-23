@@ -81,7 +81,7 @@ GEN_TXS=$(echo "$ZIP" | jq '
           max_rate: "0.100000000000000000",
           max_change_rate: "0.010000000000000000"
         },
-        min_self_delegation: .tokens,
+        min_self_delegation: "1024000000000",
         delegator_address: .delegator_address,
         validator_address: .validator_address,
         pubkey: {
