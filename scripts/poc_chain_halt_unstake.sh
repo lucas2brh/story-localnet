@@ -27,7 +27,9 @@ CHAIN_ID=${CHAIN_ID:-1399}
 ANVIL_PK=${ANVIL_PK:-ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80}
 UPGRADE_HEIGHT=${UPGRADE_HEIGHT:-50}
 TARGET_MONIKER="localnet-val-17"
-WAIT_BLOCK=85
+# Relative target: phase-4-start + N blocks. Halt typically surfaces at
+# unstake-inclusion+1, so +20 is ample margin without hardcoded height.
+WAIT_DELTA=${WAIT_DELTA:-20}
 LOCALNET="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 META="${LOCALNET}/tmp/validators_meta.json"
 
@@ -37,12 +39,21 @@ pass() { printf "${C_GREEN}[poc]${C_RESET} PASS %s\n" "$*"; }
 fail() { printf "${C_RED}[poc]${C_RESET} FAIL %s\n" "$*"; }
 
 get_height() {
-  local hex
+  # Primary: rpc1-geth eth_blockNumber. Falls back to validator1-node
+  # Tendermint /status when rpc1-geth JWT-races (returns null/0). Without
+  # the fallback a pending-JWT rpc1 looks indistinguishable from halt.
+  local hex h
   hex=$(curl -fsS -m 5 http://localhost:8545 -X POST -H "Content-Type: application/json" \
     -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' 2>/dev/null \
     | jq -r .result 2>/dev/null)
-  [[ -z $hex || $hex == null ]] && { echo 0; return; }
-  printf '%d\n' "$hex"
+  if [[ -n $hex && $hex != null ]]; then
+    printf '%d\n' "$hex"
+    return
+  fi
+  h=$(docker exec validator1-node wget -qO- http://localhost:26657/status 2>/dev/null \
+    | jq -r '.result.sync_info.latest_block_height // empty' 2>/dev/null)
+  [[ -n $h ]] && { echo "$h"; return; }
+  echo 0
 }
 wait_height() { local t=$1 h; while :; do h=$(get_height); [[ $h -ge $t ]] && { echo $h; return; }; sleep 2; done }
 meta_pubkey_hex() { local b64; b64=$(jq -r --arg m "$1" '.[] | select(.moniker==$m) | .pubkey_base64' "$META"); echo -n "$b64" | base64 -d | xxd -p -c 66; }
@@ -96,12 +107,14 @@ tx=$(grep -oE '0x[0-9a-f]{64}' <<<"$out" | head -1)
 log "tx=$tx"
 
 # Phase 4 — wait-or-timeout for halt detection
-log "Phase 4: observe chain for 30s to detect halt vs progress (target block $WAIT_BLOCK)"
-deadline=$(( $(date +%s) + 30 ))
-last_h=0; stuck_count=0; progressed=0
+h_start=$(get_height)
+target=$(( h_start + WAIT_DELTA ))
+log "Phase 4: observe 60s; start=$h_start target=$target (delta=$WAIT_DELTA)"
+deadline=$(( $(date +%s) + 60 ))
+last_h=$h_start; stuck_count=0; progressed=0
 while [[ $(date +%s) -lt $deadline ]]; do
   h=$(get_height)
-  if [[ $h -ge $WAIT_BLOCK ]]; then progressed=1; break; fi
+  if [[ $h -ge $target ]]; then progressed=1; break; fi
   if [[ $h -eq $last_h ]]; then stuck_count=$((stuck_count+1)); else stuck_count=0; fi
   last_h=$h
   sleep 2
