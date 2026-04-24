@@ -66,6 +66,13 @@ if docker ps --format '{{.Names}}' | grep -qE '^validator[0-9]+-'; then
   (cd "$LOCALNET" && bash terminate.sh 2>&1 | tail -2)
   sleep 5
 fi
+# Defensive: docker compose down -v only wipes volumes owned by compose files
+# present at tear-down time. Branch switches can leave orphaned volumes from a
+# prior 20-val run that the current compose scope does not know about; those
+# orphans would be picked up by the next start.sh run and desync the chain
+# (validators 5-20 resuming from a stale height while val 1-4 + rpc1 start
+# fresh). Wipe every story-localnet db volume unconditionally before starting.
+docker volume ls --format '{{.Name}}' | grep -E '^story-localnet_db' | xargs -r docker volume rm >/dev/null 2>&1 || true
 MAX_VALIDATORS_INIT=20 STORY_BIN="$STORY_BIN" bash "${LOCALNET}/scripts/assemble_genesis.sh" 20 2>&1 | tail -1
 (cd "$LOCALNET" && bash start.sh 2>&1 | tail -2)
 # rpc1 JWT workaround
