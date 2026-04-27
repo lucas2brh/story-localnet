@@ -5,6 +5,17 @@ export COMPOSE_IGNORE_ORPHANS=true
 
 echo "🚀 Starting Story Localnet..."
 
+# Pre-generate shared JWT secret (single file bind-mounted into all geth + node
+# containers). Eliminates the JWT race where node side reads jwtsecret before
+# the in-container common-init has finished writing it, then geth overwrites,
+# and node ends up using a stale token (401 "signature is invalid").
+JWT_FILE="$(pwd)/tmp/jwt/secret.txt"
+if [ ! -s "$JWT_FILE" ]; then
+    mkdir -p "$(dirname "$JWT_FILE")"
+    openssl rand -hex 32 > "$JWT_FILE"
+    echo "🔑 Generated shared JWT secret at $JWT_FILE"
+fi
+
 # Build images if they don't exist (build specific services to avoid parallel conflicts)
 if ! docker image inspect story-geth:localnet >/dev/null 2>&1; then
     echo "🔨 Building story-geth image..."
@@ -32,10 +43,19 @@ done
 echo "🔗 Starting RPC node..."
 docker compose -f docker-compose-rpc1.yml up -d --no-build
 
-# Wait for RPC to be ready
-echo "⏳ Waiting for RPC to be ready..."
+# Wait for RPC to be ready (90s timeout; rpc1-geth has hit JWT race in the past
+# leaving it stuck at block 0 forever — fail fast with diagnostic instead of hanging).
+echo "⏳ Waiting for RPC to be ready (90s timeout)..."
+deadline=$(( $(date +%s) + 90 ))
 until curl -s http://localhost:8545 -X POST -H "Content-Type: application/json" \
     -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | grep -qE '"result":"0x[1-9a-fA-F]'; do
+    if [ "$(date +%s)" -ge "$deadline" ]; then
+        echo "❌ RPC timeout after 90s. rpc1-geth tail:"
+        docker logs rpc1-geth 2>&1 | tail -10
+        echo "rpc1-node tail:"
+        docker logs rpc1-node 2>&1 | tail -10
+        exit 1
+    fi
     echo "   Waiting for blocks..."
     sleep 3
 done

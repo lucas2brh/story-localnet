@@ -10,9 +10,10 @@ services:
     container_name: validator12-common-init
     image: alpine
     command: >
-      sh -c "apk add --no-cache openssl && openssl rand -hex 32 > /root/.story/geth/data/jwtsecret"
+      sh -c "true"
     volumes:
       - db-validator12-geth-data:/root/.story/geth/data
+      - ./tmp/jwt/secret.txt:/root/.story/geth/data/jwtsecret:ro
 
   validator12-geth-init:
     container_name: validator12-geth-init
@@ -26,6 +27,7 @@ services:
     volumes:
       - ./config/story/genesis-geth.json:/root/.story/geth/config/genesis.json:ro
       - db-validator12-geth-data:/root/.story/geth/data
+      - ./tmp/jwt/secret.txt:/root/.story/geth/data/jwtsecret:ro
     depends_on:
       - validator12-common-init
 
@@ -61,6 +63,7 @@ services:
     volumes:
       - ./config/story/validator12/geth:/root/.story/geth/config
       - db-validator12-geth-data:/root/.story/geth/data
+      - ./tmp/jwt/secret.txt:/root/.story/geth/data/jwtsecret:ro
       - db-validator12-node-data:/root/.story/story/data
     networks:
       story-localnet:
@@ -102,6 +105,7 @@ services:
       - ./config/story/validator12/story/priv_validator_key.json:/root/.story/story/config/priv_validator_key.json
       - ./config/story/validator12/story/story.toml:/root/.story/story/config/story.toml
       - db-validator12-geth-data:/root/.story/geth/data
+      - ./tmp/jwt/secret.txt:/root/.story/geth/data/jwtsecret:ro
       - db-validator12-node-data:/root/.story/story/data
     networks:
       story-localnet:
