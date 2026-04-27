@@ -98,6 +98,7 @@ phase_1_baseline() {
 
 # ---------------- Phase 2 — Anvil delegates ----------------
 ANVIL_BAL_PRE_STAKE=""; ANVIL_BAL_POST_STAKE=""
+VAL_TOKENS_POST_STAKE=""
 phase_2_anvil_stake() {
   log "Phase 2 — Anvil stakes ${EXTERNAL_STAKE_IP} IP to $TARGET_MONIKER"
   ANVIL_BAL_PRE_STAKE=$(get_evm_balance "$ANVIL_ADDR")
@@ -112,11 +113,12 @@ phase_2_anvil_stake() {
   [[ $rc -eq 0 ]] || fail "anvil stake rc=$rc"
   sleep 15
   ANVIL_BAL_POST_STAKE=$(get_evm_balance "$ANVIL_ADDR")
-  local tokens_post shares_post
-  tokens_post=$(val_field "$VAL_OP" tokens)
+  VAL_TOKENS_POST_STAKE=$(val_field "$VAL_OP" tokens)
+  local shares_post
   shares_post=$(val_field "$VAL_OP" delegator_shares)
   log "  Anvil post-stake balance=$ANVIL_BAL_POST_STAKE wei (delta=-$((ANVIL_BAL_PRE_STAKE - ANVIL_BAL_POST_STAKE)))"
-  log "  $TARGET_MONIKER post-stake tokens=$tokens_post shares=$shares_post"
+  log "  $TARGET_MONIKER post-stake tokens=$VAL_TOKENS_POST_STAKE shares=$shares_post"
+  [[ "$VAL_TOKENS_POST_STAKE" -gt "$VAL_TOKENS_PRE" ]] || fail "post-stake tokens=$VAL_TOKENS_POST_STAKE not greater than pre-stake $VAL_TOKENS_PRE — Anvil stake didn't land"
   pass "external delegation injected"
 }
 
@@ -150,12 +152,10 @@ phase_4_verify() {
   [[ "$status" != "GONE" ]]      || fail "val removed from store (RemoveValidator fired — should not happen because operator self-del keeps shares > 0)"
   [[ "$status" == "1" ]]         || fail "expected UNBONDED (status=1), got $status"
   [[ "$jailed" != "true" ]]      || fail "expected NOT jailed (operator self-del unchanged), got jailed=$jailed"
-  [[ "$tokens" -lt "$VAL_TOKENS_PRE" ]] || fail "expected tokens reduced (Anvil's portion drained), got $tokens >= pre-stake $VAL_TOKENS_PRE"
-
-  # tokens diff should be roughly EXTERNAL_STAKE_IP * 1e9 stake (= 2048e9)
-  local expected_diff=2048000000000
-  local actual_diff=$((VAL_TOKENS_PRE - tokens + 1))  # approx, baseline was pre-stake
-  log "  tokens reduced by ~$((VAL_TOKENS_PRE + expected_diff - tokens)) stake (target diff=$expected_diff stake = ${EXTERNAL_STAKE_IP} IP)"
+  # Compare to POST-stake snapshot. Anvil's full unstake should drain its portion,
+  # bringing tokens back down to the pre-stake baseline (within rounding).
+  [[ "$tokens" -lt "$VAL_TOKENS_POST_STAKE" ]] || fail "expected tokens reduced from post-stake (Anvil's portion drained), got $tokens >= post-stake $VAL_TOKENS_POST_STAKE"
+  log "  tokens went pre=$VAL_TOKENS_PRE post-stake=$VAL_TOKENS_POST_STAKE post-unstake=$tokens (Anvil portion = $((VAL_TOKENS_POST_STAKE - tokens)) stake; expected ${EXTERNAL_STAKE_IP}e9)"
 
   # Chain liveness — make sure we're still progressing past the unstake
   local h=$(get_height)

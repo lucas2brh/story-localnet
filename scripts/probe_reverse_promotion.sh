@@ -152,11 +152,13 @@ phase_3_verify_promotion() {
   log "  bonded count post-delegation: $bonded_count"
   [[ "$bonded_count" == "$NEW_MAX" ]] || fail "bonded=$bonded_count (expected $NEW_MAX, MaxValidators cap broken)"
 
-  # Target now in top-16 by tokens
+  # Target now in top-16 by tokens. REST returns operator_address lowercase but
+  # META carries mixed-case (EIP-55 checksum) — jq comparison is case-sensitive,
+  # so normalize both sides to lowercase via ascii_downcase.
   local in_top16
   in_top16=$(curl -fsS "http://localhost:1317/staking/validators?status=BOND_STATUS_BONDED&pagination.limit=100" \
-    | jq --arg op "$TARGET_OP" '[.msg.validators[] | select(.operator_address==$op)] | length')
-  [[ "$in_top16" == "1" ]] || fail "$TARGET_MONIKER not in BONDED top-16 set"
+    | jq --arg op "$TARGET_OP" '[.msg.validators[] | select((.operator_address | ascii_downcase) == ($op | ascii_downcase))] | length')
+  [[ "$in_top16" == "1" ]] || fail "$TARGET_MONIKER not in BONDED top-16 set (case-insensitive lookup returned 0)"
 
   # Chain still progressing
   local h=$(get_height); wait_height "$((h + 3))" >/dev/null
