@@ -65,8 +65,12 @@ get_evm_balance() {
   python3 -c "print(int('$hex', 16))" 2>/dev/null || echo 0
 }
 val_field() {
-  curl -fsS "http://localhost:1317/staking/validators/${1}" 2>/dev/null \
-    | jq -r ".msg.validator.${2} // \"GONE\""
+  # When val record is removed from store, REST returns 404 -> curl -f suppresses body.
+  # jq on empty input returns empty, not the // default. Handle empty body explicitly.
+  local body
+  body=$(curl -fsS "http://localhost:1317/staking/validators/${1}" 2>/dev/null)
+  [[ -z $body ]] && { echo "GONE"; return; }
+  jq -r ".msg.validator.${2} // \"GONE\"" <<<"$body"
 }
 meta_pubkey_hex() { local b64; b64=$(jq -r --arg m "$1" '.[] | select(.moniker==$m) | .pubkey_base64' "$META"); echo -n "$b64" | base64 -d | xxd -p -c 66; }
 meta_privkey()    { jq -r --arg m "$1" '.[] | select(.moniker==$m) | .priv_key_hex' "$META"; }
