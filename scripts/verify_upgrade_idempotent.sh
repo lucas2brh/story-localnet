@@ -146,20 +146,25 @@ phase_3_post() {
     || die "UBD count changed $PRE_UBD -> $post_ubd (handler added UBDs — NOT idempotent)"
 }
 
-# ---------------- Phase 4 — invariant log + panic scan ----------------
+# ---------------- Phase 4 — no-op invariant + panic scan ----------------
+# Idempotency means the upgrade handler is a no-op when genesis already has
+# MaxValidators=NEW_MAX. Hans's applyDeferredMaxValidatorsChange early-returns
+# (`if params.MaxValidators <= NewMaxValidators { return nil }`) before its
+# log statement, so the upgrade log line MUST be absent in this scenario.
+# Inverted assertion vs other probes: expect ALL validators to MISS the log.
 phase_4_log_scan() {
-  log "Phase 4 — invariant log + panic scan"
-  local total misses=0 panics=0 c n p
+  log "Phase 4 — no-op invariant + panic scan (idempotency: log line MUST be absent)"
+  local total fired=0 panics=0 c n p
   total=$(docker ps --format '{{.Names}}' | grep -cE '^validator[0-9]+-node$' || true)
   [[ $total -gt 0 ]] || die "no validator-node containers"
   for c in $(docker ps --format '{{.Names}}' | grep -E '^validator[0-9]+-node$' | sort -V); do
-    n=$(docker logs "$c" 2>&1 | grep -c 'All upgrade invariants verified' || true)
-    [[ $n -eq 0 ]] && { misses=$((misses + 1)); log "    MISS $c"; }
+    n=$(docker logs "$c" 2>&1 | grep -cE 'All upgrade invariants verified|Applied deferred MaxValidators reduction' || true)
+    [[ $n -gt 0 ]] && { fired=$((fired + 1)); log "    UNEXPECTED FIRE $c"; }
     p=$(docker logs "$c" 2>&1 | grep -cE 'panic|CONSENSUS FAILURE' || true)
     panics=$((panics + p))
   done
-  [[ $misses -eq 0 ]] && ok "invariant log on all $total validators" \
-    || die "invariant log missing on $misses validators"
+  [[ $fired -eq 0 ]] && ok "upgrade log absent on all $total validators (no-op confirmed)" \
+    || die "upgrade log fired on $fired validators — handler not idempotent"
   [[ $panics -eq 0 ]] && ok "no panic / CONSENSUS FAILURE" \
     || die "$panics panic/CONSENSUS FAILURE lines"
 }

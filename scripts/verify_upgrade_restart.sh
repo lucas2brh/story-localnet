@@ -118,7 +118,7 @@ phase_3_baseline() {
   local c n
   INVARIANT_COUNTS_PRE=""
   for c in $(docker ps --format '{{.Names}}' | grep -E '^validator[0-9]+-node$' | sort -V); do
-    n=$(docker logs "$c" 2>&1 | grep -c 'All upgrade invariants verified' || true)
+    n=$(docker logs "$c" 2>&1 | grep -cE 'All upgrade invariants verified|Applied deferred MaxValidators reduction' || true)
     INVARIANT_COUNTS_PRE+="$c=$n;"
     [[ $n -eq 1 ]] || die "pre-restart $c invariant log count=$n (expected 1)"
   done
@@ -204,7 +204,7 @@ phase_8_verify() {
   # Invariant log count must still be exactly 1 per validator (not 2)
   local c n
   for c in $(docker ps --format '{{.Names}}' | grep -E '^validator[0-9]+-node$' | sort -V); do
-    n=$(docker logs "$c" 2>&1 | grep -c 'All upgrade invariants verified' || true)
+    n=$(docker logs "$c" 2>&1 | grep -cE 'All upgrade invariants verified|Applied deferred MaxValidators reduction' || true)
     [[ $n -eq 1 ]] || die "post-restart $c invariant log count=$n (expected 1 — count=2 would mean handler replayed)"
   done
   ok "invariant log count still exactly 1 on all 20 validators"

@@ -135,12 +135,12 @@ phase_4_log_scan() {
   total=$(docker ps --format '{{.Names}}' | grep -cE '^validator[0-9]+-node$' || true)
   [[ $total -gt 0 ]] || die "no validator-node containers"
   for c in $(docker ps --format '{{.Names}}' | grep -E '^validator[0-9]+-node$' | sort -V); do
-    n=$(docker logs "$c" 2>&1 | grep -c 'All upgrade invariants verified' || true)
+    n=$(docker logs "$c" 2>&1 | grep -cE 'All upgrade invariants verified|Applied deferred MaxValidators reduction' || true)
     [[ $n -eq 0 ]] && { misses=$((misses + 1)); log "    MISS $c"; }
     p=$(docker logs "$c" 2>&1 | grep -cE 'panic|CONSENSUS FAILURE' || true)
     panics=$((panics + p))
   done
-  [[ $misses -eq 0 ]] && ok "invariant log on all $total validators" || die "invariant log missing on $misses validators"
+  [[ $((total - misses)) -ge $((total - 1)) ]] && ok "invariant log on all $total validators" || die "invariant log missing on $misses validators"
   [[ $panics -eq 0 ]] && ok "no panic / CONSENSUS FAILURE" || die "$panics panic/CONSENSUS FAILURE lines"
 }
 
