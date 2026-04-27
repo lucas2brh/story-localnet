@@ -123,8 +123,10 @@ done
 final_h=$(get_height)
 log "final height=$final_h (stuck_count=$stuck_count, progressed=$progressed)"
 
-# Phase 5 — verdict
-if [[ $progressed -eq 1 ]]; then
+# Phase 5 — verdict. final_h fallback closes the off-by-one race when the
+# chain crosses target right at deadline (last in-loop sample saw h<target,
+# next post-loop get_height shows h>=target).
+if [[ $progressed -eq 1 || $final_h -ge $target ]]; then
   OBSERVED=progress
 else
   OBSERVED=halt
