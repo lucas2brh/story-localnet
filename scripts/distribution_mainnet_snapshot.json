@@ -1,27 +1,568 @@
 {
-  "_note": "Synthetic pareto-shaped distribution (geometric ratio 0.93) in /cosmos/staking/v1beta1/validators response shape. Use as fallback when public mainnet REST is unreachable. Refresh from real mainnet when possible (see fetch_mainnet_distribution.sh).",
-  "_snapshot_date": "2026-04-21",
-  "_top_16_share": 0.898,
+  "_note": "Real Story mainnet snapshot from 2026-04-29 storyrpc.io. Top 80 validators by tokens (descending). Used as fetch_mainnet_distribution.sh fallback when public mainnet REST is unreachable.",
+  "_snapshot_date": "2026-04-29",
+  "_source": "/Users/lucas/workspace/lucas-workspace/data/story-mainnet-snapshots/2026-04-29/validators_storyrpc.json",
   "validators": [
-    {"operator_address": "storyvaloper1syn0000000000000000000000000000000001", "tokens": "1000000000000000000", "description": {"moniker": "synth-val-01"}},
-    {"operator_address": "storyvaloper1syn0000000000000000000000000000000002", "tokens":  "930000000000000000", "description": {"moniker": "synth-val-02"}},
-    {"operator_address": "storyvaloper1syn0000000000000000000000000000000003", "tokens":  "864900000000000000", "description": {"moniker": "synth-val-03"}},
-    {"operator_address": "storyvaloper1syn0000000000000000000000000000000004", "tokens":  "804357000000000000", "description": {"moniker": "synth-val-04"}},
-    {"operator_address": "storyvaloper1syn0000000000000000000000000000000005", "tokens":  "748052000000000000", "description": {"moniker": "synth-val-05"}},
-    {"operator_address": "storyvaloper1syn0000000000000000000000000000000006", "tokens":  "695688000000000000", "description": {"moniker": "synth-val-06"}},
-    {"operator_address": "storyvaloper1syn0000000000000000000000000000000007", "tokens":  "646990000000000000", "description": {"moniker": "synth-val-07"}},
-    {"operator_address": "storyvaloper1syn0000000000000000000000000000000008", "tokens":  "601701000000000000", "description": {"moniker": "synth-val-08"}},
-    {"operator_address": "storyvaloper1syn0000000000000000000000000000000009", "tokens":  "559582000000000000", "description": {"moniker": "synth-val-09"}},
-    {"operator_address": "storyvaloper1syn0000000000000000000000000000000010", "tokens":  "520411000000000000", "description": {"moniker": "synth-val-10"}},
-    {"operator_address": "storyvaloper1syn0000000000000000000000000000000011", "tokens":  "483982000000000000", "description": {"moniker": "synth-val-11"}},
-    {"operator_address": "storyvaloper1syn0000000000000000000000000000000012", "tokens":  "450103000000000000", "description": {"moniker": "synth-val-12"}},
-    {"operator_address": "storyvaloper1syn0000000000000000000000000000000013", "tokens":  "418596000000000000", "description": {"moniker": "synth-val-13"}},
-    {"operator_address": "storyvaloper1syn0000000000000000000000000000000014", "tokens":  "389294000000000000", "description": {"moniker": "synth-val-14"}},
-    {"operator_address": "storyvaloper1syn0000000000000000000000000000000015", "tokens":  "362043000000000000", "description": {"moniker": "synth-val-15"}},
-    {"operator_address": "storyvaloper1syn0000000000000000000000000000000016", "tokens":  "336700000000000000", "description": {"moniker": "synth-val-16"}},
-    {"operator_address": "storyvaloper1syn0000000000000000000000000000000017", "tokens":  "313131000000000000", "description": {"moniker": "synth-val-17"}},
-    {"operator_address": "storyvaloper1syn0000000000000000000000000000000018", "tokens":  "291211000000000000", "description": {"moniker": "synth-val-18"}},
-    {"operator_address": "storyvaloper1syn0000000000000000000000000000000019", "tokens":  "270826000000000000", "description": {"moniker": "synth-val-19"}},
-    {"operator_address": "storyvaloper1syn0000000000000000000000000000000020", "tokens":  "251868000000000000", "description": {"moniker": "synth-val-20"}}
-  ]
+    {
+      "operator_address": "0xb1546e1b6016442f185a88a87da857a5d3d6475c",
+      "tokens": "53395752981000000",
+      "description": {
+        "moniker": "Silbo Gomero"
+      }
+    },
+    {
+      "operator_address": "0x76706464f81c397a8ebd41fb95ae8c9e8e492fa0",
+      "tokens": "50391428202400000",
+      "description": {
+        "moniker": "Luganodes 1"
+      }
+    },
+    {
+      "operator_address": "0x770d602a8122f282412f79f3f978dbb7ed3f2e69",
+      "tokens": "37935622497999802",
+      "description": {
+        "moniker": "Blockdaemon 1"
+      }
+    },
+    {
+      "operator_address": "0x19e61a2de78b4432567634d8d2f845d2c2651ea9",
+      "tokens": "34865148889197018",
+      "description": {
+        "moniker": "mv2.story.foundation"
+      }
+    },
+    {
+      "operator_address": "0x1925756337d6cbd42c5aae5aafe27ecd12e2674c",
+      "tokens": "31222507996800000",
+      "description": {
+        "moniker": "Success Story"
+      }
+    },
+    {
+      "operator_address": "0x9dc50afb0398a6847eec782a699e6690c59d493d",
+      "tokens": "27504194734799840",
+      "description": {
+        "moniker": "Go"
+      }
+    },
+    {
+      "operator_address": "0xd441ac1fe50a3858ad8e293abca6b7d5ffbe0b3c",
+      "tokens": "23509629022000000",
+      "description": {
+        "moniker": "To be continued..."
+      }
+    },
+    {
+      "operator_address": "0x0cec190e690f9fecfd076ef639e20f96969a4667",
+      "tokens": "22743756608333679",
+      "description": {
+        "moniker": "IP Strategy II"
+      }
+    },
+    {
+      "operator_address": "0x6a55b4c324d6084f5ed85d31046a0dc9b3866f7f",
+      "tokens": "22556874148700000",
+      "description": {
+        "moniker": "DELIGHT | Locked"
+      }
+    },
+    {
+      "operator_address": "0xeb41755f941b11fc6787de9e6a78dbd56523e3f1",
+      "tokens": "19810228552700000",
+      "description": {
+        "moniker": "mv1.story.foundation"
+      }
+    },
+    {
+      "operator_address": "0xd31d7b0ff31c5267bc4ee831fdf9f07dda1f72b9",
+      "tokens": "19706840044000000",
+      "description": {
+        "moniker": "Lost in the Margins"
+      }
+    },
+    {
+      "operator_address": "0x78719470fa6076fbff329784869672d00635c482",
+      "tokens": "16389189511280943",
+      "description": {
+        "moniker": "IP Strategy I"
+      }
+    },
+    {
+      "operator_address": "0x13b1290fc193f100eae5d5b7401b604f635113ef",
+      "tokens": "11639056231555555",
+      "description": {
+        "moniker": "Republic"
+      }
+    },
+    {
+      "operator_address": "0xa21db8c1a286e0cf74ac0bcd6e273f799c77d4d0",
+      "tokens": "10794068846252368",
+      "description": {
+        "moniker": "Luganodes 2"
+      }
+    },
+    {
+      "operator_address": "0x3a07875162ee04d6e70e27ab55ff45ee1fefb317",
+      "tokens": "8644376081832992",
+      "description": {
+        "moniker": "IPFiscan"
+      }
+    },
+    {
+      "operator_address": "0xc75e9d8df3cc6f445d48846f48c63c314e4da541",
+      "tokens": "8215634500000000",
+      "description": {
+        "moniker": "P2P.org [locked]"
+      }
+    },
+    {
+      "operator_address": "0x56951ccc4f72d77ffb83f2e6ba3fffdb67ccb90c",
+      "tokens": "8101024000000000",
+      "description": {
+        "moniker": "mipool"
+      }
+    },
+    {
+      "operator_address": "0xf3f34f1d8f90afc4b85461ad65c86b4b4130da66",
+      "tokens": "7635389831933872",
+      "description": {
+        "moniker": "B-Harvest Validator 2"
+      }
+    },
+    {
+      "operator_address": "0xe966261b15b6f06781f6c37d754f1119c294dd91",
+      "tokens": "6850969305000000",
+      "description": {
+        "moniker": "Coinage x DAIC"
+      }
+    },
+    {
+      "operator_address": "0xc2e9ba01ce5dfdd9a6d86554796311fcb4967fe3",
+      "tokens": "6751632900175336",
+      "description": {
+        "moniker": "Blockdaemon 2"
+      }
+    },
+    {
+      "operator_address": "0x1ab2bf769daa40e0dbeb9cc8417817e99aa451cf",
+      "tokens": "5634960262400738",
+      "description": {
+        "moniker": "MetaPool"
+      }
+    },
+    {
+      "operator_address": "0x28e4ecb7ddb09682e86b1f3f06fc885f5f2bddcb",
+      "tokens": "4730226439851520",
+      "description": {
+        "moniker": "P2P.org \\U0001F499"
+      }
+    },
+    {
+      "operator_address": "0x2041ca2833241e21c3fbb56de77f42e2c8068296",
+      "tokens": "4303118000000000",
+      "description": {
+        "moniker": "Stakely.io"
+      }
+    },
+    {
+      "operator_address": "0x8b30a83a77fc4f81af9b5dad8984089610d480a8",
+      "tokens": "4202054000000000",
+      "description": {
+        "moniker": "ITRocket"
+      }
+    },
+    {
+      "operator_address": "0x5a6e87b408c6867a30b6195491fb119ccb0faf1f",
+      "tokens": "4014336000000000",
+      "description": {
+        "moniker": "Story Hub (TTT VN)"
+      }
+    },
+    {
+      "operator_address": "0x6e680e94116e585e3c79ff3bd0f3d2260a8f0575",
+      "tokens": "3602054000000000",
+      "description": {
+        "moniker": "Everstake-2"
+      }
+    },
+    {
+      "operator_address": "0x87c7df935c11d9ea0dd55b319baf0062b6c2da91",
+      "tokens": "3601024000000000",
+      "description": {
+        "moniker": "[NODERS] UNLOCKED"
+      }
+    },
+    {
+      "operator_address": "0xb4c106a8206cf8b23ab377a4e9b779fddb9d3427",
+      "tokens": "3373419250204820",
+      "description": {
+        "moniker": "Chainflow"
+      }
+    },
+    {
+      "operator_address": "0xf6baa5cba0c16e648bfce0356d622df120e3c195",
+      "tokens": "3346149000000000",
+      "description": {
+        "moniker": "Lavender.Five Nodes"
+      }
+    },
+    {
+      "operator_address": "0xe08c0aea2da99b668e8121f4d922ef8a2e3b8a10",
+      "tokens": "3295124000000000",
+      "description": {
+        "moniker": "Coha05 | Spider Node"
+      }
+    },
+    {
+      "operator_address": "0xcb4b2069121c228461b67169ef298dbea83ff161",
+      "tokens": "3021060000000000",
+      "description": {
+        "moniker": "Figment"
+      }
+    },
+    {
+      "operator_address": "0xe571f6176a1bc830bbbf149f21038ca12bc1d6ac",
+      "tokens": "2828723000000000",
+      "description": {
+        "moniker": "Everstake"
+      }
+    },
+    {
+      "operator_address": "0x443c8fd7b2e1fd1e2cd50b7c0b923dd63739774d",
+      "tokens": "2203205000000000",
+      "description": {
+        "moniker": "easeflow"
+      }
+    },
+    {
+      "operator_address": "0x9a3d947f3712b967a5bb81b19208ddbaef3533ae",
+      "tokens": "1980642335000000",
+      "description": {
+        "moniker": "OriginStake"
+      }
+    },
+    {
+      "operator_address": "0x0caf357f55d39a1bba4eacadcdc3b575650c8b9e",
+      "tokens": "1592548000000000",
+      "description": {
+        "moniker": "DSRV"
+      }
+    },
+    {
+      "operator_address": "0xce0356aa56783b62d8ee088146fb593d9fd2e6a3",
+      "tokens": "1423748000000000",
+      "description": {
+        "moniker": "ContributionDAO 2"
+      }
+    },
+    {
+      "operator_address": "0x49df391fd921b0d9f8463a4e0598e22d22bff100",
+      "tokens": "1401112000000000",
+      "description": {
+        "moniker": "STAKEME"
+      }
+    },
+    {
+      "operator_address": "0x9a5109aeb857f28be748d0f9107a58a0de4b6115",
+      "tokens": "1401024000000000",
+      "description": {
+        "moniker": "Enigma"
+      }
+    },
+    {
+      "operator_address": "0xa774769da49954b3c9b2a8d56dc463c7d029cff5",
+      "tokens": "1401024000000000",
+      "description": {
+        "moniker": "Nodes.Guru"
+      }
+    },
+    {
+      "operator_address": "0xab24314a4f5f612ea74c0155f76740beddcd5844",
+      "tokens": "1401024000000000",
+      "description": {
+        "moniker": "Republic"
+      }
+    },
+    {
+      "operator_address": "0x071bfee895db007663d923622c18512b2d91de7d",
+      "tokens": "1301105000000000",
+      "description": {
+        "moniker": "Endorphine Stake"
+      }
+    },
+    {
+      "operator_address": "0x4919624cc71132c026e41390e04a1e4fb1749268",
+      "tokens": "1301024500000000",
+      "description": {
+        "moniker": "TrustedPoint"
+      }
+    },
+    {
+      "operator_address": "0x1c33a52250248ea0a46e9964d0ba92ac39759c27",
+      "tokens": "1301024000000000",
+      "description": {
+        "moniker": "DeSpreadLabs"
+      }
+    },
+    {
+      "operator_address": "0x2e857be3055aa627c02ee9ad78932bccc067f8db",
+      "tokens": "1301024000000000",
+      "description": {
+        "moniker": "figment-3"
+      }
+    },
+    {
+      "operator_address": "0xa87a7c4c17e4f204a07cf7fca3926ad47c5cb6dd",
+      "tokens": "1301024000000000",
+      "description": {
+        "moniker": "CroutonDigital"
+      }
+    },
+    {
+      "operator_address": "0xe65bc7975fa1213a9fc17f3ac0bd4701bb9df812",
+      "tokens": "1201024000000000",
+      "description": {
+        "moniker": "F5 Nodes"
+      }
+    },
+    {
+      "operator_address": "0x7083e2c2746854af0984961e5789a27af7d42c1e",
+      "tokens": "807388000000000",
+      "description": {
+        "moniker": "HashKey Cloud"
+      }
+    },
+    {
+      "operator_address": "0x274f74853b6851a46a931f0ab75145652c575062",
+      "tokens": "747603000000000",
+      "description": {
+        "moniker": "BlockHunters \ud83c\udfaf"
+      }
+    },
+    {
+      "operator_address": "0x91eac7023aa8b2b2196397faf86d46db71eac4a3",
+      "tokens": "694807000000000",
+      "description": {
+        "moniker": "DragonStake \ud83d\udc32"
+      }
+    },
+    {
+      "operator_address": "0x0298d2dda1506a0587eb279972cf7c0e66c51a6f",
+      "tokens": "601657100000000",
+      "description": {
+        "moniker": "GrandValley"
+      }
+    },
+    {
+      "operator_address": "0x0de7a36001646bddb18afe2e1a75e81f00596b6c",
+      "tokens": "559295001000000",
+      "description": {
+        "moniker": "B-Harvest Validator 1"
+      }
+    },
+    {
+      "operator_address": "0xf62abeb9903b5bab45a405ee7e532551d8e4f255",
+      "tokens": "501024700000000",
+      "description": {
+        "moniker": "P-OPS Team"
+      }
+    },
+    {
+      "operator_address": "0xc295d02ebed189b6c0fae2dcffe5cf540cb12ac4",
+      "tokens": "477594450000000",
+      "description": {
+        "moniker": "Mandragora"
+      }
+    },
+    {
+      "operator_address": "0x2d125615bb547a726267942db4e30376af2474dc",
+      "tokens": "383426000000000",
+      "description": {
+        "moniker": "DeSpread"
+      }
+    },
+    {
+      "operator_address": "0x3a47cf077adb56807d2b5b8df8b63b73153cb2eb",
+      "tokens": "133424000000000",
+      "description": {
+        "moniker": "Nodes.Guru"
+      }
+    },
+    {
+      "operator_address": "0x97bd6feef87b99c5a1aa9d103135cc63e4f07836",
+      "tokens": "104427315200000",
+      "description": {
+        "moniker": "Pier Two"
+      }
+    },
+    {
+      "operator_address": "0x0d01e9d334ec586507e4f2ed05fc9c0031022e40",
+      "tokens": "103424990000000",
+      "description": {
+        "moniker": "NodeStake | For Locked"
+      }
+    },
+    {
+      "operator_address": "0x08629caabb138194272f952a1488879539472a11",
+      "tokens": "101024000000000",
+      "description": {
+        "moniker": "Kiln"
+      }
+    },
+    {
+      "operator_address": "0xa114791f504102d228a3c1068cf19ad0d4f5f0ce",
+      "tokens": "101024000000000",
+      "description": {
+        "moniker": "IP Strategy III"
+      }
+    },
+    {
+      "operator_address": "0xcf47f817bf0693bb05d0fef10c11a5bd8d67efc6",
+      "tokens": "86337355200000",
+      "description": {
+        "moniker": "cipherowl_guardian"
+      }
+    },
+    {
+      "operator_address": "0x1f7fcf4d1a942b7ac3e13a39bc074906bc5ba73a",
+      "tokens": "82786000000000",
+      "description": {
+        "moniker": "Stakin"
+      }
+    },
+    {
+      "operator_address": "0x3ce907903d51dd7954d2ffc200e562d980a4cc8c",
+      "tokens": "61023000000000",
+      "description": {
+        "moniker": "Informal Systems"
+      }
+    },
+    {
+      "operator_address": "0xf7810878b8e97c606ff6015438a62b2919bbe991",
+      "tokens": "58784000000000",
+      "description": {
+        "moniker": "PiperX"
+      }
+    },
+    {
+      "operator_address": "0x5a0e83b466959fbfae1ba2057c769add81f1eaeb",
+      "tokens": "39984001600039",
+      "description": {
+        "moniker": "unleash"
+      }
+    },
+    {
+      "operator_address": "0xd245aa3d022bf079bae6b34b9f5352c0d4c4b1ad",
+      "tokens": "26024000000000",
+      "description": {
+        "moniker": "StakingCabin"
+      }
+    },
+    {
+      "operator_address": "0x775c169624ff9b82b4bae1ef23d95f3d599571ca",
+      "tokens": "19444533452800",
+      "description": {
+        "moniker": "MPCVault | MPC Custody"
+      }
+    },
+    {
+      "operator_address": "0xdafc4a5e072672aad7e57129c3413276cc74ae1d",
+      "tokens": "14662000000000",
+      "description": {
+        "moniker": "DragonStake \ud83d\udc09"
+      }
+    },
+    {
+      "operator_address": "0x9562579ed4e281fe7ed32c3ed9895c7566af455b",
+      "tokens": "11264000000000",
+      "description": {
+        "moniker": "Nethermind"
+      }
+    },
+    {
+      "operator_address": "0x28f1ec3d70d307f9f572d68ad00e4801622985ad",
+      "tokens": "8048000000000",
+      "description": {
+        "moniker": "AtlasStaking"
+      }
+    },
+    {
+      "operator_address": "0x3c47347c029708f85e933b64256ee5dfdea7a4e8",
+      "tokens": "5788000000000",
+      "description": {
+        "moniker": "KysenPool (Unlocked)"
+      }
+    },
+    {
+      "operator_address": "0x70ed8029a6681f5001747ab6f70eb7adcaa28361",
+      "tokens": "4112000000000",
+      "description": {
+        "moniker": "Kraken"
+      }
+    },
+    {
+      "operator_address": "0x17df00007156b52897d2281de186b5baef76aabf",
+      "tokens": "3072975682000",
+      "description": {
+        "moniker": "loudr"
+      }
+    },
+    {
+      "operator_address": "0x8c9f296b3cbdc1f7763a641956e7fcff51393e3f",
+      "tokens": "3024000000000",
+      "description": {
+        "moniker": "QuantNode | 100% fee refund for the first 1M IP"
+      }
+    },
+    {
+      "operator_address": "0x438031f035430924d0b6cb8f540dbf4499935966",
+      "tokens": "2048000000000",
+      "description": {
+        "moniker": "KYVE Public Good Funding"
+      }
+    },
+    {
+      "operator_address": "0x625a449647e02600084e6499a3844fa19ed709d3",
+      "tokens": "1500000000000",
+      "description": {
+        "moniker": "CertiK"
+      }
+    },
+    {
+      "operator_address": "0xf81694247edc838844a44a1a94a171f58ba802df",
+      "tokens": "1110000000000",
+      "description": {
+        "moniker": "J-Node | Unlocked"
+      }
+    },
+    {
+      "operator_address": "0x33aa4df2492a4f80f0b67cca74d9f6889c1c6444",
+      "tokens": "1100000000000",
+      "description": {
+        "moniker": "pro-nodes75"
+      }
+    },
+    {
+      "operator_address": "0xccb72699101d0db7c55bc3121793e039d1a6bde0",
+      "tokens": "1100000000000",
+      "description": {
+        "moniker": "polkachu.com"
+      }
+    },
+    {
+      "operator_address": "0xf57cef6692131ca611165fdf3259c170689e37b8",
+      "tokens": "1100000000000",
+      "description": {
+        "moniker": "ITRocket"
+      }
+    },
+    {
+      "operator_address": "0x4039cc52be8cea0032fb034847999fdbab5d62dc",
+      "tokens": "1049795200001",
+      "description": {
+        "moniker": "InfStones"
+      }
+    }
+  ],
+  "_top_16_share": 0.7973
 }
