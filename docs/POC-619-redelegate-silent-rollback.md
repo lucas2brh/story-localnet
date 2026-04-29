@@ -52,26 +52,27 @@ git checkout 22354e1                                # known-good base for this P
 make build
 GOOS=linux GOARCH=arm64 go build -o build/story-linux ./client
 
-# 2. Stage the linux binary at the docker build-context path.
-cp build/story-linux story-prebuilt
-
-# 3. Stage the host (mac) binary as the CLI used by the probe.
+# 2. Stage the host (mac) binary as the CLI used by the probe.
 cp build/story /tmp/story
 
-# 4. Verify the staged binary has the buggy upstream cosmos-sdk pin.
-go version -m story-prebuilt | grep "github.com/piplabs/cosmos-sdk"
-# expected:
-#   => github.com/piplabs/cosmos-sdk v0.50.14-piplabs-v1.1
-# NOT:
-#   => /Users/<you>/.../cosmos-sdk (devel)
-
-# 5. Run the probe (in story-localnet repo).
+# 3. Stage the linux binary at the docker build-context path
+#    (script derives the destination from docker-compose, so it works
+#    whether the build.context points to story-private-fork, story, or
+#    any other sibling repo). Records a sha256 fingerprint so start.sh
+#    can later assert the image binary matches.
 cd /path/to/story-localnet
+bash scripts/stage_binary.sh ../story-private-fork/build/story-linux
+
+# 4. Run the probe (in story-localnet repo).
 bash terminate.sh                                    # if a previous cluster is up
 docker rmi -f story-node:localnet 2>/dev/null        # ensure fresh image build
 docker builder prune -af                             # clear stale build cache
 bash scripts/probe_redelegate_silent_rollback.sh
 ```
+
+`start.sh` (invoked inside the probe) automatically asserts the image's
+embedded binary sha256 matches the one `stage_binary.sh` recorded; on
+mismatch it exits 1 with a clear error before any cluster work begins.
 
 Total wall-clock per run: ~5-6 min on first run (image rebuild from scratch),
 ~3-4 min on subsequent runs.
