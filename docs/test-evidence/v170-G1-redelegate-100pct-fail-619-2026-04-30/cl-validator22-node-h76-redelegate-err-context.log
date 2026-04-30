@@ -1,0 +1,11 @@
+26-04-30 07:44:35.722 DEBU 📚 Delegation modified                   acc_addr=70997970C51812DC3A010C7D01B50E0D17DC79C8 val_addr=1A9758003043C5C0325BA7F5AF2E180D6539733D
+26-04-30 07:44:35.723 DEBU Delegate Info                            module=x/staking delegator_addr=story1wzvhjux9rqfdcwspp37srdgwp5tac7wgfh9xau validator_operator_addr=storyvaloper1r2t4sqpsg0zuqvjm5l667tscp4jnjuea5vr9su period_delegation_id=1 subtract_account=false token_amount=1024000000000 rewards_token_amount=1076224000000.000000000000000000 delegate_shares=1024000000000.000000000000000000 delegate_rewards_shares=1076224000000.000000000000000000 period_delegation_shares=1024000000000.000000000000000000 period_delegation_rewards_shares=1076224000000.000000000000000000 delegation_shares=1024000000000.000000000000000000 delegation_rewards_shares=1076224000000.000000000000000000 validator_tokens=1217249178356582 validator_rewards_tokens=1217301402356582.000000000000000000 validator_shares=1217249178356582.000000000000000000 validator_rewards_shares=1217301402356582.000000000000000000
+26-04-30 07:44:35.724 ERRO Failed to process redelegate            
+  err=
+  │ validator_not_found
+  │ validator does not exist
+26-04-30 07:44:35.724 DEBU Processed staking events                 height=76 count=1
+26-04-30 07:44:35.724 DEBU Processed governance events              height=76 count=1
+26-04-30 07:44:35.724 DEBU Processed UBIPool events                 height=76 count=1
+26-04-30 07:44:35.724 DEBU EndBlock.evmstaking                     
+26-04-30 07:44:35.734 DEBU Processing mature unbonding delegations  count=0

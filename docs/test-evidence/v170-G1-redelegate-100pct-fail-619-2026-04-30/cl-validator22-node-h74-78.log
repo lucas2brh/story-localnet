@@ -1,0 +1,55 @@
+26-04-30 07:44:23.155 INFO 👾 ABCI call: ProcessProposal            height=74 proposer=4541a55
+26-04-30 07:44:23.488 INFO 👾 ABCI call: FinalizeBlock              height=74 proposer=4541a55
+26-04-30 07:44:23.537 INFO 👾 ABCI response: FinalizeBlock          val_updates=0 height=74
+26-04-30 07:44:23.551 DEBU prune start                              height=74
+26-04-30 07:44:23.551 DEBU prune end                                height=74
+26-04-30 07:44:23.551 DEBU flushing metadata                        height=74
+26-04-30 07:44:23.554 DEBU flushing metadata finished               height=74
+26-04-30 07:44:23.554 DEBU snapshot is skipped                      height=74
+26-04-30 07:44:26.208 INFO 👾 ABCI call: ProcessProposal            height=75 proposer=7f3a262
+26-04-30 07:44:26.547 INFO 👾 ABCI call: FinalizeBlock              height=75 proposer=7f3a262
+26-04-30 07:44:26.619 INFO 👾 ABCI response: FinalizeBlock          val_updates=0 height=75
+26-04-30 07:44:26.624 DEBU prune start                              height=75
+26-04-30 07:44:26.625 DEBU prune end                                height=75
+26-04-30 07:44:26.625 DEBU flushing metadata                        height=75
+26-04-30 07:44:26.626 DEBU flushing metadata finished               height=75
+26-04-30 07:44:26.627 DEBU snapshot is skipped                      height=75
+26-04-30 07:44:29.247 INFO 👾 ABCI call: ProcessProposal            height=76 proposer=c6125d3
+26-04-30 07:44:29.583 INFO 👾 ABCI call: FinalizeBlock              height=76 proposer=c6125d3
+26-04-30 07:44:29.602 DEBU Processed staking events                 height=74 count=0
+26-04-30 07:44:29.602 DEBU Processed governance events              height=74 count=0
+26-04-30 07:44:29.602 DEBU Processed UBIPool events                 height=74 count=0
+26-04-30 07:44:29.614 INFO 👾 ABCI response: FinalizeBlock          val_updates=0 height=76
+26-04-30 07:44:29.643 DEBU prune start                              height=76
+26-04-30 07:44:29.643 DEBU prune end                                height=76
+26-04-30 07:44:29.644 DEBU flushing metadata                        height=76
+26-04-30 07:44:29.649 DEBU flushing metadata finished               height=76
+26-04-30 07:44:29.649 DEBU snapshot is skipped                      height=76
+26-04-30 07:44:32.295 INFO 👾 ABCI call: ProcessProposal            height=77 proposer=0987f08
+26-04-30 07:44:32.645 INFO 👾 ABCI call: FinalizeBlock              height=77 proposer=0987f08
+26-04-30 07:44:32.659 DEBU Processed staking events                 height=75 count=0
+26-04-30 07:44:32.660 DEBU Processed governance events              height=75 count=0
+26-04-30 07:44:32.660 DEBU Processed UBIPool events                 height=75 count=0
+26-04-30 07:44:32.688 INFO 👾 ABCI response: FinalizeBlock          val_updates=0 height=77
+26-04-30 07:44:32.699 DEBU prune start                              height=77
+26-04-30 07:44:32.699 DEBU prune end                                height=77
+26-04-30 07:44:32.699 DEBU flushing metadata                        height=77
+26-04-30 07:44:32.702 DEBU flushing metadata finished               height=77
+26-04-30 07:44:32.702 DEBU snapshot is skipped                      height=77
+26-04-30 07:44:35.343 INFO 👾 ABCI call: ProcessProposal            height=78 proposer=ecdffdd
+26-04-30 07:44:35.670 INFO 👾 ABCI call: FinalizeBlock              height=78 proposer=ecdffdd
+26-04-30 07:44:35.724 DEBU Processed staking events                 height=76 count=1
+26-04-30 07:44:35.724 DEBU Processed governance events              height=76 count=1
+26-04-30 07:44:35.724 DEBU Processed UBIPool events                 height=76 count=1
+26-04-30 07:44:35.773 INFO 👾 ABCI response: FinalizeBlock          val_updates=0 height=78
+26-04-30 07:44:35.780 DEBU prune start                              height=78
+26-04-30 07:44:35.780 DEBU prune end                                height=78
+26-04-30 07:44:35.781 DEBU flushing metadata                        height=78
+26-04-30 07:44:35.783 DEBU flushing metadata finished               height=78
+26-04-30 07:44:35.783 DEBU snapshot is skipped                      height=78
+26-04-30 07:44:38.709 DEBU Processed staking events                 height=77 count=0
+26-04-30 07:44:38.709 DEBU Processed governance events              height=77 count=0
+26-04-30 07:44:38.709 DEBU Processed UBIPool events                 height=77 count=0
+26-04-30 07:44:41.846 DEBU Processed staking events                 height=78 count=0
+26-04-30 07:44:41.846 DEBU Processed governance events              height=78 count=0
+26-04-30 07:44:41.846 DEBU Processed UBIPool events                 height=78 count=0

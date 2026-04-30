@@ -1,0 +1,8 @@
+[36m[G1][0m Phase 0 — start fresh 22-val localnet, val-22 UNLOCKED, NEW_MAX=21 (binary v170-maxval-21)
+Wrote 22 validator dirs + /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/validators_meta.json
+OK: top-16 controls > 2/3 VP — safe pruning.
+ERROR: meta(22)/dist(20) size != N(22)
+[36m[G1][0m   period[3].duration set to 180s (runtime tweak)
+bash: /Users/lucas/workspace/lucas-workspace/story-localnet/scripts/generate_compose_files.sh: No such file or directory
+26-04-30 06:58:43.297 ERRO Stopping peer for error                  module=p2p peer="Peer{MConn{10.0.0.11:26656} a9017ff5321d6645295035e9a13a8c14d9fc28d9 out}" err=EOF
+[31m[G1][0m FAIL rpc1 didn't sync in 120s
