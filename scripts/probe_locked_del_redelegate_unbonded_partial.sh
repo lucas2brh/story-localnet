@@ -293,7 +293,8 @@ phase_4_wait_unbonded() {
   # Operator did NOT self-unstake → tokens should still be ~107T (operator self-stake) + 1024 IP (Bob)
   # Sanity: tokens > Bob's portion alone (proves operator self-stake intact)
   local bob_only=$((STAKE_IP * 1000000000))
-  if (( $(python3 -c "print(int('$t_src') > int('$bob_only'))") )); then
+  local cmp; cmp=$(python3 -c "print(1 if int('$t_src') > int('$bob_only') else 0)")
+  if [[ "$cmp" == "1" ]]; then
     pass "src in BOND_STATUS_UNBONDED; tokens=$t_src includes operator self-stake (Bob is non-100% holder)"
   else
     fail "src tokens=$t_src ≤ Bob's $bob_only — operator self-stake unexpectedly gone"
