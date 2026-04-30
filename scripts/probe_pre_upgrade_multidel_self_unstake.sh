@@ -39,9 +39,10 @@ ANVIL_ADDR=${ANVIL_ADDR:-0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266}
 LOCALNET="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 META="${LOCALNET}/tmp/validators_meta.json"
 SKIP_TEARDOWN=${SKIP_TEARDOWN:-0}
-TARGET_MONIKER="localnet-val-18"
-EXTERNAL_STAKE_IP=2048
-EXTERNAL_STAKE_WEI="2048000000000000000000"
+TARGET_MONIKER=${TARGET_MONIKER:-localnet-val-18}
+EXTERNAL_STAKE_IP=${EXTERNAL_STAKE_IP:-2048}
+EXTERNAL_STAKE_WEI=${EXTERNAL_STAKE_WEI:-${EXTERNAL_STAKE_IP}000000000000000000}
+RUN_BOB_PHASES=${RUN_BOB_PHASES:-0}
 
 C_CYAN='\033[36m'; C_RED='\033[31m'; C_GREEN='\033[32m'; C_RESET='\033[0m'
 log()  { printf "${C_CYAN}[pre-multidel]${C_RESET} %s\n" "$*"; }
@@ -193,7 +194,9 @@ phase_6_verify() {
   [[ "$status" == "1" ]]      || fail "expected UNBONDED (status=1), got $status"
   [[ "$jailed" == "true" ]]   || fail "expected jailed=true (operator self-del fell below MinSelfDelegation), got jailed=$jailed"
   # Tokens should drop to ~ EXTERNAL_STAKE_WEI/1e9 (just Anvil's portion remaining)
-  local expected_min=2000000000000  # ~2000 IP slack; exactly 2048 IP = 2.048e12
+  # Parametric on EXTERNAL_STAKE_IP — expect ~ EXTERNAL_STAKE_IP IP retained (Anvil only),
+  # with 50 IP slack for any incidental movement.
+  local expected_min=$(( (EXTERNAL_STAKE_IP - 50) * 1000000000 ))
   [[ "$tokens" -lt "$VAL_TOKENS_GENESIS" ]] || fail "expected tokens dropped below genesis $VAL_TOKENS_GENESIS, got $tokens"
   [[ "$tokens" -gt "$expected_min" ]]      || fail "expected tokens still > $expected_min (Anvil portion retained), got $tokens"
 
@@ -214,6 +217,58 @@ phase_7_operator_balance() {
   OP_EVM_BAL_AFTER_UBD=$(get_evm_balance "$op_addr")
   log "  operator after-mature balance=$OP_EVM_BAL_AFTER_UBD wei (vs pre-fund $OP_EVM_BAL_PRE wei)"
   log "  expected refund ~ $VAL_TOKENS_GENESIS stake = $(echo "$VAL_TOKENS_GENESIS * 1000000000" | bc) wei"
+}
+
+# ---------- Phase 7b/c/d — Anvil/Bob recoverability after operator self-unstake ----------
+# These run only when RUN_BOB_PHASES=1. Tests user scenario:
+#   "bob delegated 1024 IP, then operator took self-del away (jailed val);
+#    bob never unstaked manually — what happens to bob's tokens?"
+BOB_BAL_AFTER_SELF=""; BOB_UNSTAKE_RC=""; BOB_UNSTAKE_TX=""
+BOB_BAL_AFTER_RECOVERY=""
+phase_7b_bob_observe() {
+  [[ "$RUN_BOB_PHASES" == "1" ]] || { log "Phase 7b — RUN_BOB_PHASES=0, skip"; return; }
+  log "Phase 7b — observe Anvil/Bob state after operator self-unstake (Bob still passive)"
+  BOB_BAL_AFTER_SELF=$(get_evm_balance "$ANVIL_ADDR")
+  log "  Anvil EVM bal after-self-unstake=$BOB_BAL_AFTER_SELF wei"
+  local tokens shares status jailed
+  tokens=$(val_field "$VAL_OP" tokens)
+  shares=$(val_field "$VAL_OP" delegator_shares)
+  status=$(val_field "$VAL_OP" status)
+  jailed=$(val_field "$VAL_OP" jailed)
+  log "  val state holding Anvil's stake: status=$status jailed=$jailed tokens=$tokens shares=$shares"
+}
+
+phase_7c_bob_unstake() {
+  [[ "$RUN_BOB_PHASES" == "1" ]] || { log "Phase 7c — RUN_BOB_PHASES=0, skip"; return; }
+  log "Phase 7c — Anvil/Bob attempts 100% unstake (val UNBONDED + jailed; can stake be recovered?)"
+  local pub; pub=$(meta_pubkey_hex "$TARGET_MONIKER")
+  local out
+  out=$(PRIVATE_KEY="$ANVIL_PK" "$STORY_BIN" validator unstake \
+    --validator-pubkey "$pub" --unstake "$EXTERNAL_STAKE_WEI" --delegation-id 0 \
+    --rpc http://localhost:8545 --chain-id "$CHAIN_ID" 2>&1)
+  BOB_UNSTAKE_RC=$?
+  BOB_UNSTAKE_TX=$(grep -oE '0x[0-9a-f]{64}' <<<"$out" | head -1)
+  printf '%s\n' "$out" | sed 's/^/      /' | tail -8
+  log "  Anvil unstake rc=$BOB_UNSTAKE_RC tx=$BOB_UNSTAKE_TX"
+  wait_height "$(( $(get_height) + 5 ))" >/dev/null
+}
+
+phase_7d_bob_balance() {
+  [[ "$RUN_BOB_PHASES" == "1" ]] || { log "Phase 7d — RUN_BOB_PHASES=0, skip"; return; }
+  log "Phase 7d — wait past unbonding (10s), check Anvil EVM balance recovered"
+  wait_height "$(( $(get_height) + 8 ))" >/dev/null
+  BOB_BAL_AFTER_RECOVERY=$(get_evm_balance "$ANVIL_ADDR")
+  # bash $((..)) is int64 — wei values exceed it; use python for arbitrary precision
+  local delta=$(python3 -c "print($BOB_BAL_AFTER_RECOVERY - $BOB_BAL_AFTER_SELF)")
+  log "  Anvil EVM bal: after-self-unstake=$BOB_BAL_AFTER_SELF after-recovery=$BOB_BAL_AFTER_RECOVERY delta=$delta wei"
+  log "  expected delta ~= ${EXTERNAL_STAKE_IP} IP = $EXTERNAL_STAKE_WEI wei (minus gas)"
+  if python3 -c "import sys; sys.exit(0 if $delta > 0 else 1)"; then
+    local delta_ip
+    delta_ip=$(python3 -c "print(f'{$delta / 1e18:.4f}')")
+    pass "Anvil/Bob recovered tokens (delta=$delta wei = $delta_ip IP)"
+  else
+    fail "Anvil/Bob got NOTHING back from jailed-pruned val (stranding bug confirmed)"
+  fi
 }
 
 # ---------------- Phase 8 — summary ----------------
@@ -246,5 +301,8 @@ phase_4_fund_operator
 phase_5_operator_self_unstake
 phase_6_verify
 phase_7_operator_balance
+phase_7b_bob_observe
+phase_7c_bob_unstake
+phase_7d_bob_balance
 phase_8_summary
 phase_9_teardown
