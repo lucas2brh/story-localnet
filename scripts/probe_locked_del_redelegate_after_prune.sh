@@ -93,10 +93,22 @@ get_evm_balance() {
 }
 
 val_field() {
-  local body
-  body=$(curl -fsS "http://localhost:1317/staking/validators/${1}" 2>/dev/null)
-  [[ -z $body ]] && { echo "GONE"; return; }
-  jq -r ".msg.validator.${2} // \"GONE\"" <<<"$body"
+  # Returns the proto3 value for /staking/validators/{op}.msg.validator.<field>.
+  # On REST failure (5x retry exhausted): writes diagnostic to stderr and returns
+  # empty stdout — caller MUST check $? != 0 OR `[[ -z "$x" ]]` and fail() with
+  # explicit message. Empty stdout for a present body but absent field is a
+  # legal proto3 zero-value — do NOT conflate with REST failure.
+  local op=$1 field=$2 body i
+  for i in 1 2 3 4 5; do
+    body=$(curl -fsS --max-time 3 "http://localhost:1317/staking/validators/${op}" 2>/dev/null) || true
+    if [[ -n "$body" ]] && jq -e .msg.validator >/dev/null 2>&1 <<<"$body"; then
+      jq -r ".msg.validator.${field} // empty" <<<"$body"
+      return 0
+    fi
+    sleep 0.5
+  done
+  echo "ERROR: REST /staking/validators/${op} returned no validator body after 5 retries" >&2
+  return 1
 }
 
 meta_pubkey_hex() { local b64; b64=$(jq -r --arg m "$1" '.[] | select(.moniker==$m) | .pubkey_base64' "$META"); echo -n "$b64" | base64 -d | xxd -p -c 66; }
@@ -187,11 +199,18 @@ phase_0_start() {
   bash "${LOCALNET}/scripts/fetch_mainnet_distribution.sh" "$N_VALS" 2>&1 | tail -1
   UNLOCKED_VALS="1,$N_VALS" MAX_VALIDATORS_INIT="$N_VALS" bash "${LOCALNET}/scripts/assemble_genesis.sh" "$N_VALS" 2>&1 | tail -1
 
-  # Shorten period[3].duration 900s → 180s for tractable wallclock (runtime jq tweak, not committed)
+  # Stretch period[1] short / [2] medium / [3] long all to 1800s so Bob's
+  # locked-short delegation stays unmatured through Phase 6 redelegate (~6-8min
+  # wallclock). Default genesis values (60s/120s/180s) would mature mid-probe
+  # and bypass the forceUnbond=true path that Raul Case 6b targets.
   local genesis_path="${LOCALNET}/config/story/genesis-node.json"
   local tmp; tmp=$(mktemp)
-  jq '.app_state.staking.params.periods[3].duration = "180s"' "$genesis_path" > "$tmp" && mv "$tmp" "$genesis_path"
-  log "  period[3].duration set to 180s (runtime tweak)"
+  jq '
+    .app_state.staking.params.periods[1].duration = "1800s" |
+    .app_state.staking.params.periods[2].duration = "1800s" |
+    .app_state.staking.params.periods[3].duration = "1800s"
+  ' "$genesis_path" > "$tmp" && mv "$tmp" "$genesis_path"
+  log "  periods[1..3].duration set to 1800s (runtime tweak; keeps locked-short delegation unmatured through Phase 6)"
 
   # also need docker-compose for vals 21+22 which don't ship by default
   bash "${LOCALNET}/scripts/generate_compose_files.sh" "$N_VALS" 2>&1 | tail -1 || \
@@ -217,20 +236,25 @@ phase_1_baseline() {
   SRC_VAL_OP=$(meta_op_evm "$SRC_VAL_MONIKER")
   DST_VAL_OP=$(meta_op_evm "$DST_VAL_MONIKER")
   local s_src s_dst t_src t_dst stt_src stt_dst
-  s_src=$(val_field "$SRC_VAL_OP" status); t_src=$(val_field "$SRC_VAL_OP" tokens); stt_src=$(val_field "$SRC_VAL_OP" support_token_type)
-  s_dst=$(val_field "$DST_VAL_OP" status); t_dst=$(val_field "$DST_VAL_OP" tokens); stt_dst=$(val_field "$DST_VAL_OP" support_token_type)
+  s_src=$(val_field "$SRC_VAL_OP" status)              || fail "REST: failed to read $SRC_VAL_MONIKER status (Phase 1 baseline)"
+  t_src=$(val_field "$SRC_VAL_OP" tokens)              || fail "REST: failed to read $SRC_VAL_MONIKER tokens"
+  stt_src=$(val_field "$SRC_VAL_OP" support_token_type) || fail "REST: failed to read $SRC_VAL_MONIKER support_token_type"
+  s_dst=$(val_field "$DST_VAL_OP" status)              || fail "REST: failed to read $DST_VAL_MONIKER status"
+  t_dst=$(val_field "$DST_VAL_OP" tokens)              || fail "REST: failed to read $DST_VAL_MONIKER tokens"
+  stt_dst=$(val_field "$DST_VAL_OP" support_token_type) || fail "REST: failed to read $DST_VAL_MONIKER support_token_type"
   log "  $SRC_VAL_MONIKER (UNLOCKED): op=$SRC_VAL_OP status=$s_src tokens=$t_src support_token_type=$stt_src"
   log "  $DST_VAL_MONIKER (UNLOCKED): op=$DST_VAL_OP status=$s_dst tokens=$t_dst support_token_type=$stt_dst"
-  [[ "$s_src" == "3" && "$s_dst" == "3" ]] || fail "expected both BONDED pre-upgrade, got src=$s_src dst=$s_dst"
-  [[ "$stt_src" == "1" ]] || fail "expected $SRC_VAL_MONIKER UNLOCKED (support_token_type=1), got $stt_src"
-  [[ "$stt_dst" == "1" ]] || fail "expected $DST_VAL_MONIKER UNLOCKED (support_token_type=1), got $stt_dst"
+  [[ "$s_src" == "3" ]] || fail "expected $SRC_VAL_MONIKER BOND_STATUS_BONDED (status=3), got status=$s_src"
+  [[ "$s_dst" == "3" ]] || fail "expected $DST_VAL_MONIKER BOND_STATUS_BONDED (status=3), got status=$s_dst"
+  [[ "$stt_src" == "1" ]] || fail "expected $SRC_VAL_MONIKER support_token_type=1 (UNLOCKED), got $stt_src"
+  [[ "$stt_dst" == "1" ]] || fail "expected $DST_VAL_MONIKER support_token_type=1 (UNLOCKED), got $stt_dst"
 
   # Seed Bob
   cast send --rpc-url http://localhost:8545 --private-key "$ALICE_PK" "$BOB_ADDR" \
     --value "${SEED_IP}ether" --legacy --gas-price 50gwei >/dev/null 2>&1
   local bal; bal=$(get_evm_balance "$BOB_ADDR")
   log "  Bob seeded balance=$bal wei"
-  pass "baseline + seed complete; src=UNLOCKED, dst=LOCKED, both BONDED"
+  pass "baseline + seed complete; src=UNLOCKED, dst=UNLOCKED, both BOND_STATUS_BONDED"
   capture_evidence "01-baseline"
 }
 
@@ -265,13 +289,15 @@ phase_3_prune() {
   log "Phase 3 — wait past V170=$UPGRADE_HEIGHT to h=$POST_UPGRADE_BLOCK"
   wait_height "$POST_UPGRADE_BLOCK" >/dev/null
   local s_src s_dst t_src t_dst
-  s_src=$(val_field "$SRC_VAL_OP" status); t_src=$(val_field "$SRC_VAL_OP" tokens)
-  s_dst=$(val_field "$DST_VAL_OP" status); t_dst=$(val_field "$DST_VAL_OP" tokens)
+  s_src=$(val_field "$SRC_VAL_OP" status) || fail "REST: $SRC_VAL_MONIKER status read failed (Phase 3)"
+  t_src=$(val_field "$SRC_VAL_OP" tokens) || fail "REST: $SRC_VAL_MONIKER tokens read failed"
+  s_dst=$(val_field "$DST_VAL_OP" status) || fail "REST: $DST_VAL_MONIKER status read failed"
+  t_dst=$(val_field "$DST_VAL_OP" tokens) || fail "REST: $DST_VAL_MONIKER tokens read failed"
   log "  src post-upgrade: status=$s_src tokens=$t_src"
   log "  dst post-upgrade: status=$s_dst tokens=$t_dst"
-  [[ "$s_src" == "1" ]] || fail "expected src UNBONDED (status=1) post-upgrade, got $s_src"
-  [[ "$s_dst" == "3" ]] || fail "expected dst BONDED (status=3) post-upgrade, got $s_dst"
-  pass "V170 prune fired; src UNBONDED carrying Bob's locked delegation; dst still BONDED"
+  [[ "$s_src" == "1" ]] || fail "expected $SRC_VAL_MONIKER BOND_STATUS_UNBONDED (status=1) post-upgrade, got status=$s_src"
+  [[ "$s_dst" == "3" ]] || fail "expected $DST_VAL_MONIKER BOND_STATUS_BONDED (status=3) post-upgrade, got status=$s_dst"
+  pass "V170 prune fired; src BOND_STATUS_UNBONDED carrying Bob's locked delegation; dst still BOND_STATUS_BONDED"
   capture_evidence "03-post-prune"
 }
 
@@ -294,10 +320,12 @@ phase_4_self_unstake() {
   do_unstake "${SRC_VAL_MONIKER}-op" "$op_pk" "$pub_src" "$self_amount" 0
   sleep 5
   local s j t
-  s=$(val_field "$SRC_VAL_OP" status); j=$(val_field "$SRC_VAL_OP" jailed); t=$(val_field "$SRC_VAL_OP" tokens)
+  s=$(val_field "$SRC_VAL_OP" status) || fail "REST: $SRC_VAL_MONIKER status read failed (Phase 4)"
+  j=$(val_field "$SRC_VAL_OP" jailed) || fail "REST: $SRC_VAL_MONIKER jailed read failed"
+  t=$(val_field "$SRC_VAL_OP" tokens) || fail "REST: $SRC_VAL_MONIKER tokens read failed"
   log "  src post-self-unstake: status=$s jailed=$j tokens=$t"
-  [[ "$s" == "1" ]]      || fail "src expected UNBONDED, got $s"
-  [[ "$j" == "true" ]]   || fail "src expected jailed=true, got $j"
+  [[ "$s" == "1" ]]      || fail "expected $SRC_VAL_MONIKER BOND_STATUS_UNBONDED (status=1) post-self-unstake, got status=$s"
+  [[ "$j" == "true" ]]   || fail "expected $SRC_VAL_MONIKER jailed=true post-self-unstake, got jailed=$j"
   [[ "$t" == "$ext" ]]   || fail "src expected tokens=$ext (Bob's portion only), got $t"
   pass "src val jailed + UNBONDED; only Bob's 1024 IP delegation remains"
   capture_evidence "04-post-self-unstake"
