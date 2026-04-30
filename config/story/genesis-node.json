@@ -1412,7 +1412,7 @@
           },
           {
             "period_type": 3,
-            "duration": "900s",
+            "duration": "180s",
             "rewards_multiplier": "1.340000000000000000"
           }
         ],
