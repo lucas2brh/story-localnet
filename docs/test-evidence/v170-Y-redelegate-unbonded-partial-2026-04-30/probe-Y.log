@@ -1,0 +1,129 @@
+[36m[Y][0m Phase 0 — start fresh 22-val localnet, val-1 + val-22 UNLOCKED, NEW_MAX=21 (binary v170-maxval-21)
+Wrote 22 validator dirs + /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/validators_meta.json
+OK: top-16 controls > 2/3 VP — safe pruning.
+Rewrote /Users/lucas/workspace/lucas-workspace/story-localnet/config/story/genesis-node.json: 22 validators, supply=9999999999999986, max_validators=22, singularity_height=0, unlocked_vals=[1,22]
+[36m[Y][0m   periods[1..3].duration set to 1800s (locked-short stays unmatured through Phase 5)
+Done. Last val IP range: 10.0.1.62 (geth) / 10.0.1.63 (node).
+   Grafana:      http://localhost:3000
+[36m[Y][0m   rpc1 sync ok h=12
+[36m[Y][0m Phase 1 — wait h=10 + capture baseline + seed Bob
+[36m[Y][0m   localnet-val-22 (UNLOCKED): op=0xA60f8AEBbeb9A54B96a44689d7c2F63f3fE217b7 status=3 tokens=107743035247064 support_token_type=1
+[36m[Y][0m   localnet-val-1 (UNLOCKED): op=0x7173e80ad3e96B3AA4BaB802787513EE85300A27 status=3 tokens=1216225178356582 support_token_type=1
+[36m[Y][0m   Bob seeded balance=2000000000000000000000 wei
+[32m[Y][0m PASS baseline + seed complete; src=UNLOCKED, dst=UNLOCKED, both BOND_STATUS_BONDED
+[36m[Y][0m   evidence captured to /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/probe-Y-evidence/{cl,el,health}-*-01-baseline.log
+[36m[Y][0m Phase 2 — Bob stakes 1024 IP locked-short (period_type=1) to localnet-val-22
+[36m[Y][0m   pre-stake: Bob=2000000000000000000000, src.tokens=107743035247064, dst.tokens=1216225178356582
+[36m[Y][0m   CLI returned: [36m[Y][0m   Bob stake short (1024 IP) → 0207ad9169b8fd5c89b9cbe88ee91e78b5464fae3d385146b0a3c77e83682355dc
+      Warning: No .env file found
+      Signing transaction with account address: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0xdb906873f1ecf02af0bd024648b91c130ae1b9c3185218d0e8cc3c3349610f4a
+      Explorer URL: https://storyscan.xyz/tx/0xdb906873f1ecf02af0bd024648b91c130ae1b9c3185218d0e8cc3c3349610f4a
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens staked successfully! Extracting delegation ID...
+      Delegation ID: 1
+Delegation ID: 1
+[36m[Y][0m   post-stake: src.tokens=108767035247064 (delta=1024000000000), src.shares=108767035247064.000000000000000000
+[32m[Y][0m PASS Bob stake committed; src val carrying locked-short delegation (id=1)
+[36m[Y][0m   evidence captured to /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/probe-Y-evidence/{cl,el,health}-*-02-stake.log
+[36m[Y][0m Phase 3 — wait past V170=50 to h=55
+[36m[Y][0m   src post-V170: status=1 tokens=108767035247064
+[36m[Y][0m   dst post-V170: status=3 tokens=1216225178356582
+[32m[Y][0m PASS V170 prune fired; src in BOND_STATUS_UNBONDING/UNBONDED; dst still BOND_STATUS_BONDED
+[36m[Y][0m   evidence captured to /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/probe-Y-evidence/{cl,el,health}-*-03-post-prune.log
+[36m[Y][0m Phase 4 — wait UnbondingTime+buffer (15s) for src to transition UNBONDING → UNBONDED
+[36m[Y][0m   src after UnbondingTime: status=1 tokens=108767035247064 jailed=
+[32m[Y][0m PASS src in BOND_STATUS_UNBONDED; tokens=108767035247064 includes operator self-stake (Bob is non-100% holder)
+[36m[Y][0m   evidence captured to /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/probe-Y-evidence/{cl,el,health}-*-04-unbonded.log
+[36m[Y][0m Phase 5 — Bob redelegate (forceUnbond=true path) from localnet-val-22 (UNBONDED) to localnet-val-1 (BONDED, UNLOCKED)
+[36m[Y][0m   Raul Case 6b 'source Unbonded' baseline: redelegation entry must complete instantly + lock metadata preserved on dst
+[36m[Y][0m   pre-redel: src.tokens=108767035247064, dst.tokens=1216225178356582, Bob=976018819030308479680 wei
+[36m[Y][0m   redelegate [36m[Y][0m   Bob redelegate amt=1024000000000000000000 del_id=1 src→dst
+      Warning: No .env file found
+      Signing transaction with account address: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0x2339c57dd1dbdc6915a704939e19fc980ef62111d091f84863afd959c1b31b17
+      Explorer URL: https://storyscan.xyz/tx/0x2339c57dd1dbdc6915a704939e19fc980ef62111d091f84863afd959c1b31b17
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens redelegated successfully!
+Transaction hash: 0x2339c57dd1dbdc6915a704939e19fc980ef62111d091f84863afd959c1b31b17
+[36m[Y][0m   post-redel: src.tokens=107743035247064 (delta=-1024000000000), dst.tokens=1217249178356582 (delta=1024000000000)
+[36m[Y][0m   post-redel: src.shares=107743035247064.000000000000000000, dst.shares=1217249178356582.000000000000000000
+[32m[Y][0m PASS redelegate moved 1024 IP src→dst on chain; non-100% baseline path holds
+[36m[Y][0m   evidence captured to /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/probe-Y-evidence/{cl,el,health}-*-05-redelegate.log
+[36m[Y][0m Phase 6 — verify Bob's delegation on dst preserves period_type=1 (locked-short) + same EndTime
+[36m[Y][0m   dst val delegations response (head):
+      {
+        "code": 200,
+        "msg": {
+          "delegation_responses": [
+            {
+              "delegation": {
+                "delegator_address": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+                "validator_address": "0x7173e80ad3e96b3aa4bab802787513ee85300a27",
+                "shares": "1024000000000.000000000000000000",
+                "rewards_shares": "1076224000000.000000000000000000"
+              },
+              "balance": {
+                "denom": "stake",
+                "amount": "1024000000000"
+              }
+            },
+            {
+              "delegation": {
+                "delegator_address": "0x7173e80ad3e96b3aa4bab802787513ee85300a27",
+                "validator_address": "0x7173e80ad3e96b3aa4bab802787513ee85300a27",
+                "shares": "1216225178356582.000000000000000000",
+                "rewards_shares": "1216225178356582.000000000000000000"
+              },
+              "balance": {
+                "denom": "stake",
+                "amount": "1216225178356582"
+              }
+            }
+          ],
+          "pagination": {
+[36m[Y][0m   Bob on dst: shares=1024000000000.000000000000000000
+[32m[Y][0m PASS Phase 6 lock-metadata snapshot captured (review evidence files for period_type + EndTime)
+[36m[Y][0m   evidence captured to /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/probe-Y-evidence/{cl,el,health}-*-06-lock-preserved.log
+[36m[Y][0m Phase 7 — final on-chain val state snapshot
+[36m[Y][0m   localnet-val-22 final: status=1 jailed= tokens=107743035247064 shares=107743035247064.000000000000000000
+[36m[Y][0m   localnet-val-1 final: status=3 jailed= tokens=1217249178356582 shares=1217249178356582.000000000000000000
+[36m[Y][0m   chain height 67
+[36m[Y][0m   redelegate tx hash: [36m[Y][0m   Bob redelegate amt=1024000000000000000000 del_id=1 src→dst
+      Warning: No .env file found
+      Signing transaction with account address: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0x2339c57dd1dbdc6915a704939e19fc980ef62111d091f84863afd959c1b31b17
+      Explorer URL: https://storyscan.xyz/tx/0x2339c57dd1dbdc6915a704939e19fc980ef62111d091f84863afd959c1b31b17
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens redelegated successfully!
+Transaction hash: 0x2339c57dd1dbdc6915a704939e19fc980ef62111d091f84863afd959c1b31b17
+
+========== Y PROBE — RAUL CASE 6b 'SOURCE UNBONDED' BASELINE ==========
+  Binary: yao/v170-maxval-21 (NewMaxValidators=21)
+  Cluster: 22 vals, NEW_MAX=21 → 1 val pruned
+  src val: localnet-val-22 (UNLOCKED, V170-pruned, post UnbondingTime, status=BOND_STATUS_UNBONDED)
+  dst val: localnet-val-1 (UNLOCKED, top-21, BOND_STATUS_BONDED)
+  Action: Bob redelegate 1024 IP locked-short (id=1) src→dst, Bob non-100% holder (operator self-stake intact)
+  src final: {"moniker":"localnet-val-22","operator":"0xA60f8AEBbeb9A54B96a44689d7c2F63f3fE217b7","status":"1","jailed":"","tokens":"107743035247064","shares":"107743035247064.000000000000000000"}
+  dst final: {"moniker":"localnet-val-1","operator":"0x7173e80ad3e96B3AA4BaB802787513EE85300A27","status":"3","jailed":"","tokens":"1217249178356582","shares":"1217249178356582.000000000000000000"}
+  Bob EVM bal: pre-stake=2000000000000000000000, pre-redel=976018819030308479680, post=975016569350433567216 wei
+  Final chain height: 67
+  Redelegate tx: [36m[Y][0m   Bob redelegate amt=1024000000000000000000 del_id=1 src→dst
+      Warning: No .env file found
+      Signing transaction with account address: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0x2339c57dd1dbdc6915a704939e19fc980ef62111d091f84863afd959c1b31b17
+      Explorer URL: https://storyscan.xyz/tx/0x2339c57dd1dbdc6915a704939e19fc980ef62111d091f84863afd959c1b31b17
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens redelegated successfully!
+Transaction hash: 0x2339c57dd1dbdc6915a704939e19fc980ef62111d091f84863afd959c1b31b17
+  Evidence: /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/probe-Y-evidence/
+========================================================================
+[36m[Y][0m Phase 9 — SKIP_TEARDOWN

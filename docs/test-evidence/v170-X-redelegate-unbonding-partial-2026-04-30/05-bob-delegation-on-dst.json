@@ -1,0 +1,12 @@
+{
+  "delegation": {
+    "delegator_address": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+    "validator_address": "0xb1b2ff6c3df2861f56e3a168d8517f38a4ff903a",
+    "shares": "1024000000000.000000000000000000",
+    "rewards_shares": "1076224000000.000000000000000000"
+  },
+  "balance": {
+    "denom": "stake",
+    "amount": "1024000000000"
+  }
+}

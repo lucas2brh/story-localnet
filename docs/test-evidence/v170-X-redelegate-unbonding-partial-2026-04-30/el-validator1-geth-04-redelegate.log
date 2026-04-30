@@ -1,0 +1,207 @@
+INFO [04-30|09:14:56.826] Imported new potential chain segment     number=1 hash=1d1683..aa499d blocks=1 txs=0 mgas=0.000 elapsed="136.335µs" mgasps=0.000 triedirty=0.00B
+WARN [04-30|09:14:57.204] Ignoring already known beacon payload    number=1 hash=1d1683..aa499d age=4s
+INFO [04-30|09:14:57.205] Chain head was updated                   number=1 hash=1d1683..aa499d root=262e2b..f43c1c elapsed="39.083µs"
+INFO [04-30|09:14:59.974] Imported new potential chain segment     number=2 hash=80c7b5..aeb669 blocks=1 txs=0 mgas=0.000 elapsed=1.657ms     mgasps=0.000 snapdiffs=1.07KiB triedirty=29.09KiB
+WARN [04-30|09:15:00.512] Ignoring already known beacon payload    number=2 hash=80c7b5..aeb669 age=3s
+INFO [04-30|09:15:00.516] Chain head was updated                   number=2 hash=80c7b5..aeb669 root=cba268..e41e42 elapsed="64.417µs"
+INFO [04-30|09:15:03.115] Imported new potential chain segment     number=3 hash=3b16dc..8e3ee9 blocks=1 txs=0 mgas=0.000 elapsed="759.959µs" mgasps=0.000 snapdiffs=2.14KiB triedirty=56.06KiB
+WARN [04-30|09:15:03.475] Ignoring already known beacon payload    number=3 hash=3b16dc..8e3ee9 age=3s
+INFO [04-30|09:15:03.525] Chain head was updated                   number=3 hash=3b16dc..8e3ee9 root=897afc..3430ba elapsed="111.834µs"
+INFO [04-30|09:15:06.243] Imported new potential chain segment     number=4 hash=de5b93..0b7470 blocks=1 txs=0 mgas=0.000 elapsed="930.959µs" mgasps=0.000 snapdiffs=3.22KiB triedirty=83.03KiB
+WARN [04-30|09:15:06.593] Ignoring already known beacon payload    number=4 hash=de5b93..0b7470 age=3s
+INFO [04-30|09:15:06.596] Chain head was updated                   number=4 hash=de5b93..0b7470 root=8b70e9..c4e0d7 elapsed="923.583µs"
+INFO [04-30|09:15:09.504] Imported new potential chain segment     number=5 hash=67ffe3..bd8f4e blocks=1 txs=0 mgas=0.000 elapsed=8.621ms     mgasps=0.000 snapdiffs=4.29KiB triedirty=110.00KiB
+WARN [04-30|09:15:09.859] Ignoring already known beacon payload    number=5 hash=67ffe3..bd8f4e age=3s
+INFO [04-30|09:15:09.863] Chain head was updated                   number=5 hash=67ffe3..bd8f4e root=6c0958..79f57f elapsed="58.125µs"
+INFO [04-30|09:15:12.534] Imported new potential chain segment     number=6 hash=c2ac9a..d7b891 blocks=1 txs=0 mgas=0.000 elapsed="727.376µs" mgasps=0.000 snapdiffs=5.37KiB triedirty=136.97KiB
+WARN [04-30|09:15:12.902] Ignoring already known beacon payload    number=6 hash=c2ac9a..d7b891 age=3s
+INFO [04-30|09:15:12.903] Chain head was updated                   number=6 hash=c2ac9a..d7b891 root=c89494..309671 elapsed="44.75µs"
+INFO [04-30|09:15:15.671] Imported new potential chain segment     number=7 hash=b131f1..b28eba blocks=1 txs=0 mgas=0.000 elapsed=1.003ms     mgasps=0.000 snapdiffs=6.44KiB triedirty=163.93KiB
+WARN [04-30|09:15:16.033] Ignoring already known beacon payload    number=7 hash=b131f1..b28eba age=4s
+INFO [04-30|09:15:16.035] Chain head was updated                   number=7 hash=b131f1..b28eba root=63f8b6..679c04 elapsed="31.958µs"
+INFO [04-30|09:15:18.907] Imported new potential chain segment     number=8 hash=61d86c..6e3d70 blocks=1 txs=0 mgas=0.000 elapsed="813.001µs" mgasps=0.000 snapdiffs=7.52KiB triedirty=190.90KiB
+WARN [04-30|09:15:19.166] Ignoring already known beacon payload    number=8 hash=61d86c..6e3d70 age=4s
+INFO [04-30|09:15:19.167] Chain head was updated                   number=8 hash=61d86c..6e3d70 root=61aa3b..b2c68f elapsed="44.917µs"
+INFO [04-30|09:15:21.873] Imported new potential chain segment     number=9 hash=23994f..41a8ce blocks=1 txs=0 mgas=0.000 elapsed="773.334µs" mgasps=0.000 snapdiffs=8.59KiB triedirty=217.87KiB
+WARN [04-30|09:15:22.196] Ignoring already known beacon payload    number=9 hash=23994f..41a8ce age=3s
+INFO [04-30|09:15:22.196] Chain head was updated                   number=9 hash=23994f..41a8ce root=84a928..102e20 elapsed="32.625µs"
+INFO [04-30|09:15:24.937] Imported new potential chain segment     number=10 hash=326a97..ac9358 blocks=1 txs=0 mgas=0.000 elapsed="880.626µs" mgasps=0.000 snapdiffs=9.66KiB triedirty=244.84KiB
+WARN [04-30|09:15:25.267] Ignoring already known beacon payload    number=10 hash=326a97..ac9358 age=3s
+INFO [04-30|09:15:25.271] Chain head was updated                   number=10 hash=326a97..ac9358 root=79c395..e9106c elapsed="39.125µs"
+INFO [04-30|09:15:27.261] Starting work on payload                 id=0x03278b5d219dba0b
+INFO [04-30|09:15:27.261] Updated payload                          id=0x03278b5d219dba0b number=11 hash=cf8517..5baf75 txs=0 withdrawals=23 gas=0 fees=0 root=d6ac8c..8c4530 elapsed="227.167µs"
+INFO [04-30|09:15:27.862] Stopping work on payload                 id=0x03278b5d219dba0b reason=delivery
+INFO [04-30|09:15:27.874] Imported new potential chain segment     number=11 hash=cf8517..5baf75 blocks=1 txs=0 mgas=0.000 elapsed="731.209µs" mgasps=0.000 snapdiffs=10.74KiB triedirty=271.81KiB
+WARN [04-30|09:15:28.312] Ignoring already known beacon payload    number=11 hash=cf8517..5baf75 age=3s
+INFO [04-30|09:15:28.315] Chain head was updated                   number=11 hash=cf8517..5baf75 root=d6ac8c..8c4530 elapsed="60.834µs"
+INFO [04-30|09:15:31.008] Imported new potential chain segment     number=12 hash=4e265d..e2d0be blocks=1 txs=0 mgas=0.000 elapsed="713.043µs" mgasps=0.000 snapdiffs=11.81KiB triedirty=298.78KiB
+WARN [04-30|09:15:31.352] Ignoring already known beacon payload    number=12 hash=4e265d..e2d0be age=3s
+INFO [04-30|09:15:31.358] Chain head was updated                   number=12 hash=4e265d..e2d0be root=585998..2417fa elapsed="51.875µs"
+INFO [04-30|09:15:34.065] Imported new potential chain segment     number=13 hash=ade04e..367d28 blocks=1 txs=0 mgas=0.000 elapsed="759.459µs" mgasps=0.000 snapdiffs=12.89KiB triedirty=325.75KiB
+WARN [04-30|09:15:34.422] Ignoring already known beacon payload    number=13 hash=ade04e..367d28 age=3s
+INFO [04-30|09:15:34.424] Chain head was updated                   number=13 hash=ade04e..367d28 root=00819a..835354 elapsed="29.875µs"
+INFO [04-30|09:15:37.115] Imported new potential chain segment     number=14 hash=a37801..da9437 blocks=1 txs=0 mgas=0.000 elapsed=1.513ms     mgasps=0.000 snapdiffs=13.96KiB triedirty=352.72KiB
+WARN [04-30|09:15:37.457] Ignoring already known beacon payload    number=14 hash=a37801..da9437 age=3s
+INFO [04-30|09:15:37.459] Chain head was updated                   number=14 hash=a37801..da9437 root=50623d..186bbe elapsed="40.125µs"
+INFO [04-30|09:15:40.167] Imported new potential chain segment     number=15 hash=87cae6..120f2a blocks=1 txs=0 mgas=0.000 elapsed=1.162ms     mgasps=0.000 snapdiffs=15.04KiB triedirty=379.68KiB
+WARN [04-30|09:15:40.509] Ignoring already known beacon payload    number=15 hash=87cae6..120f2a age=3s
+INFO [04-30|09:15:40.511] Chain head was updated                   number=15 hash=87cae6..120f2a root=e9f18b..c76b88 elapsed="45.917µs"
+INFO [04-30|09:15:43.233] Imported new potential chain segment     number=16 hash=254fd8..4dcb18 blocks=1 txs=0 mgas=0.000 elapsed="821.96µs"  mgasps=0.000 snapdiffs=16.11KiB triedirty=406.65KiB
+WARN [04-30|09:15:43.564] Ignoring already known beacon payload    number=16 hash=254fd8..4dcb18 age=3s
+INFO [04-30|09:15:43.565] Chain head was updated                   number=16 hash=254fd8..4dcb18 root=2a2856..5f567a elapsed="27.334µs"
+INFO [04-30|09:15:46.355] Imported new potential chain segment     number=17 hash=6ead31..98f9cb blocks=1 txs=0 mgas=0.000 elapsed="773.251µs" mgasps=0.000 snapdiffs=17.18KiB triedirty=433.62KiB
+WARN [04-30|09:15:46.689] Ignoring already known beacon payload    number=17 hash=6ead31..98f9cb age=3s
+INFO [04-30|09:15:46.690] Chain head was updated                   number=17 hash=6ead31..98f9cb root=02431a..f574ed elapsed="35.167µs"
+INFO [04-30|09:15:49.439] Imported new potential chain segment     number=18 hash=0e247f..c55558 blocks=1 txs=0 mgas=0.000 elapsed="972.959µs" mgasps=0.000 snapdiffs=18.26KiB triedirty=460.59KiB
+WARN [04-30|09:15:49.766] Ignoring already known beacon payload    number=18 hash=0e247f..c55558 age=3s
+INFO [04-30|09:15:49.769] Chain head was updated                   number=18 hash=0e247f..c55558 root=a56142..e65d39 elapsed="33.041µs"
+INFO [04-30|09:15:51.745] Starting work on payload                 id=0x037c2f32967d46a3
+INFO [04-30|09:15:51.746] Updated payload                          id=0x037c2f32967d46a3 number=19 hash=f857ad..139b41 txs=1 withdrawals=23 gas=21000 fees=0.00104833899 root=223814..b11aaa elapsed="419.917µs"
+INFO [04-30|09:15:52.348] Stopping work on payload                 id=0x037c2f32967d46a3 reason=delivery
+INFO [04-30|09:15:52.365] Imported new potential chain segment     number=19 hash=f857ad..139b41 blocks=1 txs=1 mgas=0.021 elapsed="681.167µs" mgasps=30.829 snapdiffs=19.42KiB triedirty=488.67KiB
+WARN [04-30|09:15:52.722] Ignoring already known beacon payload    number=19 hash=f857ad..139b41 age=3s
+INFO [04-30|09:15:52.722] Chain head was updated                   number=19 hash=f857ad..139b41 root=223814..b11aaa elapsed="62.334µs"
+INFO [04-30|09:15:55.491] Imported new potential chain segment     number=20 hash=47a6f0..fb8f91 blocks=1 txs=1 mgas=0.127 elapsed=1.522ms     mgasps=83.587 snapdiffs=19.88KiB triedirty=498.83KiB
+WARN [04-30|09:15:55.846] Ignoring already known beacon payload    number=20 hash=47a6f0..fb8f91 age=3s
+INFO [04-30|09:15:55.847] Chain head was updated                   number=20 hash=47a6f0..fb8f91 root=1d20ef..233b4c elapsed="35.917µs"
+INFO [04-30|09:15:58.539] Imported new potential chain segment     number=21 hash=0ce2d6..c75b74 blocks=1 txs=0 mgas=0.000 elapsed=1.769ms     mgasps=0.000  snapdiffs=20.56KiB triedirty=517.02KiB
+WARN [04-30|09:15:58.859] Ignoring already known beacon payload    number=21 hash=0ce2d6..c75b74 age=3s
+INFO [04-30|09:15:58.860] Chain head was updated                   number=21 hash=0ce2d6..c75b74 root=38f2c2..61aca2 elapsed="44.167µs"
+INFO [04-30|09:16:01.769] Imported new potential chain segment     number=22 hash=a68417..ea4e65 blocks=1 txs=0 mgas=0.000 elapsed="432.334µs" mgasps=0.000  snapdiffs=21.11KiB triedirty=531.68KiB
+WARN [04-30|09:16:02.097] Ignoring already known beacon payload    number=22 hash=a68417..ea4e65 age=4s
+INFO [04-30|09:16:02.098] Chain head was updated                   number=22 hash=a68417..ea4e65 root=212ace..f23f5f elapsed="32µs"
+INFO [04-30|09:16:04.815] Imported new potential chain segment     number=23 hash=317824..bb0cda blocks=1 txs=0 mgas=0.000 elapsed=1.948ms     mgasps=0.000  snapdiffs=22.01KiB triedirty=555.61KiB
+WARN [04-30|09:16:05.162] Ignoring already known beacon payload    number=23 hash=317824..bb0cda age=4s
+INFO [04-30|09:16:05.164] Chain head was updated                   number=23 hash=317824..bb0cda root=50dfd2..5016eb elapsed="38.375µs"
+INFO [04-30|09:16:07.943] Imported new potential chain segment     number=24 hash=28d921..58801c blocks=1 txs=0 mgas=0.000 elapsed="414.126µs" mgasps=0.000  snapdiffs=22.47KiB triedirty=568.13KiB
+WARN [04-30|09:16:08.308] Ignoring already known beacon payload    number=24 hash=28d921..58801c age=3s
+INFO [04-30|09:16:08.311] Chain head was updated                   number=24 hash=28d921..58801c root=d62342..004661 elapsed="46.292µs"
+INFO [04-30|09:16:11.125] Imported new potential chain segment     number=25 hash=d1d6bf..5495f3 blocks=1 txs=0 mgas=0.000 elapsed="545.751µs" mgasps=0.000  snapdiffs=23.28KiB triedirty=589.24KiB
+WARN [04-30|09:16:11.462] Ignoring already known beacon payload    number=25 hash=d1d6bf..5495f3 age=3s
+INFO [04-30|09:16:11.465] Chain head was updated                   number=25 hash=d1d6bf..5495f3 root=99e235..1d73ce elapsed="38.875µs"
+INFO [04-30|09:16:14.169] Imported new potential chain segment     number=26 hash=74addc..ffb51d blocks=1 txs=0 mgas=0.000 elapsed=1.263ms     mgasps=0.000  snapdiffs=23.69KiB triedirty=600.33KiB
+WARN [04-30|09:16:14.594] Ignoring already known beacon payload    number=26 hash=74addc..ffb51d age=3s
+INFO [04-30|09:16:14.597] Chain head was updated                   number=26 hash=74addc..ffb51d root=d65261..160f07 elapsed="30.75µs"
+INFO [04-30|09:16:17.286] Imported new potential chain segment     number=27 hash=7b7f15..1a3ce3 blocks=1 txs=0 mgas=0.000 elapsed="695.292µs" mgasps=0.000  snapdiffs=24.59KiB triedirty=624.26KiB
+WARN [04-30|09:16:17.622] Ignoring already known beacon payload    number=27 hash=7b7f15..1a3ce3 age=3s
+INFO [04-30|09:16:17.624] Chain head was updated                   number=27 hash=7b7f15..1a3ce3 root=aad1bd..8cf8be elapsed="44.667µs"
+INFO [04-30|09:16:19.615] Starting work on payload                 id=0x03c82eea143070d5
+INFO [04-30|09:16:19.618] Updated payload                          id=0x03c82eea143070d5 number=28 hash=b46426..34ea1a txs=0 withdrawals=11 gas=0     fees=0             root=bd8b01..0411c7 elapsed=1.612ms
+INFO [04-30|09:16:20.221] Stopping work on payload                 id=0x03c82eea143070d5 reason=delivery
+INFO [04-30|09:16:20.231] Imported new potential chain segment     number=28 hash=b46426..34ea1a blocks=1 txs=0 mgas=0.000 elapsed="437.418µs" mgasps=0.000  snapdiffs=25.14KiB triedirty=638.92KiB
+WARN [04-30|09:16:20.701] Ignoring already known beacon payload    number=28 hash=b46426..34ea1a age=3s
+INFO [04-30|09:16:20.722] Chain head was updated                   number=28 hash=b46426..34ea1a root=bd8b01..0411c7 elapsed="65.459µs"
+INFO [04-30|09:16:23.368] Imported new potential chain segment     number=29 hash=5e2547..90b36e blocks=1 txs=0 mgas=0.000 elapsed="566.293µs" mgasps=0.000  snapdiffs=25.86KiB triedirty=658.53KiB
+WARN [04-30|09:16:23.708] Ignoring already known beacon payload    number=29 hash=5e2547..90b36e age=3s
+INFO [04-30|09:16:23.712] Chain head was updated                   number=29 hash=5e2547..90b36e root=1915af..aafc76 elapsed="39.041µs"
+INFO [04-30|09:16:26.411] Imported new potential chain segment     number=30 hash=ab5a61..056625 blocks=1 txs=0 mgas=0.000 elapsed="418.876µs" mgasps=0.000  snapdiffs=26.28KiB triedirty=669.62KiB
+WARN [04-30|09:16:26.752] Ignoring already known beacon payload    number=30 hash=ab5a61..056625 age=3s
+INFO [04-30|09:16:26.753] Chain head was updated                   number=30 hash=ab5a61..056625 root=26c356..426f47 elapsed="41.042µs"
+INFO [04-30|09:16:29.510] Imported new potential chain segment     number=31 hash=d0622a..edf233 blocks=1 txs=0 mgas=0.000 elapsed="685.334µs" mgasps=0.000  snapdiffs=27.31KiB triedirty=695.82KiB
+WARN [04-30|09:16:29.852] Ignoring already known beacon payload    number=31 hash=d0622a..edf233 age=3s
+INFO [04-30|09:16:29.852] Chain head was updated                   number=31 hash=d0622a..edf233 root=980fa7..4f21d0 elapsed="35.584µs"
+INFO [04-30|09:16:32.684] Imported new potential chain segment     number=32 hash=ae7d07..95a53f blocks=1 txs=0 mgas=0.000 elapsed="328.668µs" mgasps=0.000  snapdiffs=27.72KiB triedirty=706.92KiB
+WARN [04-30|09:16:33.002] Ignoring already known beacon payload    number=32 hash=ae7d07..95a53f age=4s
+INFO [04-30|09:16:33.011] Chain head was updated                   number=32 hash=ae7d07..95a53f root=d5e18e..dd425c elapsed="49.125µs"
+INFO [04-30|09:16:35.666] Imported new potential chain segment     number=33 hash=814a37..278b5a blocks=1 txs=0 mgas=0.000 elapsed="685.251µs" mgasps=0.000  snapdiffs=28.40KiB triedirty=725.10KiB
+WARN [04-30|09:16:36.021] Ignoring already known beacon payload    number=33 hash=814a37..278b5a age=4s
+INFO [04-30|09:16:36.027] Chain head was updated                   number=33 hash=814a37..278b5a root=5150d7..c4d7fc elapsed=2.326584ms
+INFO [04-30|09:16:38.693] Imported new potential chain segment     number=34 hash=2c9e18..2fc581 blocks=1 txs=0 mgas=0.000 elapsed="726.585µs" mgasps=0.000  snapdiffs=29.00KiB triedirty=741.19KiB
+WARN [04-30|09:16:39.029] Ignoring already known beacon payload    number=34 hash=2c9e18..2fc581 age=4s
+INFO [04-30|09:16:39.032] Chain head was updated                   number=34 hash=2c9e18..2fc581 root=e3a573..1eedd5 elapsed="46.083µs"
+INFO [04-30|09:16:41.739] Imported new potential chain segment     number=35 hash=57745c..9e8513 blocks=1 txs=0 mgas=0.000 elapsed=1.445ms     mgasps=0.000  snapdiffs=29.90KiB triedirty=765.12KiB
+WARN [04-30|09:16:42.104] Ignoring already known beacon payload    number=35 hash=57745c..9e8513 age=4s
+INFO [04-30|09:16:42.107] Chain head was updated                   number=35 hash=57745c..9e8513 root=bcca60..7080b0 elapsed="47.25µs"
+INFO [04-30|09:16:44.774] Imported new potential chain segment     number=36 hash=394515..248f6c blocks=1 txs=0 mgas=0.000 elapsed="451.46µs"  mgasps=0.000  snapdiffs=30.31KiB triedirty=776.22KiB
+WARN [04-30|09:16:45.113] Ignoring already known beacon payload    number=36 hash=394515..248f6c age=4s
+INFO [04-30|09:16:45.115] Chain head was updated                   number=36 hash=394515..248f6c root=03a10f..6d99b6 elapsed="49.5µs"
+INFO [04-30|09:16:47.096] Starting work on payload                 id=0x03a08ded22f0ac2a
+INFO [04-30|09:16:47.096] Updated payload                          id=0x03a08ded22f0ac2a number=37 hash=4c02b3..28d896 txs=0 withdrawals=18 gas=0     fees=0             root=0f2f35..7a25ce elapsed="313.333µs"
+INFO [04-30|09:16:47.699] Stopping work on payload                 id=0x03a08ded22f0ac2a reason=delivery
+INFO [04-30|09:16:47.709] Imported new potential chain segment     number=37 hash=4c02b3..28d896 blocks=1 txs=0 mgas=0.000 elapsed="478.417µs" mgasps=0.000  snapdiffs=31.17KiB triedirty=797.97KiB
+WARN [04-30|09:16:48.185] Ignoring already known beacon payload    number=37 hash=4c02b3..28d896 age=4s
+INFO [04-30|09:16:48.193] Chain head was updated                   number=37 hash=4c02b3..28d896 root=0f2f35..7a25ce elapsed="68.542µs"
+INFO [04-30|09:16:50.835] Imported new potential chain segment     number=38 hash=57f8a3..cca69d blocks=1 txs=0 mgas=0.000 elapsed=1.454ms     mgasps=0.000  snapdiffs=31.58KiB triedirty=809.07KiB
+WARN [04-30|09:16:51.181] Ignoring already known beacon payload    number=38 hash=57f8a3..cca69d age=4s
+INFO [04-30|09:16:51.184] Chain head was updated                   number=38 hash=57f8a3..cca69d root=cba13a..686ebb elapsed="36.125µs"
+INFO [04-30|09:16:53.920] Imported new potential chain segment     number=39 hash=ba88da..1def62 blocks=1 txs=0 mgas=0.000 elapsed="862.334µs" mgasps=0.000  snapdiffs=32.53KiB triedirty=833.77KiB
+WARN [04-30|09:16:54.277] Ignoring already known beacon payload    number=39 hash=ba88da..1def62 age=3s
+INFO [04-30|09:16:54.277] Chain head was updated                   number=39 hash=ba88da..1def62 root=60526f..8eb9d8 elapsed="41.917µs"
+INFO [04-30|09:16:57.057] Imported new potential chain segment     number=40 hash=86c4f2..53822a blocks=1 txs=0 mgas=0.000 elapsed="388.293µs" mgasps=0.000  snapdiffs=33.08KiB triedirty=848.43KiB
+WARN [04-30|09:16:57.326] Ignoring already known beacon payload    number=40 hash=86c4f2..53822a age=3s
+INFO [04-30|09:16:57.327] Chain head was updated                   number=40 hash=86c4f2..53822a root=dcf471..b6b83f elapsed="31.917µs"
+INFO [04-30|09:17:00.084] Imported new potential chain segment     number=41 hash=d88e6f..e0a652 blocks=1 txs=0 mgas=0.000 elapsed="445.417µs" mgasps=0.000  snapdiffs=33.75KiB triedirty=866.62KiB
+WARN [04-30|09:17:00.434] Ignoring already known beacon payload    number=41 hash=d88e6f..e0a652 age=3s
+INFO [04-30|09:17:00.435] Chain head was updated                   number=41 hash=d88e6f..e0a652 root=87f333..ff1b84 elapsed="42.75µs"
+INFO [04-30|09:17:03.147] Imported new potential chain segment     number=42 hash=182363..6bf2fc blocks=1 txs=0 mgas=0.000 elapsed="357.251µs" mgasps=0.000  snapdiffs=34.17KiB triedirty=877.71KiB
+WARN [04-30|09:17:03.473] Ignoring already known beacon payload    number=42 hash=182363..6bf2fc age=3s
+INFO [04-30|09:17:03.474] Chain head was updated                   number=42 hash=182363..6bf2fc root=9d8b50..05e7b8 elapsed="49.25µs"
+INFO [04-30|09:17:06.248] Imported new potential chain segment     number=43 hash=ad67df..be02ed blocks=1 txs=0 mgas=0.000 elapsed="953.46µs"  mgasps=0.000  snapdiffs=35.20KiB triedirty=903.91KiB
+WARN [04-30|09:17:06.584] Ignoring already known beacon payload    number=43 hash=ad67df..be02ed age=3s
+INFO [04-30|09:17:06.588] Chain head was updated                   number=43 hash=ad67df..be02ed root=949f16..d32933 elapsed="37.417µs"
+INFO [04-30|09:17:09.286] Imported new potential chain segment     number=44 hash=c1946b..87cc56 blocks=1 txs=0 mgas=0.000 elapsed="946.543µs" mgasps=0.000  snapdiffs=35.66KiB triedirty=916.43KiB
+WARN [04-30|09:17:09.614] Ignoring already known beacon payload    number=44 hash=c1946b..87cc56 age=3s
+INFO [04-30|09:17:09.620] Chain head was updated                   number=44 hash=c1946b..87cc56 root=66fa26..95b31c elapsed="33.291µs"
+INFO [04-30|09:17:11.607] Starting work on payload                 id=0x036d4dd9ff3538a5
+INFO [04-30|09:17:11.607] Updated payload                          id=0x036d4dd9ff3538a5 number=45 hash=f2872d..1a0edf txs=0 withdrawals=14 gas=0     fees=0             root=7f7359..1bec2e elapsed="138.75µs"
+INFO [04-30|09:17:12.208] Stopping work on payload                 id=0x036d4dd9ff3538a5 reason=delivery
+INFO [04-30|09:17:12.216] Imported new potential chain segment     number=45 hash=f2872d..1a0edf blocks=1 txs=0 mgas=0.000 elapsed="537.459µs" mgasps=0.000  snapdiffs=36.34KiB triedirty=934.62KiB
+WARN [04-30|09:17:12.671] Ignoring already known beacon payload    number=45 hash=f2872d..1a0edf age=3s
+INFO [04-30|09:17:12.674] Chain head was updated                   number=45 hash=f2872d..1a0edf root=7f7359..1bec2e elapsed="33.75µs"
+INFO [04-30|09:17:15.443] Imported new potential chain segment     number=46 hash=0e753c..a79376 blocks=1 txs=0 mgas=0.000 elapsed="635.751µs" mgasps=0.000  snapdiffs=36.89KiB triedirty=949.28KiB
+WARN [04-30|09:17:15.867] Ignoring already known beacon payload    number=46 hash=0e753c..a79376 age=3s
+INFO [04-30|09:17:15.868] Chain head was updated                   number=46 hash=0e753c..a79376 root=142cde..743075 elapsed="144.083µs"
+INFO [04-30|09:17:18.680] Imported new potential chain segment     number=47 hash=b36090..b519ea blocks=1 txs=0 mgas=0.000 elapsed="773.751µs" mgasps=0.000  snapdiffs=37.79KiB triedirty=973.21KiB
+WARN [04-30|09:17:18.910] Ignoring already known beacon payload    number=47 hash=b36090..b519ea age=3s
+INFO [04-30|09:17:18.911] Chain head was updated                   number=47 hash=b36090..b519ea root=2bdcf7..dd842e elapsed="38.958µs"
+INFO [04-30|09:17:21.701] Imported new potential chain segment     number=48 hash=1e27bb..cca260 blocks=1 txs=0 mgas=0.000 elapsed=3.692ms     mgasps=0.000  snapdiffs=38.21KiB triedirty=984.30KiB
+WARN [04-30|09:17:22.040] Ignoring already known beacon payload    number=48 hash=1e27bb..cca260 age=4s
+INFO [04-30|09:17:22.041] Chain head was updated                   number=48 hash=1e27bb..cca260 root=ed9e20..57344f elapsed="35.125µs"
+INFO [04-30|09:17:24.744] Imported new potential chain segment     number=49 hash=aab94c..b862a4 blocks=1 txs=0 mgas=0.000 elapsed=1.147ms     mgasps=0.000  snapdiffs=39.06KiB triedirty=1006.84KiB
+WARN [04-30|09:17:25.079] Ignoring already known beacon payload    number=49 hash=aab94c..b862a4 age=4s
+INFO [04-30|09:17:25.080] Chain head was updated                   number=49 hash=aab94c..b862a4 root=e6dce9..82475f elapsed="43.417µs"
+INFO [04-30|09:17:27.794] Imported new potential chain segment     number=50 hash=56cd8d..52aaf3 blocks=1 txs=0 mgas=0.000 elapsed="452.584µs" mgasps=0.000  snapdiffs=39.48KiB triedirty=1017.93KiB
+WARN [04-30|09:17:28.116] Ignoring already known beacon payload    number=50 hash=56cd8d..52aaf3 age=4s
+INFO [04-30|09:17:28.117] Chain head was updated                   number=50 hash=56cd8d..52aaf3 root=fa8c87..b925c0 elapsed="51.708µs"
+INFO [04-30|09:17:30.829] Imported new potential chain segment     number=51 hash=6bff41..a644a6 blocks=1 txs=0 mgas=0.000 elapsed="845.001µs" mgasps=0.000  snapdiffs=40.38KiB triedirty=1.02MiB
+WARN [04-30|09:17:31.160] Ignoring already known beacon payload    number=51 hash=6bff41..a644a6 age=4s
+INFO [04-30|09:17:31.161] Chain head was updated                   number=51 hash=6bff41..a644a6 root=49d9a8..308cc2 elapsed="70.417µs"
+INFO [04-30|09:17:33.947] Imported new potential chain segment     number=52 hash=54f724..2796b7 blocks=1 txs=0 mgas=0.000 elapsed="399.751µs" mgasps=0.000  snapdiffs=40.97KiB triedirty=1.03MiB
+WARN [04-30|09:17:34.287] Ignoring already known beacon payload    number=52 hash=54f724..2796b7 age=3s
+INFO [04-30|09:17:34.287] Chain head was updated                   number=52 hash=54f724..2796b7 root=e489c2..0dd343 elapsed="29.625µs"
+INFO [04-30|09:17:36.274] Starting work on payload                 id=0x0389da1d17e9fee3
+INFO [04-30|09:17:36.275] Updated payload                          id=0x0389da1d17e9fee3 number=53 hash=771b6a..77c062 txs=0 withdrawals=13 gas=0     fees=0             root=db9631..cbaa56 elapsed="319.083µs"
+INFO [04-30|09:17:36.876] Stopping work on payload                 id=0x0389da1d17e9fee3 reason=delivery
+INFO [04-30|09:17:36.889] Imported new potential chain segment     number=53 hash=771b6a..77c062 blocks=1 txs=0 mgas=0.000 elapsed="502.085µs" mgasps=0.000  snapdiffs=41.60KiB triedirty=1.05MiB
+WARN [04-30|09:17:37.325] Ignoring already known beacon payload    number=53 hash=771b6a..77c062 age=3s
+INFO [04-30|09:17:37.326] Chain head was updated                   number=53 hash=771b6a..77c062 root=db9631..cbaa56 elapsed="46.625µs"
+INFO [04-30|09:17:39.990] Imported new potential chain segment     number=54 hash=40abe7..133a51 blocks=1 txs=0 mgas=0.000 elapsed="432.168µs" mgasps=0.000  snapdiffs=42.20KiB triedirty=1.06MiB
+WARN [04-30|09:17:40.348] Ignoring already known beacon payload    number=54 hash=40abe7..133a51 age=3s
+INFO [04-30|09:17:40.364] Chain head was updated                   number=54 hash=40abe7..133a51 root=3ceca7..f3eeaa elapsed="34.375µs"
+INFO [04-30|09:17:43.046] Imported new potential chain segment     number=55 hash=765812..8394b6 blocks=1 txs=0 mgas=0.000 elapsed=6.347ms     mgasps=0.000  snapdiffs=43.05KiB triedirty=1.09MiB
+WARN [04-30|09:17:43.381] Ignoring already known beacon payload    number=55 hash=765812..8394b6 age=3s
+INFO [04-30|09:17:43.385] Chain head was updated                   number=55 hash=765812..8394b6 root=df3b10..23cc58 elapsed="42.75µs"
+INFO [04-30|09:17:46.177] Imported new potential chain segment     number=56 hash=cac0ea..301bde blocks=1 txs=0 mgas=0.000 elapsed="624.668µs" mgasps=0.000  snapdiffs=43.51KiB triedirty=1.10MiB
+WARN [04-30|09:17:46.506] Ignoring already known beacon payload    number=56 hash=cac0ea..301bde age=3s
+INFO [04-30|09:17:46.509] Chain head was updated                   number=56 hash=cac0ea..301bde root=32181e..4fdf09 elapsed="51.75µs"
+INFO [04-30|09:17:49.208] Imported new potential chain segment     number=57 hash=23b254..a0b5f7 blocks=1 txs=0 mgas=0.000 elapsed="682.376µs" mgasps=0.000  snapdiffs=44.24KiB triedirty=1.12MiB
+WARN [04-30|09:17:49.528] Ignoring already known beacon payload    number=57 hash=23b254..a0b5f7 age=3s
+INFO [04-30|09:17:49.529] Chain head was updated                   number=57 hash=23b254..a0b5f7 root=445146..ed172a elapsed="29.958µs"
+INFO [04-30|09:17:52.221] Imported new potential chain segment     number=58 hash=7517fb..58acf8 blocks=1 txs=0 mgas=0.000 elapsed="691.501µs" mgasps=0.000  snapdiffs=44.78KiB triedirty=1.13MiB
+WARN [04-30|09:17:52.584] Ignoring already known beacon payload    number=58 hash=7517fb..58acf8 age=3s
+INFO [04-30|09:17:52.591] Chain head was updated                   number=58 hash=7517fb..58acf8 root=e0d2e2..627189 elapsed="41.709µs"
+INFO [04-30|09:17:55.336] Imported new potential chain segment     number=59 hash=d1befe..53e9bd blocks=1 txs=1 mgas=0.117 elapsed=2.449ms     mgasps=47.928 snapdiffs=45.83KiB triedirty=1.15MiB
+WARN [04-30|09:17:55.674] Ignoring already known beacon payload    number=59 hash=d1befe..53e9bd age=3s
+INFO [04-30|09:17:55.675] Chain head was updated                   number=59 hash=d1befe..53e9bd root=b474f1..b8e824 elapsed="66.333µs"
+INFO [04-30|09:17:58.405] Imported new potential chain segment     number=60 hash=b94a84..8e4d8b blocks=1 txs=0 mgas=0.000 elapsed="612.335µs" mgasps=0.000  snapdiffs=46.38KiB triedirty=1.17MiB
+WARN [04-30|09:17:58.762] Ignoring already known beacon payload    number=60 hash=b94a84..8e4d8b age=3s
+INFO [04-30|09:17:58.764] Chain head was updated                   number=60 hash=b94a84..8e4d8b root=55800e..7c69dd elapsed="47.125µs"
+INFO [04-30|09:18:00.741] Starting work on payload                 id=0x03187fb00e9e35db
+INFO [04-30|09:18:00.742] Updated payload                          id=0x03187fb00e9e35db number=61 hash=220beb..e9d595 txs=0 withdrawals=15 gas=0     fees=0             root=1f0e66..267e87 elapsed="233.291µs"
+INFO [04-30|09:18:01.343] Stopping work on payload                 id=0x03187fb00e9e35db reason=delivery
+INFO [04-30|09:18:01.351] Imported new potential chain segment     number=61 hash=220beb..e9d595 blocks=1 txs=0 mgas=0.000 elapsed="483.168µs" mgasps=0.000  snapdiffs=47.10KiB triedirty=1.19MiB
+WARN [04-30|09:18:01.858] Ignoring already known beacon payload    number=61 hash=220beb..e9d595 age=3s
+INFO [04-30|09:18:01.859] Chain head was updated                   number=61 hash=220beb..e9d595 root=1f0e66..267e87 elapsed="98.959µs"
+INFO [04-30|09:18:04.591] Imported new potential chain segment     number=62 hash=103ea2..0b0cab blocks=1 txs=0 mgas=0.000 elapsed="413.793µs" mgasps=0.000  snapdiffs=47.56KiB triedirty=1.20MiB
+WARN [04-30|09:18:04.946] Ignoring already known beacon payload    number=62 hash=103ea2..0b0cab age=3s
+INFO [04-30|09:18:04.949] Chain head was updated                   number=62 hash=103ea2..0b0cab root=72f7b0..808f8a elapsed="33.959µs"
