@@ -18,10 +18,15 @@
 #
 # Setup:
 #   - val-22 = UNLOCKED (support_token_type=1) — will be pruned at H=50
-#   - val-1 = LOCKED (default support_token_type=0) — top-21
-#     Note: val-1 LOCKED dest tests whether locked-period delegation can
-#     redelegate INTO a LOCKED val (per upgrades.go:190 comment, locked vals
-#     should only have flexible delegations — this probe verifies that).
+#   - val-1  = UNLOCKED (support_token_type=1) — top-21 dest (same-type)
+#     Cross-type redelegate is rejected by ErrTokenTypeMismatch
+#     (x/staking/keeper/delegation.go:1378-1379), so dst must match src type.
+#     Locked-period delegation can ONLY exist on UNLOCKED vals (LOCKED vals
+#     coerce all periods to flexible at deposit time per
+#     client/x/evmstaking/keeper/deposit.go:95-119) — see
+#     docs/sot/story-l1-staking-module.md "Period-type override on LOCKED
+#     validators" for the SoT entry. Hence the only mobility path for
+#     locked-period delegations is UNLOCKED→UNLOCKED.
 #
 # Delegator: Bob (anvil[1])
 #   - stake locked-short (period_type=1) 1024 IP to val-22 → delegation-id=1
@@ -54,7 +59,7 @@ BOB_ADDR=${BOB_ADDR:-0x70997970C51812dc3A010C7d01b50e0d17dc79C8}
 N_VALS=${N_VALS:-22}
 NEW_MAX=${NEW_MAX:-21}
 SRC_VAL_MONIKER=${SRC_VAL_MONIKER:-localnet-val-22}    # will be pruned (UNLOCKED)
-DST_VAL_MONIKER=${DST_VAL_MONIKER:-localnet-val-1}     # top-21 (LOCKED by default)
+DST_VAL_MONIKER=${DST_VAL_MONIKER:-localnet-val-1}     # top-21 (UNLOCKED — same type as src)
 STAKE_IP=${STAKE_IP:-1024}
 STAKE_WEI="${STAKE_IP}000000000000000000"
 
@@ -174,13 +179,13 @@ capture_evidence() {
 
 # ---------------- Phase 0 — fresh localnet ----------------
 phase_0_start() {
-  log "Phase 0 — start fresh ${N_VALS}-val localnet, val-${N_VALS} UNLOCKED, NEW_MAX=${NEW_MAX} (binary v170-maxval-21)"
+  log "Phase 0 — start fresh ${N_VALS}-val localnet, val-1 + val-${N_VALS} UNLOCKED, NEW_MAX=${NEW_MAX} (binary v170-maxval-21)"
   if docker ps --format '{{.Names}}' | grep -qE '^(validator|bootnode|rpc)[0-9]*-'; then
     (cd "$LOCALNET" && bash terminate.sh 2>&1 | tail -1); sleep 5
   fi
   bash "${LOCALNET}/scripts/generate_N_validators.sh" "$N_VALS" 2>&1 | tail -1
   bash "${LOCALNET}/scripts/fetch_mainnet_distribution.sh" "$N_VALS" 2>&1 | tail -1
-  UNLOCKED_VALS="$N_VALS" MAX_VALIDATORS_INIT="$N_VALS" bash "${LOCALNET}/scripts/assemble_genesis.sh" "$N_VALS" 2>&1 | tail -1
+  UNLOCKED_VALS="1,$N_VALS" MAX_VALIDATORS_INIT="$N_VALS" bash "${LOCALNET}/scripts/assemble_genesis.sh" "$N_VALS" 2>&1 | tail -1
 
   # Shorten period[3].duration 900s → 180s for tractable wallclock (runtime jq tweak, not committed)
   local genesis_path="${LOCALNET}/config/story/genesis-node.json"
@@ -215,10 +220,10 @@ phase_1_baseline() {
   s_src=$(val_field "$SRC_VAL_OP" status); t_src=$(val_field "$SRC_VAL_OP" tokens); stt_src=$(val_field "$SRC_VAL_OP" support_token_type)
   s_dst=$(val_field "$DST_VAL_OP" status); t_dst=$(val_field "$DST_VAL_OP" tokens); stt_dst=$(val_field "$DST_VAL_OP" support_token_type)
   log "  $SRC_VAL_MONIKER (UNLOCKED): op=$SRC_VAL_OP status=$s_src tokens=$t_src support_token_type=$stt_src"
-  log "  $DST_VAL_MONIKER (LOCKED):   op=$DST_VAL_OP status=$s_dst tokens=$t_dst support_token_type=$stt_dst"
+  log "  $DST_VAL_MONIKER (UNLOCKED): op=$DST_VAL_OP status=$s_dst tokens=$t_dst support_token_type=$stt_dst"
   [[ "$s_src" == "3" && "$s_dst" == "3" ]] || fail "expected both BONDED pre-upgrade, got src=$s_src dst=$s_dst"
   [[ "$stt_src" == "1" ]] || fail "expected $SRC_VAL_MONIKER UNLOCKED (support_token_type=1), got $stt_src"
-  [[ "$stt_dst" == "0" ]] || fail "expected $DST_VAL_MONIKER LOCKED (support_token_type=0), got $stt_dst"
+  [[ "$stt_dst" == "1" ]] || fail "expected $DST_VAL_MONIKER UNLOCKED (support_token_type=1), got $stt_dst"
 
   # Seed Bob
   cast send --rpc-url http://localhost:8545 --private-key "$ALICE_PK" "$BOB_ADDR" \
