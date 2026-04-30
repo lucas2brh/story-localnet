@@ -22,6 +22,9 @@ DIST="${REPO_ROOT}/distribution.json"
 META="${REPO_ROOT}/tmp/validators_meta.json"
 MAX_VALIDATORS_INIT=${MAX_VALIDATORS_INIT:-$N}
 SINGULARITY_HEIGHT=${SINGULARITY_HEIGHT:-0}
+# UNLOCKED_VALS: comma-separated list of 1-based val indices to mark as
+# UNLOCKED (support_token_type=1). Default "" → all vals LOCKED (legacy).
+UNLOCKED_VALS=${UNLOCKED_VALS:-}
 
 command -v jq >/dev/null || { echo "ERROR: jq required" >&2; exit 1; }
 [ -f "$GENESIS" ] || { echo "ERROR: $GENESIS missing (restore from git)" >&2; exit 1; }
@@ -64,13 +67,14 @@ BALANCES=$(echo "$ZIP" | jq '
   }]
 ')
 
-GEN_TXS=$(echo "$ZIP" | jq '
-  [.[] | {
+GEN_TXS=$(echo "$ZIP" | jq --arg unlocked "$UNLOCKED_VALS" '
+  ($unlocked | if . == "" then [] else split(",") | map(tonumber) end) as $u
+  | [.[] | . as $v | {
     body: {
       messages: [{
         "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
         description: {
-          moniker: .moniker,
+          moniker: $v.moniker,
           identity: "",
           website: "",
           security_contact: "",
@@ -82,14 +86,14 @@ GEN_TXS=$(echo "$ZIP" | jq '
           max_change_rate: "0.010000000000000000"
         },
         min_self_delegation: "1024000000000",
-        delegator_address: .delegator_address,
-        validator_address: .validator_address,
+        delegator_address: $v.delegator_address,
+        validator_address: $v.validator_address,
         pubkey: {
           "@type": "/cosmos.crypto.secp256k1.PubKey",
-          key: .pubkey_base64
+          key: $v.pubkey_base64
         },
-        value: {denom: "stake", amount: .tokens},
-        support_token_type: 0
+        value: {denom: "stake", amount: $v.tokens},
+        support_token_type: (if ($u | index($v.index)) != null then 1 else 0 end)
       }],
       memo: "",
       timeout_height: "0",
@@ -128,4 +132,4 @@ jq \
 
 mv "$tmp_out" "$GENESIS"
 
-echo "Rewrote $GENESIS: $N validators, supply=$TOTAL_SUPPLY, max_validators=$MAX_VALIDATORS_INIT, singularity_height=$SINGULARITY_HEIGHT" >&2
+echo "Rewrote $GENESIS: $N validators, supply=$TOTAL_SUPPLY, max_validators=$MAX_VALIDATORS_INIT, singularity_height=$SINGULARITY_HEIGHT, unlocked_vals=[${UNLOCKED_VALS:-none}]" >&2
