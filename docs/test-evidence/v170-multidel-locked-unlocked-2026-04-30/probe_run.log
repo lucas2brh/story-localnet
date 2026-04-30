@@ -1,0 +1,174 @@
+[36m[multidel][0m Phase 0 — start fresh 20-val localnet, val-17 UNLOCKED, val-18 LOCKED, period[3]=180s
+Wrote 20 validator dirs + /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/validators_meta.json
+OK: top-16 controls > 2/3 VP — safe pruning.
+Rewrote /Users/lucas/workspace/lucas-workspace/story-localnet/config/story/genesis-node.json: 20 validators, supply=9999999999999991, max_validators=20, singularity_height=0, unlocked_vals=[17]
+   Grafana:      http://localhost:3000
+[36m[multidel][0m   rpc1 sync ok h=8
+[36m[multidel][0m Phase 1 — wait h=10 + capture baseline + seed Bob/Carol/Dave
+[36m[multidel][0m   val-17 (UNLOCKED): op=0xFbFcB72336b6ba3Db696A40cBB0eD6e84313af6c status=3 tokens=286240559955792
+[36m[multidel][0m   val-18 (LOCKED):   op=0xAA0502F8B22c4a8ab7d3e316f4FF84D8Fe120d36 status=3 tokens=266202962035973
+[36m[multidel][0m   seeded Bob 0x70997970C51812dc3A010C7d01b50e0d17dc79C8 balance=2000000000000000000000 wei
+[36m[multidel][0m   seeded Carol 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC balance=2000000000000000000000 wei
+[36m[multidel][0m   seeded Dave 0x90F79bf6EB2c4f870365E785982E1f101E93b906 balance=2000000000000000000000 wei
+[32m[multidel][0m PASS baseline + seed complete
+[36m[multidel][0m   evidence captured to /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/probe-multidel-evidence/{cl,el,health}-*-01-baseline.log
+[36m[multidel][0m Phase 2 — 5 stakes pre-upgrade
+[36m[multidel][0m   EVM balances pre-stake: Alice=99993999996850000000000000 Bob=2000000000000000000000 Carol=2000000000000000000000 Dave=2000000000000000000000
+[36m[multidel][0m   pre-stake val tokens: val-17=286240559955792 val-18=266202962035973
+[36m[multidel][0m   Alice → 023d32dca2d4bffe617e6717f24cacb7799abba625b32e7f2e934ef936d57f0be4 period=flexible (1024 IP)
+      Warning: No .env file found
+      Signing transaction with account address: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0xf455b77872008891ec83a054b99a0f1b9acec9a8d799fbc592fd6053a35e5201
+      Explorer URL: https://storyscan.xyz/tx/0xf455b77872008891ec83a054b99a0f1b9acec9a8d799fbc592fd6053a35e5201
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens staked successfully! Extracting delegation ID...
+      Delegation ID: 0
+[36m[multidel][0m   Bob → 023d32dca2d4bffe617e6717f24cacb7799abba625b32e7f2e934ef936d57f0be4 period=short (1024 IP)
+      Warning: No .env file found
+      Signing transaction with account address: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0xcacbc4841bcba53edaa830dc80cba91a2d623eb5bb790ab95d0d4816d65fc387
+      Explorer URL: https://storyscan.xyz/tx/0xcacbc4841bcba53edaa830dc80cba91a2d623eb5bb790ab95d0d4816d65fc387
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens staked successfully! Extracting delegation ID...
+      Delegation ID: 1
+[36m[multidel][0m   Carol → 023d32dca2d4bffe617e6717f24cacb7799abba625b32e7f2e934ef936d57f0be4 period=medium (1024 IP)
+      Warning: No .env file found
+      Signing transaction with account address: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0xa7860bb788671f706c2b2b38f661d438ec797ee44c720ea7196452ad444e1f03
+      Explorer URL: https://storyscan.xyz/tx/0xa7860bb788671f706c2b2b38f661d438ec797ee44c720ea7196452ad444e1f03
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens staked successfully! Extracting delegation ID...
+      Delegation ID: 2
+[36m[multidel][0m   Dave → 023d32dca2d4bffe617e6717f24cacb7799abba625b32e7f2e934ef936d57f0be4 period=long (1024 IP)
+      Warning: No .env file found
+      Signing transaction with account address: 0x90F79bf6EB2c4f870365E785982E1f101E93b906
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0x621b42bcee5074e253b5327815aa563fa3b6efa5bad9f31f1abcb81c622d61c8
+      Explorer URL: https://storyscan.xyz/tx/0x621b42bcee5074e253b5327815aa563fa3b6efa5bad9f31f1abcb81c622d61c8
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens staked successfully! Extracting delegation ID...
+      Delegation ID: 3
+[36m[multidel][0m   Dave stake timestamp=1777520060 (lock expires at ~1777520240)
+[36m[multidel][0m   Alice → 02fcf7b754c04b8cd342e61736debcc3c870d3b483b23adb215306d13c4e2f3395 period=flexible (1024 IP)
+      Warning: No .env file found
+      Signing transaction with account address: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0xe2a705835fb60275e84470c36f16bf8efc9fcb204522321479b8873dca4999ba
+      Explorer URL: https://storyscan.xyz/tx/0xe2a705835fb60275e84470c36f16bf8efc9fcb204522321479b8873dca4999ba
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens staked successfully! Extracting delegation ID...
+      Delegation ID: 0
+[36m[multidel][0m   val-17 post-stake: tokens=290336559955792 shares=290336559955792.000000000000000000 (expected 4-del shape: Alice/Bob/Carol/Dave)
+[36m[multidel][0m   val-18 post-stake: tokens=267226962035973 shares=267226962035973.000000000000000000 (expected 1-del shape: Alice flex)
+[32m[multidel][0m PASS 5 stakes committed (val-17 +4096000000000, val-18 +1024000000000), multi-del shape verified
+[36m[multidel][0m   evidence captured to /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/probe-multidel-evidence/{cl,el,health}-*-02-stakes.log
+[36m[multidel][0m Phase 3 — wait past V170=50 to h=65
+[36m[multidel][0m   val-17 post-upgrade status=1
+[36m[multidel][0m   val-18 post-upgrade status=1
+[32m[multidel][0m PASS both vals pruned to UNBONDED carrying multi-del shape
+[36m[multidel][0m   evidence captured to /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/probe-multidel-evidence/{cl,el,health}-*-03-post-prune.log
+[36m[multidel][0m Phase 4 — operator on val-17 + val-18 each 100% self-unstake (→ jailed)
+[36m[multidel][0m   localnet-val-17-op unstake 286240559955792000000000 wei (delegation-id=0)
+      Warning: No .env file found
+      Signing transaction with account address: 0xFbFcB72336b6ba3Db696A40cBB0eD6e84313af6c
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0x46a404025c2b44add96c0b0045633d6052f16daaed8f5ca44b616d34dd225597
+      Explorer URL: https://storyscan.xyz/tx/0x46a404025c2b44add96c0b0045633d6052f16daaed8f5ca44b616d34dd225597
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens unstaked successfully!
+[36m[multidel][0m   localnet-val-17 post-self-unstake: status=1 jailed=true tokens=4096000000000
+[36m[multidel][0m   localnet-val-18-op unstake 266202962035973000000000 wei (delegation-id=0)
+      Warning: No .env file found
+      Signing transaction with account address: 0xAA0502F8B22c4a8ab7d3e316f4FF84D8Fe120d36
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0xaa185813255c1f5c12fe53f22e51df4afd704f69efaac1b35d292f80ec852f20
+      Explorer URL: https://storyscan.xyz/tx/0xaa185813255c1f5c12fe53f22e51df4afd704f69efaac1b35d292f80ec852f20
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens unstaked successfully!
+[36m[multidel][0m   localnet-val-18 post-self-unstake: status=1 jailed=true tokens=1024000000000
+[32m[multidel][0m PASS both operators self-unstaked, both vals jailed + UNBONDED with ext dels retained
+[36m[multidel][0m   evidence captured to /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/probe-multidel-evidence/{cl,el,health}-*-04-post-self-unstake.log
+[36m[multidel][0m Phase 5 — Alice/Bob/Carol unstake from val-17 (locks already expired)
+[36m[multidel][0m   Alice unstake 1024000000000000000000 wei (delegation-id=0)
+      Warning: No .env file found
+      Signing transaction with account address: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0x73fbd88e34e23ecb2cccb46ab5c710facbbb37f9d5fdfed36bf7ced65ac882d3
+      Explorer URL: https://storyscan.xyz/tx/0x73fbd88e34e23ecb2cccb46ab5c710facbbb37f9d5fdfed36bf7ced65ac882d3
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens unstaked successfully!
+[36m[multidel][0m   Bob unstake 1024000000000000000000 wei (delegation-id=0)
+      Warning: No .env file found
+      Signing transaction with account address: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0x1799e26cfe6bd9505d0ce22e2daa1fc4b1f4dbfbd95b6fbbcc872c42b5501eb9
+      Explorer URL: https://storyscan.xyz/tx/0x1799e26cfe6bd9505d0ce22e2daa1fc4b1f4dbfbd95b6fbbcc872c42b5501eb9
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens unstaked successfully!
+[36m[multidel][0m   Carol unstake 1024000000000000000000 wei (delegation-id=0)
+      Warning: No .env file found
+      Signing transaction with account address: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0x31df89303d222eca210a1d16553f3104854d54cf4fa1f4700bca7bb41b6832a3
+      Explorer URL: https://storyscan.xyz/tx/0x31df89303d222eca210a1d16553f3104854d54cf4fa1f4700bca7bb41b6832a3
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens unstaked successfully!
+[32m[multidel][0m PASS Alice/Bob/Carol unstake calls submitted
+[36m[multidel][0m   evidence captured to /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/probe-multidel-evidence/{cl,el,health}-*-05-short-locks-unstake.log
+[36m[multidel][0m Phase 6 — Alice unstake from val-18 (LOCKED val, flexible delegation)
+[36m[multidel][0m   Alice unstake 1024000000000000000000 wei (delegation-id=0)
+      Warning: No .env file found
+      Signing transaction with account address: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0x3068584a842860ddf8836e461cd7b5aa7c056ed35e57edd8b2dca22f08fbfea1
+      Explorer URL: https://storyscan.xyz/tx/0x3068584a842860ddf8836e461cd7b5aa7c056ed35e57edd8b2dca22f08fbfea1
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens unstaked successfully!
+[32m[multidel][0m PASS Alice val-18 unstake call submitted
+[36m[multidel][0m   evidence captured to /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/probe-multidel-evidence/{cl,el,health}-*-06-alice-locked-val.log
+[36m[multidel][0m Phase 7 — wait Dave's 180 s lock to expire then unstake from val-17
+[36m[multidel][0m   Dave unstake 1024000000000000000000 wei (delegation-id=0)
+      Warning: No .env file found
+      Signing transaction with account address: 0x90F79bf6EB2c4f870365E785982E1f101E93b906
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0xe3d00cf04bbf70d1617fba09cdc18b9f60fbecb0c4ccf4c7f242fb25206c556f
+      Explorer URL: https://storyscan.xyz/tx/0xe3d00cf04bbf70d1617fba09cdc18b9f60fbecb0c4ccf4c7f242fb25206c556f
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens unstaked successfully!
+[32m[multidel][0m PASS Dave unstake call submitted post lock-expiry
+[36m[multidel][0m   evidence captured to /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/probe-multidel-evidence/{cl,el,health}-*-07-dave-post-lock.log
+[36m[multidel][0m Phase 8 — wait unbonding mature (10s + buffer), verify all 5 EVM balances credited
+[36m[multidel][0m   Alice: pre=99993999996850000000000000 post=99993978054514055338725094
+[36m[multidel][0m   Bob:   pre=2000000000000000000000 post=975058182922502836533
+[36m[multidel][0m   Carol: pre=2000000000000000000000 post=975064445370039919044
+[36m[multidel][0m   Dave:  pre=2000000000000000000000 post=975080151912511371104
+scripts/probe_multidel_locked_unlocked_after_prune.sh: line 388: ${who^^}_BAL_PRE: bad substitution
+[36m[multidel][0m Phase 9 — final on-chain val state snapshots
+[36m[multidel][0m   localnet-val-17 final: status=1 jailed=true tokens=3072000000000 shares=3072000000000.000000000000000000
+[36m[multidel][0m   localnet-val-18 final: status=GONE jailed=GONE tokens=GONE shares=GONE
+[36m[multidel][0m   chain height 90
+[36m[multidel][0m   bonded count 16
+
+========== MULTIDEL LOCKED+UNLOCKED PROBE CONCLUSIONS ==========
+  val-17 (UNLOCKED, 4-del) final: {"moniker":"localnet-val-17","operator":"0xFbFcB72336b6ba3Db696A40cBB0eD6e84313af6c","status":"1","jailed":"true","tokens":"3072000000000","shares":"3072000000000.000000000000000000"}
+  val-18 (LOCKED, 1-del)   final: {"moniker":"localnet-val-18","operator":"0xAA0502F8B22c4a8ab7d3e316f4FF84D8Fe120d36","status":"GONE","jailed":"GONE","tokens":"GONE","shares":"GONE"}
+  Final chain height: 90
+  Total FAILs: 0
+  Evidence: /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/probe-multidel-evidence/
+================================================================
+[36m[multidel][0m Phase 11 — SKIP_TEARDOWN

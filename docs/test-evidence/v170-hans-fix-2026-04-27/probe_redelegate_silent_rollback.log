@@ -1,0 +1,38 @@
+[36m[silent][0m Phase 0 — start fresh 20-val localnet, patch unbonding_time=10s
+Rewrote /Users/lucas/workspace/lucas-workspace/story-localnet/config/story/genesis-node.json: 20 validators, supply=9999999999999991, max_validators=20, singularity_height=0
+[36m[silent][0m   staking.unbonding_time=10s (post-patch)
+   Blockscout:   http://localhost:3080
+   Grafana:      http://localhost:3000
+[36m[silent][0m   rpc1 sync ok h=8
+[36m[silent][0m Phase 1 — wait past V170=50 to block 65, capture SRC=localnet-val-19 + DST=localnet-val-1 pre-state
+[36m[silent][0m   chain at 65
+[36m[silent][0m   SRC (localnet-val-19) op=0x71f9Fc09c05EA26Dc534B681b1497D09D2A95F8c status=1 tokens=247568544444937
+[36m[silent][0m   DST (localnet-val-1) op=0x65Bb14E42381513F901c28e5C16cA42bbf5ab3Bd tokens=914123992692492
+[32m[silent][0m PASS SRC confirmed UNBONDED (status=1) — bug trigger condition (1) met
+[36m[silent][0m Phase 2 — Anvil sends 10 IP gas to SRC operator wallet 0x71f9Fc09c05EA26Dc534B681b1497D09D2A95F8c (operator wallets are not pre-funded in genesis)
+[36m[silent][0m   SRC operator pre-fund balance: 1934893366000000000 wei
+[36m[silent][0m   SRC operator post-fund balance: 11934893366000000000 wei
+[36m[silent][0m Phase 3 — submit 100% self-stake redelegate: 247568544444937 stake = 247568544444937000000000 wei from localnet-val-19 -> localnet-val-1
+[36m[silent][0m   trigger condition (3): single-call 100% of only remaining delegation -> DelegatorShares hits 0 -> RemoveValidator -> getBeginInfo fails -> silent rollback
+[36m[silent][0m   CLI: tx=0xad1118405bc82e696957f7c1ab4c4808a2df1aa3ee4ae239e7edce733245276a rc=0
+[36m[silent][0m   EVM tx status: 1 (1 = success on EVM layer; gas burned, hash on-chain)
+[36m[silent][0m Phase 4 — assert 4 silent-rollback indicators (PASS = bug still present)
+[36m[silent][0m   (a) SRC val record in store post-tx: yes (expected: yes; rollback healed RemoveValidator)
+[36m[silent][0m   (b) SRC tokens: 247568544444937 -> 247568544444937 (expected: unchanged; Unbond rolled back)
+[36m[silent][0m   (c) DST tokens: 914123992692492 -> 914123992692492 (expected: unchanged; Delegate rolled back)
+[36m[silent][0m   (d) found error string in validator9-node log:
+[36m[silent][0m       26-04-29 05:39:46.434 ERRO Failed to process redelegate            
+[32m[silent][0m PASS all 4 silent-rollback indicators confirmed — bug reproduces on this binary
+
+========== SILENT-ROLLBACK PROBE CONCLUSIONS ==========
+  Bug: BeginRedelegation removes UNBONDED-with-zero-DelegatorShares src; getBeginInfo can't re-find it; ErrNoValidatorFound bubbles up; evmstaking CacheContext writeCache skipped; state silently rolled back.
+  Tx hash: 0xad1118405bc82e696957f7c1ab4c4808a2df1aa3ee4ae239e7edce733245276a
+  EVM tx status: 1 (success — gas burned, hash on-chain)
+  On-chain effect: SRC tokens 247568544444937 -> 247568544444937 (unchanged); DST tokens 914123992692492 -> 914123992692492 (unchanged) — silent rollback confirmed.
+  PROBE PASS = bug still present on this binary.
+  Once a fix lands (cosmos-sdk-private-fork getBeginInfo tolerates ErrNoValidatorFound, or BeginRedelegation pre-captures completion info), this probe's Phase 4 assertions will flip and the probe will FAIL — that is the GREEN signal.
+=======================================================
+[36m[silent][0m Phase 6 — teardown
+Deleted: sha256:2a52d6730d25120821877da2623cb86fbb15a8fa7e4bdad4d7cd0058f4a2e919
+🎉 All containers stopped and volumes removed successfully!
+EXIT=0

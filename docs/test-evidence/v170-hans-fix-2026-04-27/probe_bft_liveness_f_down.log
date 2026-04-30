@@ -1,0 +1,71 @@
+[36m[bft][0m Phase 0 — start fresh 20-val localnet (default slashing params)
+Rewrote /Users/lucas/workspace/lucas-workspace/story-localnet/config/story/genesis-node.json: 20 validators, supply=9999999999999991, max_validators=20, singularity_height=0
+[36m[bft][0m   default slashing: signed_blocks_window=200 downtime_jail_duration=60s
+   Blockscout:   http://localhost:3080
+   Grafana:      http://localhost:3000
+[36m[bft][0m   rpc1 sync ok h=8
+[36m[bft][0m Phase 1 — wait past V170=50 to block 65 and capture bonded set
+[36m[bft][0m   chain at 65
+[36m[bft][0m   bonded count: 16 (expected 16)
+[36m[bft][0m   V_total=8969749351771817  threshold(1/3)=2989916450590605
+[36m[bft][0m   rank-16: localnet-val-16 tokens=307785548339562 (3.43% of V_total)
+[36m[bft][0m   rank-15: localnet-val-15 tokens=330952192686368 (3.69% of V_total)
+[36m[bft][0m   rank-14: localnet-val-14 tokens=355862985611231 (3.97% of V_total)
+[36m[bft][0m   rank-13: localnet-val-13 tokens=382648646845106 (4.27% of V_total)
+[36m[bft][0m   rank-12: localnet-val-12 tokens=411449951482869 (4.59% of V_total)
+[36m[bft][0m   rank-11: localnet-val-11 tokens=442419558231298 (4.93% of V_total)
+[36m[bft][0m   rank-10: localnet-val-10 tokens=475720181161092 (5.30% of V_total)
+[36m[bft][0m   rank-9: localnet-val-9 tokens=511527332078850 (5.70% of V_total)
+[36m[bft][0m   rank-8: localnet-val-8 tokens=550029320527065 (6.13% of V_total)
+[36m[bft][0m   rank-7: localnet-val-7 tokens=591429082032116 (6.59% of V_total)
+[36m[bft][0m   rank-6: localnet-val-6 tokens=635945092228254 (7.09% of V_total)
+[36m[bft][0m   rank-5: localnet-val-5 tokens=683812280981604 (7.62% of V_total)
+[36m[bft][0m   rank-4: localnet-val-4 tokens=735282032390155 (8.20% of V_total)
+[36m[bft][0m   rank-3: localnet-val-3 tokens=790625841279737 (8.81% of V_total)
+[36m[bft][0m   rank-2: localnet-val-2 tokens=850135313204018 (9.48% of V_total)
+[36m[bft][0m   rank-1: localnet-val-1 tokens=914123992692492 (10.19% of V_total)
+[32m[bft][0m PASS baseline captured (16 BONDED, sorted ascending)
+[36m[bft][0m Phase 2 — Phase A: pause smallest vals while paused_VP < threshold(2989916450590605)
+[36m[bft][0m   pause localnet-val-16 (op=0x32489be2de9efde93e0d7a81a4c0e3d4e9a8fb1f tokens=307785548339562) container=validator16-node
+[36m[bft][0m   paused so far: 1 vals, paused_VP=307785548339562 (3.43%); chain advanced 65 -> 70
+[36m[bft][0m   pause localnet-val-15 (op=0xe31856549b4a3f1ebc9e99c83e697b7f1c016957 tokens=330952192686368) container=validator15-node
+[36m[bft][0m   paused so far: 2 vals, paused_VP=638737741025930 (7.12%); chain advanced 70 -> 75
+[36m[bft][0m   pause localnet-val-14 (op=0x876955b6a3cc6c3f45092cb8002661a14cc16373 tokens=355862985611231) container=validator14-node
+[36m[bft][0m   paused so far: 3 vals, paused_VP=994600726637161 (11.09%); chain advanced 75 -> 80
+[36m[bft][0m   pause localnet-val-13 (op=0x58e17289ab1b8a08838afa4c7604d92816e16e1e tokens=382648646845106) container=validator13-node
+[36m[bft][0m   paused so far: 4 vals, paused_VP=1377249373482267 (15.35%); chain advanced 80 -> 85
+[36m[bft][0m   pause localnet-val-12 (op=0x312754308a1f3c199662ea7b592bb537b48b6c65 tokens=411449951482869) container=validator12-node
+[36m[bft][0m   paused so far: 5 vals, paused_VP=1788699324965136 (19.94%); chain advanced 85 -> 90
+[36m[bft][0m   pause localnet-val-11 (op=0x1ca24116102a6b7155e1d3f4a045e8d221eb977f tokens=442419558231298) container=validator11-node
+[36m[bft][0m   paused so far: 6 vals, paused_VP=2231118883196434 (24.87%); chain advanced 90 -> 95
+[36m[bft][0m   pause localnet-val-10 (op=0x9af940c5ccf4fa0897b5c04e67a4045851c19e0b tokens=475720181161092) container=validator10-node
+[36m[bft][0m   paused so far: 7 vals, paused_VP=2706839064357526 (30.18%); chain advanced 95 -> 100
+[36m[bft][0m   next val (localnet-val-9, tokens=511527332078850) would push paused_VP=3218366396436376 >= threshold=2989916450590605 — stop Phase A
+[32m[bft][0m PASS Phase A: 7 vals paused, paused_VP=2706839064357526 (30.1774%); chain still live
+[36m[bft][0m Phase 3 — Phase B: pause localnet-val-9 (tokens=511527332078850) to cross threshold
+[36m[bft][0m   now 8 vals paused, paused_VP=3218366396436376 (35.8802%); threshold=2989916450590605
+[36m[bft][0m   observe chain for 60s — must NOT advance more than 3 blocks
+[36m[bft][0m   chain 100 -> 100 (delta=0) over 60s
+[32m[bft][0m PASS Phase B: chain halted as expected (delta=0 <= 3 in 60s)
+[36m[bft][0m Phase 4 — Phase C: docker unpause all (8 vals)
+[36m[bft][0m   unpaused validator16-node
+[36m[bft][0m   unpaused validator15-node
+[36m[bft][0m   unpaused validator14-node
+[36m[bft][0m   unpaused validator13-node
+[36m[bft][0m   unpaused validator12-node
+[36m[bft][0m   unpaused validator11-node
+[36m[bft][0m   unpaused validator10-node
+[36m[bft][0m   unpaused validator9-node
+[36m[bft][0m   expect chain to advance 10 blocks within 60s; start h=100 target=110
+[32m[bft][0m PASS Phase C: chain resumed (h=100 -> 110, advanced 10 blocks)
+
+========== BFT-LIVENESS-F-DOWN PROBE CONCLUSIONS ==========
+  Bonded set: 16 vals; V_total=8969749351771817; threshold(1/3)=2989916450590605
+  Phase A:    paused 7 vals, paused_VP=2706839064357526 (30.1774% of V_total) — chain progressed
+  Phase B:    paused 8 vals, paused_VP=3218366396436376 (35.8802% of V_total) — chain halted
+  Phase C:    all unpaused — chain resumed
+  Final chain height: 110
+===========================================================
+[36m[bft][0m Phase 6 — teardown
+Deleted: sha256:56e90c8823d29b657c1462e97d7410e3a86199cc79ced0d9bc5b5455c0d3244f
+🎉 All containers stopped and volumes removed successfully!

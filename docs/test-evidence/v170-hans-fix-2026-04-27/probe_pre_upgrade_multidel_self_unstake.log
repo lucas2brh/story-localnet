@@ -1,0 +1,55 @@
+[main 6c18451] docs(test-evidence): probe_pre_upgrade_external_del_unstake.sh PASS log
+ 1 file changed, 48 insertions(+)
+ create mode 100644 docs/test-evidence/v170-hans-fix-2026-04-27/probe_pre_upgrade_external_del_unstake.log
+To github.com:lucas2brh/lucas-workspace.git
+   4981f61..6c18451  main -> main
+
+---launch probe 2---
+[36m[pre-multidel][0m Phase 0 — start fresh localnet
+Rewrote /Users/lucas/workspace/lucas-workspace/story-localnet/config/story/genesis-node.json: 20 validators, supply=9999999999999991, max_validators=20, singularity_height=0
+   Blockscout:   http://localhost:3080
+   Grafana:      http://localhost:3000
+[36m[pre-multidel][0m   rpc1 sync ok h=9
+[36m[pre-multidel][0m Phase 1 — wait to block 10 and capture localnet-val-18 baseline
+[36m[pre-multidel][0m   chain at 10
+[36m[pre-multidel][0m   localnet-val-18 op=0xfc30Cdaf7Bd022981C6C1899988fc42B8F7916bc status=3 genesis_tokens=266202962035973 (= operator self-del; no external dels yet)
+[32m[pre-multidel][0m PASS target val confirmed BONDED pre-upgrade
+[36m[pre-multidel][0m Phase 2 — Anvil stakes 2048 IP to localnet-val-18 (pre-upgrade, val still BONDED)
+      Explorer URL: https://storyscan.xyz/tx/0x34a5e9f13e2a3c72107a87c1871860061d87ca294dd46fa5b91a9a16e70edd36
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens staked successfully! Extracting delegation ID...
+      Delegation ID: 0
+[36m[pre-multidel][0m   localnet-val-18 post-stake status=3 tokens=268250962035973 shares=268250962035973.000000000000000000
+[32m[pre-multidel][0m PASS external delegation injected pre-upgrade, multi-del shape established
+[36m[pre-multidel][0m Phase 3 — wait past V170=50 to block 65
+[36m[pre-multidel][0m   localnet-val-18 post-upgrade status=1 tokens=268250962035973 (multi-del shape carried through prune)
+[32m[pre-multidel][0m PASS target val pruned to UNBONDED while carrying multi-del shape
+[36m[pre-multidel][0m Phase 4 — Anvil sends 10 IP to localnet-val-18 operator wallet for unstake gas
+[36m[pre-multidel][0m   operator 0xfc30Cdaf7Bd022981C6C1899988fc42B8F7916bc pre-fund balance=2080970060000000000 wei
+[36m[pre-multidel][0m   operator post-fund balance=12080970060000000000 wei
+[36m[pre-multidel][0m Phase 5 — operator 100% self-unstakes (amount = genesis tokens = 266202962035973 stake)
+[36m[pre-multidel][0m   localnet-val-18 operator unstakes 266202962035973 stake = 266202962035973000000000 wei (delegation-id=0)
+[36m[pre-multidel][0m   tx=0x01aafa5a02bc0ba9601bdf6a786a08cff844bf35310c329d4e0caebdd77c8755 rc=0
+[36m[pre-multidel][0m Phase 6 — verify post-unstake state
+[36m[pre-multidel][0m   localnet-val-18 post-unstake: status=1 jailed=true tokens=2048000000000 shares=2048000000000.000000000000000000
+[36m[pre-multidel][0m   tokens went genesis=266202962035973 post-stake=268250962035973 post-unstake=2048000000000
+[36m[pre-multidel][0m   operator portion drained = 266202962035973 stake (expected ~266202962035973)
+[32m[pre-multidel][0m PASS chain still progressing post-unstake (no halt)
+[36m[pre-multidel][0m Phase 7 — wait past unbonding_time (10s), sample operator EVM balance
+[36m[pre-multidel][0m   operator after-mature balance=266214041433800753660280 wei (vs pre-fund 2080970060000000000 wei)
+[36m[pre-multidel][0m   expected refund ~ 266202962035973 stake = 266202962035973000000000 wei
+
+========== PRE-UPGRADE MULTIDEL SELF-UNSTAKE PROBE CONCLUSIONS ==========
+Target: localnet-val-18 op=0xfc30Cdaf7Bd022981C6C1899988fc42B8F7916bc
+  Anvil stake timing:    PRE-UPGRADE (block 10, val BONDED)
+  Operator unstake:      POST-UPGRADE (after V170=50)
+  CLI rc=0 tx=0x01aafa5a02bc0ba9601bdf6a786a08cff844bf35310c329d4e0caebdd77c8755
+  val status: pre=BONDED(3) post-prune=UNBONDED(1) post-unstake=1 jailed=true
+  tokens genesis=266202962035973 post-stake=268250962035973 post-unstake=2048000000000 (operator drained = 266202962035973 stake; Anvil retained ~2048e9)
+  operator EVM bal pre-fund=2080970060000000000 after-ubd=266214041433800753660280
+  Final chain height: 85 (no halt)
+=========================================================================
+[36m[pre-multidel][0m Phase 9 — teardown
+Deleted: sha256:ac2d0f5ede85e2337af2edbd986a6d7bec5747c5da5bffee4b2a902c4e035bef
+🎉 All containers stopped and volumes removed successfully!

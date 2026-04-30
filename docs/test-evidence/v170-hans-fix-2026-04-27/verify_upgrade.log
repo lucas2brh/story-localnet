@@ -1,0 +1,40 @@
+[36m[e2e][0m Phase 0 — preflight
+[36m[e2e][0m   docker/jq/python3/go OK, no stale containers
+[36m[e2e][0m Phase 1 — --skip-build (using existing /Users/lucas/workspace/lucas-workspace/story-private-fork/story-prebuilt)
+[36m[e2e][0m Phase 2 — starting localnet (start.sh)
+   RPC WS:       ws://localhost:8546
+   Blockscout:   http://localhost:3080
+   Grafana:      http://localhost:3000
+[36m[e2e][0m   localnet up, RPC producing blocks
+[36m[e2e][0m Phase 3 — verify_upgrade.sh (N=20 NEW_MAX=16 UPGRADE_HEIGHT=50)
+16:29:37  == Phase 1 (block 5): pre-upgrade baseline ==
+16:29:37  PASS  bonded=20 (expected 20)
+16:29:37  PASS  max_validators=20 (expected 20)
+16:29:37  == Phase 2 (block 55): post-upgrade state ==
+16:29:37    waiting for block 55 (at 8)
+16:29:39    waiting for block 55 (at 9)
+16:29:41    waiting for block 55 (at 10)
+16:29:43    waiting for block 55 (at 10)
+16:29:45    waiting for block 55 (at 11)
+16:29:47    waiting for block 55 (at 12)
+16:29:49    waiting for block 55 (at 12)
+16:29:51    waiting for block 55 (at 13)
+16:29:53    waiting for block 55 (at 14)
+16:29:55    waiting for block 55 (at 14)
+16:29:57    waiting for block 55 (at 15)
+16:29:59    waiting for block 55 (at 16)
+16:30:01    waiting for block 55 (at 16)
+16:30:03    waiting for block 55 (at 17)
+16:30:05    waiting for block 55 (at 18)
+16:30:07    waiting for block 55 (at 18)
+16:30:09    waiting for block 55 (at 19)
+16:30:16    waiting for block 55 (at 0)
+16:30:18    waiting for block 55 (at 0)
+16:30:21    waiting for block 55 (at 0)
+16:30:23    waiting for block 55 (at 0)
+16:30:25    waiting for block 55 (at 0)
+16:30:27    waiting for block 55 (at 0)
+16:30:29    waiting for block 55 (at 0)
+16:30:31    waiting for block 55 (at 0)
+16:30:33    waiting for block 55 (at 0)
+16:30:35    waiting for block 55 (at 0)

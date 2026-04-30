@@ -1,0 +1,285 @@
+26-04-30 03:33:06.444 DEBU Delegate Info                            module=x/staking delegator_addr=story1y9wm8qz42f067tu36nd4cgcflymvvlas7hwjty validator_operator_addr=storyvaloper1y9wm8qz42f067tu36nd4cgcflymvvlassc6nq0 period_delegation_id=0 subtract_account=true token_amount=914123992692492 rewards_token_amount=457061996346246.000000000000000000 delegate_shares=914123992692492.000000000000000000 delegate_rewards_shares=457061996346246.000000000000000000 period_delegation_shares=914123992692492.000000000000000000 period_delegation_rewards_shares=457061996346246.000000000000000000 delegation_shares=914123992692492.000000000000000000 delegation_rewards_shares=457061996346246.000000000000000000 validator_tokens=914123992692492 validator_rewards_tokens=457061996346246.000000000000000000 validator_shares=914123992692492.000000000000000000 validator_rewards_shares=457061996346246.000000000000000000
+26-04-30 03:33:06.445 DEBU Delegate Info                            module=x/staking delegator_addr=story1ghekk30dycvm4tfpe4gdq8vrlr28nh6slk7y9y validator_operator_addr=storyvaloper1ghekk30dycvm4tfpe4gdq8vrlr28nh6s3e29w0 period_delegation_id=0 subtract_account=true token_amount=850135313204018 rewards_token_amount=425067656602009.000000000000000000 delegate_shares=850135313204018.000000000000000000 delegate_rewards_shares=425067656602009.000000000000000000 period_delegation_shares=850135313204018.000000000000000000 period_delegation_rewards_shares=425067656602009.000000000000000000 delegation_shares=850135313204018.000000000000000000 delegation_rewards_shares=425067656602009.000000000000000000 validator_tokens=850135313204018 validator_rewards_tokens=425067656602009.000000000000000000 validator_shares=850135313204018.000000000000000000 validator_rewards_shares=425067656602009.000000000000000000
+26-04-30 03:33:06.445 DEBU Delegate Info                            module=x/staking delegator_addr=story1p4adz4pht664rthp2wvj49nc8sdey7ekl36wf3 validator_operator_addr=storyvaloper1p4adz4pht664rthp2wvj49nc8sdey7ek37w0z6 period_delegation_id=0 subtract_account=true token_amount=790625841279737 rewards_token_amount=395312920639868.500000000000000000 delegate_shares=790625841279737.000000000000000000 delegate_rewards_shares=395312920639868.500000000000000000 period_delegation_shares=790625841279737.000000000000000000 period_delegation_rewards_shares=395312920639868.500000000000000000 delegation_shares=790625841279737.000000000000000000 delegation_rewards_shares=395312920639868.500000000000000000 validator_tokens=790625841279737 validator_rewards_tokens=395312920639868.500000000000000000 validator_shares=790625841279737.000000000000000000 validator_rewards_shares=395312920639868.500000000000000000
+26-04-30 03:33:06.446 DEBU Delegate Info                            module=x/staking delegator_addr=story1kkmq7u6fd5fprp7k748e3nphalsprqm6l66hce validator_operator_addr=storyvaloper1kkmq7u6fd5fprp7k748e3nphalsprqm634wknj period_delegation_id=0 subtract_account=true token_amount=735282032390155 rewards_token_amount=367641016195077.500000000000000000 delegate_shares=735282032390155.000000000000000000 delegate_rewards_shares=367641016195077.500000000000000000 period_delegation_shares=735282032390155.000000000000000000 period_delegation_rewards_shares=367641016195077.500000000000000000 delegation_shares=735282032390155.000000000000000000 delegation_rewards_shares=367641016195077.500000000000000000 validator_tokens=735282032390155 validator_rewards_tokens=367641016195077.500000000000000000 validator_shares=735282032390155.000000000000000000 validator_rewards_shares=367641016195077.500000000000000000
+26-04-30 03:33:06.447 DEBU Delegate Info                            module=x/staking delegator_addr=story1rp0fev2yzmu8nmtmczyxyzm90x3j4ezu0q780z validator_operator_addr=storyvaloper1rp0fev2yzmu8nmtmczyxyzm90x3j4ezup02xyf period_delegation_id=0 subtract_account=true token_amount=683812280981604 rewards_token_amount=341906140490802.000000000000000000 delegate_shares=683812280981604.000000000000000000 delegate_rewards_shares=341906140490802.000000000000000000 period_delegation_shares=683812280981604.000000000000000000 period_delegation_rewards_shares=341906140490802.000000000000000000 delegation_shares=683812280981604.000000000000000000 delegation_rewards_shares=341906140490802.000000000000000000 validator_tokens=683812280981604 validator_rewards_tokens=341906140490802.000000000000000000 validator_shares=683812280981604.000000000000000000 validator_rewards_shares=341906140490802.000000000000000000
+26-04-30 03:33:06.448 DEBU Delegate Info                            module=x/staking delegator_addr=story1l73s462k3xu8wh46ncl7uynptf2zgeshhm4uk5 validator_operator_addr=storyvaloper1l73s462k3xu8wh46ncl7uynptf2zgeshe5paal period_delegation_id=0 subtract_account=true token_amount=635945092228254 rewards_token_amount=317972546114127.000000000000000000 delegate_shares=635945092228254.000000000000000000 delegate_rewards_shares=317972546114127.000000000000000000 period_delegation_shares=635945092228254.000000000000000000 period_delegation_rewards_shares=317972546114127.000000000000000000 delegation_shares=635945092228254.000000000000000000 delegation_rewards_shares=317972546114127.000000000000000000 validator_tokens=635945092228254 validator_rewards_tokens=317972546114127.000000000000000000 validator_shares=635945092228254.000000000000000000 validator_rewards_shares=317972546114127.000000000000000000
+26-04-30 03:33:06.448 DEBU Delegate Info                            module=x/staking delegator_addr=story1gjjpnhu55m7vvaf8us9ywwruheps5x9lclwe42 validator_operator_addr=storyvaloper1gjjpnhu55m7vvaf8us9ywwruheps5x9lks6c7p period_delegation_id=0 subtract_account=true token_amount=591429082032116 rewards_token_amount=295714541016058.000000000000000000 delegate_shares=591429082032116.000000000000000000 delegate_rewards_shares=295714541016058.000000000000000000 period_delegation_shares=591429082032116.000000000000000000 period_delegation_rewards_shares=295714541016058.000000000000000000 delegation_shares=591429082032116.000000000000000000 delegation_rewards_shares=295714541016058.000000000000000000 validator_tokens=591429082032116 validator_rewards_tokens=295714541016058.000000000000000000 validator_shares=591429082032116.000000000000000000 validator_rewards_shares=295714541016058.000000000000000000
+26-04-30 03:33:06.448 DEBU Delegate Info                            module=x/staking delegator_addr=story16j8ytsvc4xvzyzze57me6t02zp0e373e93dvdc validator_operator_addr=storyvaloper16j8ytsvc4xvzyzze57me6t02zp0e373et7edxn period_delegation_id=0 subtract_account=true token_amount=550029320527065 rewards_token_amount=275014660263532.500000000000000000 delegate_shares=550029320527065.000000000000000000 delegate_rewards_shares=275014660263532.500000000000000000 period_delegation_shares=550029320527065.000000000000000000 period_delegation_rewards_shares=275014660263532.500000000000000000 delegation_shares=550029320527065.000000000000000000 delegation_rewards_shares=275014660263532.500000000000000000 validator_tokens=550029320527065 validator_rewards_tokens=275014660263532.500000000000000000 validator_shares=550029320527065.000000000000000000 validator_rewards_shares=275014660263532.500000000000000000
+26-04-30 03:33:06.448 DEBU Delegate Info                            module=x/staking delegator_addr=story1z7tpvfwsxcxkxtrpm32uu7tlgtjvl8gz3nf87h validator_operator_addr=storyvaloper1z7tpvfwsxcxkxtrpm32uu7tlgtjvl8gzluax4u period_delegation_id=0 subtract_account=true token_amount=511527332078850 rewards_token_amount=255763666039425.000000000000000000 delegate_shares=511527332078850.000000000000000000 delegate_rewards_shares=255763666039425.000000000000000000 period_delegation_shares=511527332078850.000000000000000000 period_delegation_rewards_shares=255763666039425.000000000000000000 delegation_shares=511527332078850.000000000000000000 delegation_rewards_shares=255763666039425.000000000000000000 validator_tokens=511527332078850 validator_rewards_tokens=255763666039425.000000000000000000 validator_shares=511527332078850.000000000000000000 validator_rewards_shares=255763666039425.000000000000000000
+26-04-30 03:33:06.449 DEBU Delegate Info                            module=x/staking delegator_addr=story164vrdpc73fxkr3m0hnnh6eyqp4feknfzdvtde3 validator_operator_addr=storyvaloper164vrdpc73fxkr3m0hnnh6eyqp4feknfzrrlvj6 period_delegation_id=0 subtract_account=true token_amount=475720181161092 rewards_token_amount=237860090580546.000000000000000000 delegate_shares=475720181161092.000000000000000000 delegate_rewards_shares=237860090580546.000000000000000000 period_delegation_shares=475720181161092.000000000000000000 period_delegation_rewards_shares=237860090580546.000000000000000000 delegation_shares=475720181161092.000000000000000000 delegation_rewards_shares=237860090580546.000000000000000000 validator_tokens=475720181161092 validator_rewards_tokens=237860090580546.000000000000000000 validator_shares=475720181161092.000000000000000000 validator_rewards_shares=237860090580546.000000000000000000
+26-04-30 03:33:06.449 DEBU Delegate Info                            module=x/staking delegator_addr=story1kxlf9mzwnv6878kpp0pc4tmtfxxfjh32cgfsn2 validator_operator_addr=storyvaloper1kxlf9mzwnv6878kpp0pc4tmtfxxfjh32k8a3cp period_delegation_id=0 subtract_account=true token_amount=442419558231298 rewards_token_amount=221209779115649.000000000000000000 delegate_shares=442419558231298.000000000000000000 delegate_rewards_shares=221209779115649.000000000000000000 period_delegation_shares=442419558231298.000000000000000000 period_delegation_rewards_shares=221209779115649.000000000000000000 delegation_shares=442419558231298.000000000000000000 delegation_rewards_shares=221209779115649.000000000000000000 validator_tokens=442419558231298 validator_rewards_tokens=221209779115649.000000000000000000 validator_shares=442419558231298.000000000000000000 validator_rewards_shares=221209779115649.000000000000000000
+26-04-30 03:33:06.449 DEBU Delegate Info                            module=x/staking delegator_addr=story1h4k9lmdyffc0807ptdc2zkhxc3udy26mnm2e38 validator_operator_addr=storyvaloper1h4k9lmdyffc0807ptdc2zkhxc3udy26ma57c6v period_delegation_id=0 subtract_account=true token_amount=411449951482869 rewards_token_amount=205724975741434.500000000000000000 delegate_shares=411449951482869.000000000000000000 delegate_rewards_shares=205724975741434.500000000000000000 period_delegation_shares=411449951482869.000000000000000000 period_delegation_rewards_shares=205724975741434.500000000000000000 delegation_shares=411449951482869.000000000000000000 delegation_rewards_shares=205724975741434.500000000000000000 validator_tokens=411449951482869 validator_rewards_tokens=205724975741434.500000000000000000 validator_shares=411449951482869.000000000000000000 validator_rewards_shares=205724975741434.500000000000000000
+26-04-30 03:33:06.449 DEBU Delegate Info                            module=x/staking delegator_addr=story1t7g8lj4s39julxfydrnhynmt430wzul6le09qv validator_operator_addr=storyvaloper1t7g8lj4s39julxfydrnhynmt430wzul63kmyt8 period_delegation_id=0 subtract_account=true token_amount=382648646845106 rewards_token_amount=191324323422553.000000000000000000 delegate_shares=382648646845106.000000000000000000 delegate_rewards_shares=191324323422553.000000000000000000 period_delegation_shares=382648646845106.000000000000000000 period_delegation_rewards_shares=191324323422553.000000000000000000 delegation_shares=382648646845106.000000000000000000 delegation_rewards_shares=191324323422553.000000000000000000 validator_tokens=382648646845106 validator_rewards_tokens=191324323422553.000000000000000000 validator_shares=382648646845106.000000000000000000 validator_rewards_shares=191324323422553.000000000000000000
+26-04-30 03:33:06.450 DEBU Delegate Info                            module=x/staking delegator_addr=story15q8fa72mtv8yv70wrwvgtdsm55ktsz99t36g6r validator_operator_addr=storyvaloper15q8fa72mtv8yv70wrwvgtdsm55ktsz9997wf3g period_delegation_id=0 subtract_account=true token_amount=355862985611231 rewards_token_amount=177931492805615.500000000000000000 delegate_shares=355862985611231.000000000000000000 delegate_rewards_shares=177931492805615.500000000000000000 period_delegation_shares=355862985611231.000000000000000000 period_delegation_rewards_shares=177931492805615.500000000000000000 delegation_shares=355862985611231.000000000000000000 delegation_rewards_shares=177931492805615.500000000000000000 validator_tokens=355862985611231 validator_rewards_tokens=177931492805615.500000000000000000 validator_shares=355862985611231.000000000000000000 validator_rewards_shares=177931492805615.500000000000000000
+26-04-30 03:33:06.450 DEBU Delegate Info                            module=x/staking delegator_addr=story10p39snc80x9g4xm5nntpj6hn2x3ptcever2ul6 validator_operator_addr=storyvaloper10p39snc80x9g4xm5nntpj6hn2x3ptcevhv7a53 period_delegation_id=0 subtract_account=true token_amount=330952192686368 rewards_token_amount=165476096343184.000000000000000000 delegate_shares=330952192686368.000000000000000000 delegate_rewards_shares=165476096343184.000000000000000000 period_delegation_shares=330952192686368.000000000000000000 period_delegation_rewards_shares=165476096343184.000000000000000000 delegation_shares=330952192686368.000000000000000000 delegation_rewards_shares=165476096343184.000000000000000000 validator_tokens=330952192686368 validator_rewards_tokens=165476096343184.000000000000000000 validator_shares=330952192686368.000000000000000000 validator_rewards_shares=165476096343184.000000000000000000
+26-04-30 03:33:06.450 DEBU Delegate Info                            module=x/staking delegator_addr=story180rqrcmms8udyetxa44dyp3vvnz0y8nqhv3yxu validator_operator_addr=storyvaloper180rqrcmms8udyetxa44dyp3vvnz0y8nqer99dh period_delegation_id=0 subtract_account=true token_amount=307785548339562 rewards_token_amount=153892774169781.000000000000000000 delegate_shares=307785548339562.000000000000000000 delegate_rewards_shares=153892774169781.000000000000000000 period_delegation_shares=307785548339562.000000000000000000 period_delegation_rewards_shares=153892774169781.000000000000000000 delegation_shares=307785548339562.000000000000000000 delegation_rewards_shares=153892774169781.000000000000000000 validator_tokens=307785548339562 validator_rewards_tokens=153892774169781.000000000000000000 validator_shares=307785548339562.000000000000000000 validator_rewards_shares=153892774169781.000000000000000000
+26-04-30 03:33:06.450 DEBU Delegate Info                            module=x/staking delegator_addr=story1l07twgekk6armd5k5sxtkrkkapp38tmvelayfd validator_operator_addr=storyvaloper1l07twgekk6armd5k5sxtkrkkapp38tmvhsf9zx period_delegation_id=0 subtract_account=true token_amount=286240559955792 rewards_token_amount=286240559955792.000000000000000000 delegate_shares=286240559955792.000000000000000000 delegate_rewards_shares=286240559955792.000000000000000000 period_delegation_shares=286240559955792.000000000000000000 period_delegation_rewards_shares=286240559955792.000000000000000000 delegation_shares=286240559955792.000000000000000000 delegation_rewards_shares=286240559955792.000000000000000000 validator_tokens=286240559955792 validator_rewards_tokens=286240559955792.000000000000000000 validator_shares=286240559955792.000000000000000000 validator_rewards_shares=286240559955792.000000000000000000
+26-04-30 03:33:06.451 DEBU Delegate Info                            module=x/staking delegator_addr=story14gzs979j939g4d7nuvt0fluymrlpyrfkf6pqnp validator_operator_addr=storyvaloper14gzs979j939g4d7nuvt0fluymrlpyrfk844pc2 period_delegation_id=0 subtract_account=true token_amount=266202962035973 rewards_token_amount=133101481017986.500000000000000000 delegate_shares=266202962035973.000000000000000000 delegate_rewards_shares=133101481017986.500000000000000000 period_delegation_shares=266202962035973.000000000000000000 period_delegation_rewards_shares=133101481017986.500000000000000000 delegation_shares=266202962035973.000000000000000000 delegation_rewards_shares=133101481017986.500000000000000000 validator_tokens=266202962035973 validator_rewards_tokens=133101481017986.500000000000000000 validator_shares=266202962035973.000000000000000000 validator_rewards_shares=133101481017986.500000000000000000
+26-04-30 03:33:06.451 DEBU Delegate Info                            module=x/staking delegator_addr=story1ca8rrjw83mqk0rmx8dfs7avqp36vpex4zgy5qh validator_operator_addr=storyvaloper1ca8rrjw83mqk0rmx8dfs7avqp36vpex4v8s4tu period_delegation_id=0 subtract_account=true token_amount=247568544444937 rewards_token_amount=123784272222468.500000000000000000 delegate_shares=247568544444937.000000000000000000 delegate_rewards_shares=123784272222468.500000000000000000 period_delegation_shares=247568544444937.000000000000000000 period_delegation_rewards_shares=123784272222468.500000000000000000 delegation_shares=247568544444937.000000000000000000 delegation_rewards_shares=123784272222468.500000000000000000 validator_tokens=247568544444937 validator_rewards_tokens=123784272222468.500000000000000000 validator_shares=247568544444937.000000000000000000 validator_rewards_shares=123784272222468.500000000000000000
+26-04-30 03:33:06.451 DEBU Delegate Info                            module=x/staking delegator_addr=story1aaae68f3rmsh7h7rx4c2830l93h8tq788f07nk validator_operator_addr=storyvaloper1aaae68f3rmsh7h7rx4c2830l93h8tq78fxmlca period_delegation_id=0 subtract_account=true token_amount=230238581791472 rewards_token_amount=115119290895736.000000000000000000 delegate_shares=230238581791472.000000000000000000 delegate_rewards_shares=115119290895736.000000000000000000 period_delegation_shares=230238581791472.000000000000000000 period_delegation_rewards_shares=115119290895736.000000000000000000 delegation_shares=230238581791472.000000000000000000 delegation_rewards_shares=115119290895736.000000000000000000 validator_tokens=230238581791472 validator_rewards_tokens=115119290895736.000000000000000000 validator_shares=230238581791472.000000000000000000 validator_rewards_shares=115119290895736.000000000000000000
+26-04-30 03:33:06.452 DEBU running initialization for module        module=evmstaking
+26-04-30 03:33:36.678 INFO 👾 ABCI call: FinalizeBlock              height=1 proposer=256f65a
+26-04-30 03:33:36.682 INFO 👾 ABCI call: Commit                    
+26-04-30 03:33:36.886 INFO 👾 ABCI call: FinalizeBlock              height=2 proposer=2a386e0
+26-04-30 03:33:36.898 INFO 👾 ABCI call: Commit                    
+26-04-30 03:33:37.045 INFO 👾 ABCI call: FinalizeBlock              height=3 proposer=8cbe74f
+26-04-30 03:33:37.062 INFO 👾 ABCI call: Commit                    
+26-04-30 03:33:37.241 INFO 👾 ABCI call: FinalizeBlock              height=4 proposer=5eb618b
+26-04-30 03:33:37.259 INFO 👾 ABCI call: Commit                    
+26-04-30 03:33:37.445 INFO 👾 ABCI call: FinalizeBlock              height=5 proposer=eac3027
+26-04-30 03:33:37.454 INFO 👾 ABCI call: Commit                    
+26-04-30 03:33:40.042 INFO 👾 ABCI call: ProcessProposal            height=6 proposer=4ca2067
+26-04-30 03:33:40.385 INFO 👾 ABCI call: FinalizeBlock              height=6 proposer=4ca2067
+26-04-30 03:33:40.408 INFO 👾 ABCI call: Commit                    
+26-04-30 03:33:43.160 INFO 👾 ABCI call: ProcessProposal            height=7 proposer=58f9577
+26-04-30 03:33:43.495 INFO 👾 ABCI call: FinalizeBlock              height=7 proposer=58f9577
+26-04-30 03:33:43.527 INFO 👾 ABCI call: Commit                    
+26-04-30 03:33:46.285 INFO 👾 ABCI call: ProcessProposal            height=8 proposer=8a1dd90
+26-04-30 03:33:46.609 INFO 👾 ABCI call: FinalizeBlock              height=8 proposer=8a1dd90
+26-04-30 03:33:46.622 INFO 👾 ABCI call: Commit                    
+26-04-30 03:33:49.404 INFO 👾 ABCI call: ProcessProposal            height=9 proposer=308740e
+26-04-30 03:33:49.730 INFO 👾 ABCI call: FinalizeBlock              height=9 proposer=308740e
+26-04-30 03:33:49.739 INFO 👾 ABCI call: Commit                    
+26-04-30 03:33:52.526 INFO 👾 ABCI call: ProcessProposal            height=10 proposer=08e6a65
+26-04-30 03:33:52.851 INFO 👾 ABCI call: FinalizeBlock              height=10 proposer=08e6a65
+26-04-30 03:33:52.889 INFO 👾 ABCI call: Commit                    
+26-04-30 03:33:55.570 INFO 👾 ABCI call: ProcessProposal            height=11 proposer=56b7e00
+26-04-30 03:33:55.889 INFO 👾 ABCI call: FinalizeBlock              height=11 proposer=56b7e00
+26-04-30 03:33:55.932 INFO 👾 ABCI call: Commit                    
+26-04-30 03:33:58.593 INFO 👾 ABCI call: ProcessProposal            height=12 proposer=b8e348b
+26-04-30 03:33:58.902 INFO 👾 ABCI call: FinalizeBlock              height=12 proposer=b8e348b
+26-04-30 03:33:58.925 INFO 👾 ABCI call: Commit                    
+26-04-30 03:34:01.621 INFO 👾 ABCI call: ProcessProposal            height=13 proposer=ae39a85
+26-04-30 03:34:01.941 INFO 👾 ABCI call: FinalizeBlock              height=13 proposer=ae39a85
+26-04-30 03:34:01.974 INFO 👾 ABCI call: Commit                    
+26-04-30 03:34:04.750 INFO 👾 ABCI call: ProcessProposal            height=14 proposer=64acf8f
+26-04-30 03:34:04.986 INFO 👾 ABCI call: FinalizeBlock              height=14 proposer=64acf8f
+26-04-30 03:34:05.023 INFO 👾 ABCI call: Commit                    
+26-04-30 03:34:07.688 INFO 👾 ABCI call: ProcessProposal            height=15 proposer=067aa90
+26-04-30 03:34:08.005 INFO 👾 ABCI call: FinalizeBlock              height=15 proposer=067aa90
+26-04-30 03:34:08.023 INFO 👾 ABCI call: Commit                    
+26-04-30 03:34:10.724 INFO 👾 ABCI call: ProcessProposal            height=16 proposer=7252780
+26-04-30 03:34:11.045 INFO 👾 ABCI call: FinalizeBlock              height=16 proposer=7252780
+26-04-30 03:34:11.070 INFO 👾 ABCI call: Commit                    
+26-04-30 03:34:13.753 INFO 👾 ABCI call: ProcessProposal            height=17 proposer=256f65a
+26-04-30 03:34:14.073 INFO 👾 ABCI call: FinalizeBlock              height=17 proposer=256f65a
+26-04-30 03:34:14.087 DEBU Delegate Info                            module=x/staking delegator_addr=story17w0adeg64ky0daxwd2ugyuneellmjgnxpupef6 validator_operator_addr=storyvaloper1l07twgekk6armd5k5sxtkrkkapp38tmvhsf9zx period_delegation_id=0 subtract_account=true token_amount=1024000000000 rewards_token_amount=1024000000000.000000000000000000 delegate_shares=1024000000000.000000000000000000 delegate_rewards_shares=1024000000000.000000000000000000 period_delegation_shares=1024000000000.000000000000000000 period_delegation_rewards_shares=1024000000000.000000000000000000 delegation_shares=1024000000000.000000000000000000 delegation_rewards_shares=1024000000000.000000000000000000 validator_tokens=287264559955792 validator_rewards_tokens=287264559955792.000000000000000000 validator_shares=287264559955792.000000000000000000 validator_rewards_shares=287264559955792.000000000000000000
+26-04-30 03:34:14.116 INFO 👾 ABCI call: Commit                    
+26-04-30 03:34:16.770 INFO 👾 ABCI call: ProcessProposal            height=18 proposer=2a386e0
+26-04-30 03:34:17.099 INFO 👾 ABCI call: FinalizeBlock              height=18 proposer=2a386e0
+26-04-30 03:34:17.109 DEBU Delegate Info                            module=x/staking delegator_addr=story1wzvhjux9rqfdcwspp37srdgwp5tac7wgfh9xau validator_operator_addr=storyvaloper1l07twgekk6armd5k5sxtkrkkapp38tmvhsf9zx period_delegation_id=1 subtract_account=true token_amount=1024000000000 rewards_token_amount=1076224000000.000000000000000000 delegate_shares=1024000000000.000000000000000000 delegate_rewards_shares=1076224000000.000000000000000000 period_delegation_shares=1024000000000.000000000000000000 period_delegation_rewards_shares=1076224000000.000000000000000000 delegation_shares=1024000000000.000000000000000000 delegation_rewards_shares=1076224000000.000000000000000000 validator_tokens=288288559955792 validator_rewards_tokens=288340783955792.000000000000000000 validator_shares=288288559955792.000000000000000000 validator_rewards_shares=288340783955792.000000000000000000
+26-04-30 03:34:17.141 INFO 👾 ABCI call: Commit                    
+26-04-30 03:34:19.805 INFO 👾 ABCI call: ProcessProposal            height=19 proposer=d04873c
+26-04-30 03:34:20.120 INFO 👾 ABCI call: FinalizeBlock              height=19 proposer=d04873c
+26-04-30 03:34:20.127 DEBU Delegate Info                            module=x/staking delegator_addr=story183zvmhdk4yq0526cthffncpaztay9yaueh0jcz validator_operator_addr=storyvaloper1l07twgekk6armd5k5sxtkrkkapp38tmvhsf9zx period_delegation_id=2 subtract_account=true token_amount=1024000000000 rewards_token_amount=1187840000000.000000000000000000 delegate_shares=1024000000000.000000000000000000 delegate_rewards_shares=1187840000000.000000000000000000 period_delegation_shares=1024000000000.000000000000000000 period_delegation_rewards_shares=1187840000000.000000000000000000 delegation_shares=1024000000000.000000000000000000 delegation_rewards_shares=1187840000000.000000000000000000 validator_tokens=289312559955792 validator_rewards_tokens=289528623955792.000000000000000000 validator_shares=289312559955792.000000000000000000 validator_rewards_shares=289528623955792.000000000000000000
+26-04-30 03:34:20.155 INFO 👾 ABCI call: Commit                    
+26-04-30 03:34:22.823 INFO 👾 ABCI call: ProcessProposal            height=20 proposer=8cbe74f
+26-04-30 03:34:23.147 INFO 👾 ABCI call: FinalizeBlock              height=20 proposer=8cbe74f
+26-04-30 03:34:23.168 DEBU Delegate Info                            module=x/staking delegator_addr=story1jrmehaht938cwqm9u7zestslzq0f8wgxjwwh5d validator_operator_addr=storyvaloper1l07twgekk6armd5k5sxtkrkkapp38tmvhsf9zx period_delegation_id=3 subtract_account=true token_amount=1024000000000 rewards_token_amount=1372160000000.000000000000000000 delegate_shares=1024000000000.000000000000000000 delegate_rewards_shares=1372160000000.000000000000000000 period_delegation_shares=1024000000000.000000000000000000 period_delegation_rewards_shares=1372160000000.000000000000000000 delegation_shares=1024000000000.000000000000000000 delegation_rewards_shares=1372160000000.000000000000000000 validator_tokens=290336559955792 validator_rewards_tokens=290900783955792.000000000000000000 validator_shares=290336559955792.000000000000000000 validator_rewards_shares=290900783955792.000000000000000000
+26-04-30 03:34:23.182 INFO 👾 ABCI call: Commit                    
+26-04-30 03:34:25.832 INFO 👾 ABCI call: ProcessProposal            height=21 proposer=bdb062b
+26-04-30 03:34:26.160 INFO 👾 ABCI call: FinalizeBlock              height=21 proposer=bdb062b
+26-04-30 03:34:26.173 DEBU Delegate Info                            module=x/staking delegator_addr=story17w0adeg64ky0daxwd2ugyuneellmjgnxpupef6 validator_operator_addr=storyvaloper14gzs979j939g4d7nuvt0fluymrlpyrfk844pc2 period_delegation_id=0 subtract_account=true token_amount=1024000000000 rewards_token_amount=25600000000.000000000000000000 delegate_shares=1024000000000.000000000000000000 delegate_rewards_shares=25600000000.000000000000000000 period_delegation_shares=1024000000000.000000000000000000 period_delegation_rewards_shares=25600000000.000000000000000000 delegation_shares=1024000000000.000000000000000000 delegation_rewards_shares=25600000000.000000000000000000 validator_tokens=267226962035973 validator_rewards_tokens=6680674050899.325000000000000000 validator_shares=267226962035973.000000000000000000 validator_rewards_shares=6680674050899.325000000000000000
+26-04-30 03:34:26.193 INFO 👾 ABCI call: Commit                    
+26-04-30 03:34:28.868 INFO 👾 ABCI call: ProcessProposal            height=22 proposer=5eb618b
+26-04-30 03:34:29.195 INFO 👾 ABCI call: FinalizeBlock              height=22 proposer=5eb618b
+26-04-30 03:34:29.230 INFO 👾 ABCI call: Commit                    
+26-04-30 03:34:31.893 INFO 👾 ABCI call: ProcessProposal            height=23 proposer=eac3027
+26-04-30 03:34:32.233 INFO 👾 ABCI call: FinalizeBlock              height=23 proposer=eac3027
+26-04-30 03:34:32.293 INFO 👾 ABCI call: Commit                    
+26-04-30 03:34:34.946 INFO 👾 ABCI call: ProcessProposal            height=24 proposer=d4b1cfe
+26-04-30 03:34:35.266 INFO 👾 ABCI call: FinalizeBlock              height=24 proposer=d4b1cfe
+26-04-30 03:34:35.316 INFO 👾 ABCI call: Commit                    
+26-04-30 03:34:37.954 INFO 👾 ABCI call: ProcessProposal            height=25 proposer=4ca2067
+26-04-30 03:34:38.290 INFO 👾 ABCI call: FinalizeBlock              height=25 proposer=4ca2067
+26-04-30 03:34:38.311 INFO 👾 ABCI call: Commit                    
+26-04-30 03:34:41.053 INFO 👾 ABCI call: ProcessProposal            height=26 proposer=632827d
+26-04-30 03:34:41.368 INFO 👾 ABCI call: FinalizeBlock              height=26 proposer=632827d
+26-04-30 03:34:41.404 INFO 👾 ABCI call: Commit                    
+26-04-30 03:34:44.071 INFO 👾 ABCI call: ProcessProposal            height=27 proposer=58f9577
+26-04-30 03:34:44.397 INFO 👾 ABCI call: FinalizeBlock              height=27 proposer=58f9577
+26-04-30 03:34:44.428 INFO 👾 ABCI call: Commit                    
+26-04-30 03:34:47.107 INFO 👾 ABCI call: ProcessProposal            height=28 proposer=256f65a
+26-04-30 03:34:47.345 INFO 👾 ABCI call: FinalizeBlock              height=28 proposer=256f65a
+26-04-30 03:34:47.368 INFO 👾 ABCI call: Commit                    
+26-04-30 03:34:50.042 INFO 👾 ABCI call: ProcessProposal            height=29 proposer=8a1dd90
+26-04-30 03:34:50.402 INFO 👾 ABCI call: FinalizeBlock              height=29 proposer=8a1dd90
+26-04-30 03:34:50.465 INFO 👾 ABCI call: Commit                    
+26-04-30 03:34:53.074 INFO 👾 ABCI call: ProcessProposal            height=30 proposer=2a386e0
+26-04-30 03:34:53.405 INFO 👾 ABCI call: FinalizeBlock              height=30 proposer=2a386e0
+26-04-30 03:34:53.435 INFO 👾 ABCI call: Commit                    
+26-04-30 03:34:56.100 INFO 👾 ABCI call: ProcessProposal            height=31 proposer=308740e
+26-04-30 03:34:56.341 INFO 👾 ABCI call: FinalizeBlock              height=31 proposer=308740e
+26-04-30 03:34:56.366 INFO 👾 ABCI call: Commit                    
+26-04-30 03:34:59.115 INFO 👾 ABCI call: ProcessProposal            height=32 proposer=8cbe74f
+26-04-30 03:34:59.368 INFO 👾 ABCI call: FinalizeBlock              height=32 proposer=8cbe74f
+26-04-30 03:34:59.378 INFO 👾 ABCI call: Commit                    
+26-04-30 03:35:02.145 INFO 👾 ABCI call: ProcessProposal            height=33 proposer=08e6a65
+26-04-30 03:35:02.374 INFO 👾 ABCI call: FinalizeBlock              height=33 proposer=08e6a65
+26-04-30 03:35:02.390 INFO 👾 ABCI call: Commit                    
+26-04-30 03:35:05.166 INFO 👾 ABCI call: ProcessProposal            height=34 proposer=56b7e00
+26-04-30 03:35:05.474 INFO 👾 ABCI call: FinalizeBlock              height=34 proposer=56b7e00
+26-04-30 03:35:05.500 INFO 👾 ABCI call: Commit                    
+26-04-30 03:35:08.174 INFO 👾 ABCI call: ProcessProposal            height=35 proposer=5eb618b
+26-04-30 03:35:08.502 INFO 👾 ABCI call: FinalizeBlock              height=35 proposer=5eb618b
+26-04-30 03:35:08.559 INFO 👾 ABCI call: Commit                    
+26-04-30 03:35:11.203 INFO 👾 ABCI call: ProcessProposal            height=36 proposer=b8e348b
+26-04-30 03:35:11.433 INFO 👾 ABCI call: FinalizeBlock              height=36 proposer=b8e348b
+26-04-30 03:35:11.466 INFO 👾 ABCI call: Commit                    
+26-04-30 03:35:14.243 INFO 👾 ABCI call: ProcessProposal            height=37 proposer=eac3027
+26-04-30 03:35:14.460 INFO 👾 ABCI call: FinalizeBlock              height=37 proposer=eac3027
+26-04-30 03:35:14.494 INFO 👾 ABCI call: Commit                    
+26-04-30 03:35:17.164 INFO 👾 ABCI call: ProcessProposal            height=38 proposer=256f65a
+26-04-30 03:35:17.389 INFO 👾 ABCI call: FinalizeBlock              height=38 proposer=256f65a
+26-04-30 03:35:17.417 INFO 👾 ABCI call: Commit                    
+26-04-30 03:35:20.091 INFO 👾 ABCI call: ProcessProposal            height=39 proposer=ae39a85
+26-04-30 03:35:20.321 INFO 👾 ABCI call: FinalizeBlock              height=39 proposer=ae39a85
+26-04-30 03:35:20.347 INFO 👾 ABCI call: Commit                    
+26-04-30 03:35:23.024 INFO 👾 ABCI call: ProcessProposal            height=40 proposer=4ca2067
+26-04-30 03:35:23.348 INFO 👾 ABCI call: FinalizeBlock              height=40 proposer=4ca2067
+26-04-30 03:35:23.362 INFO 👾 ABCI call: Commit                    
+26-04-30 03:35:26.039 INFO 👾 ABCI call: ProcessProposal            height=41 proposer=2a386e0
+26-04-30 03:35:26.266 INFO 👾 ABCI call: FinalizeBlock              height=41 proposer=2a386e0
+26-04-30 03:35:26.298 INFO 👾 ABCI call: Commit                    
+26-04-30 03:35:28.976 INFO 👾 ABCI call: ProcessProposal            height=42 proposer=64acf8f
+26-04-30 03:35:29.218 INFO 👾 ABCI call: FinalizeBlock              height=42 proposer=64acf8f
+26-04-30 03:35:29.261 INFO 👾 ABCI call: Commit                    
+26-04-30 03:35:31.925 INFO 👾 ABCI call: ProcessProposal            height=43 proposer=58f9577
+26-04-30 03:35:32.252 INFO 👾 ABCI call: FinalizeBlock              height=43 proposer=58f9577
+26-04-30 03:35:32.275 INFO 👾 ABCI call: Commit                    
+26-04-30 03:35:34.933 INFO 👾 ABCI call: ProcessProposal            height=44 proposer=8cbe74f
+26-04-30 03:35:35.177 INFO 👾 ABCI call: FinalizeBlock              height=44 proposer=8cbe74f
+26-04-30 03:35:35.216 INFO 👾 ABCI call: Commit                    
+26-04-30 03:35:37.965 INFO 👾 ABCI call: ProcessProposal            height=45 proposer=067aa90
+26-04-30 03:35:38.192 INFO 👾 ABCI call: FinalizeBlock              height=45 proposer=067aa90
+26-04-30 03:35:38.230 INFO 👾 ABCI call: Commit                    
+26-04-30 03:35:40.896 INFO 👾 ABCI call: ProcessProposal            height=46 proposer=8a1dd90
+26-04-30 03:35:41.210 INFO 👾 ABCI call: FinalizeBlock              height=46 proposer=8a1dd90
+26-04-30 03:35:41.238 INFO 👾 ABCI call: Commit                    
+26-04-30 03:35:43.829 INFO 👾 ABCI call: ProcessProposal            height=47 proposer=5eb618b
+26-04-30 03:35:44.148 INFO 👾 ABCI call: FinalizeBlock              height=47 proposer=5eb618b
+26-04-30 03:35:44.179 INFO 👾 ABCI call: Commit                    
+26-04-30 03:35:46.853 INFO 👾 ABCI call: ProcessProposal            height=48 proposer=7252780
+26-04-30 03:35:47.171 INFO 👾 ABCI call: FinalizeBlock              height=48 proposer=7252780
+26-04-30 03:35:47.190 INFO 👾 ABCI call: Commit                    
+26-04-30 03:35:49.867 INFO 👾 ABCI call: ProcessProposal            height=49 proposer=308740e
+26-04-30 03:35:50.127 INFO 👾 ABCI call: FinalizeBlock              height=49 proposer=308740e
+26-04-30 03:35:50.161 INFO 👾 ABCI call: Commit                    
+26-04-30 03:35:52.826 INFO 👾 ABCI call: ProcessProposal            height=50 proposer=256f65a
+26-04-30 03:35:53.058 INFO 👾 ABCI call: FinalizeBlock              height=50 proposer=256f65a
+26-04-30 03:35:53.099 INFO Applied deferred MaxValidators reduction max_validators=16
+26-04-30 03:35:53.113 INFO 👾 ABCI call: Commit                    
+26-04-30 03:35:55.766 INFO 👾 ABCI call: ProcessProposal            height=51 proposer=eac3027
+26-04-30 03:35:55.989 INFO 👾 ABCI call: FinalizeBlock              height=51 proposer=eac3027
+26-04-30 03:35:56.004 INFO 👾 ABCI call: Commit                    
+26-04-30 03:35:58.709 INFO 👾 ABCI call: ProcessProposal            height=52 proposer=08e6a65
+26-04-30 03:35:58.947 INFO 👾 ABCI call: FinalizeBlock              height=52 proposer=08e6a65
+26-04-30 03:35:58.979 INFO 👾 ABCI call: Commit                    
+26-04-30 03:36:01.648 INFO 👾 ABCI call: ProcessProposal            height=53 proposer=2a386e0
+26-04-30 03:36:01.967 INFO 👾 ABCI call: FinalizeBlock              height=53 proposer=2a386e0
+26-04-30 03:36:01.984 INFO 👾 ABCI call: Commit                    
+26-04-30 03:36:04.728 INFO 👾 ABCI call: ProcessProposal            height=54 proposer=4ca2067
+26-04-30 03:36:05.048 INFO 👾 ABCI call: FinalizeBlock              height=54 proposer=4ca2067
+26-04-30 03:36:05.090 INFO 👾 ABCI call: Commit                    
+26-04-30 03:36:07.757 INFO 👾 ABCI call: ProcessProposal            height=55 proposer=56b7e00
+26-04-30 03:36:07.995 INFO 👾 ABCI call: FinalizeBlock              height=55 proposer=56b7e00
+26-04-30 03:36:08.013 INFO 👾 ABCI call: Commit                    
+26-04-30 03:36:10.685 INFO 👾 ABCI call: ProcessProposal            height=56 proposer=8cbe74f
+26-04-30 03:36:10.996 INFO 👾 ABCI call: FinalizeBlock              height=56 proposer=8cbe74f
+26-04-30 03:36:11.016 INFO 👾 ABCI call: Commit                    
+26-04-30 03:36:13.627 INFO 👾 ABCI call: ProcessProposal            height=57 proposer=58f9577
+26-04-30 03:36:13.950 INFO 👾 ABCI call: FinalizeBlock              height=57 proposer=58f9577
+26-04-30 03:36:13.981 INFO 👾 ABCI call: Commit                    
+26-04-30 03:36:16.650 INFO 👾 ABCI call: ProcessProposal            height=58 proposer=b8e348b
+26-04-30 03:36:16.973 INFO 👾 ABCI call: FinalizeBlock              height=58 proposer=b8e348b
+26-04-30 03:36:17.006 INFO 👾 ABCI call: Commit                    
+26-04-30 03:36:19.670 INFO 👾 ABCI call: ProcessProposal            height=59 proposer=256f65a
+26-04-30 03:36:19.904 INFO 👾 ABCI call: FinalizeBlock              height=59 proposer=256f65a
+26-04-30 03:36:19.929 INFO 👾 ABCI call: Commit                    
+26-04-30 03:36:22.607 INFO 👾 ABCI call: ProcessProposal            height=60 proposer=5eb618b
+26-04-30 03:36:22.927 INFO 👾 ABCI call: FinalizeBlock              height=60 proposer=5eb618b
+26-04-30 03:36:22.958 INFO 👾 ABCI call: Commit                    
+26-04-30 03:36:25.638 INFO 👾 ABCI call: ProcessProposal            height=61 proposer=8a1dd90
+26-04-30 03:36:25.941 INFO 👾 ABCI call: FinalizeBlock              height=61 proposer=8a1dd90
+26-04-30 03:36:25.970 INFO 👾 ABCI call: Commit                    
+26-04-30 03:36:28.652 INFO 👾 ABCI call: ProcessProposal            height=62 proposer=2a386e0
+26-04-30 03:36:28.965 INFO 👾 ABCI call: FinalizeBlock              height=62 proposer=2a386e0
+26-04-30 03:36:29.000 INFO 👾 ABCI call: Commit                    
+26-04-30 03:36:31.667 INFO 👾 ABCI call: ProcessProposal            height=63 proposer=ae39a85
+26-04-30 03:36:31.893 INFO 👾 ABCI call: FinalizeBlock              height=63 proposer=ae39a85
+26-04-30 03:36:31.906 INFO 👾 ABCI call: Commit                    
+26-04-30 03:36:34.676 INFO 👾 ABCI call: ProcessProposal            height=64 proposer=eac3027
+26-04-30 03:36:34.899 INFO 👾 ABCI call: FinalizeBlock              height=64 proposer=eac3027
+26-04-30 03:36:34.919 INFO 👾 ABCI call: Commit                    
+26-04-30 03:36:37.687 INFO 👾 ABCI call: ProcessProposal            height=65 proposer=308740e
+26-04-30 03:36:37.907 INFO 👾 ABCI call: FinalizeBlock              height=65 proposer=308740e
+26-04-30 03:36:37.929 INFO 👾 ABCI call: Commit                    
+26-04-30 03:36:40.610 INFO 👾 ABCI call: ProcessProposal            height=66 proposer=64acf8f
+26-04-30 03:36:40.842 INFO 👾 ABCI call: FinalizeBlock              height=66 proposer=64acf8f
+26-04-30 03:36:40.872 INFO 👾 ABCI call: Commit                    
+26-04-30 03:36:43.551 INFO 👾 ABCI call: ProcessProposal            height=67 proposer=8cbe74f
+26-04-30 03:36:43.799 INFO 👾 ABCI call: FinalizeBlock              height=67 proposer=8cbe74f
+26-04-30 03:36:43.814 INFO 👾 ABCI call: Commit                    
+26-04-30 03:36:46.500 INFO 👾 ABCI call: ProcessProposal            height=68 proposer=4ca2067
+26-04-30 03:36:46.815 INFO 👾 ABCI call: FinalizeBlock              height=68 proposer=4ca2067
+26-04-30 03:36:46.840 INFO 👾 ABCI call: Commit                    
+26-04-30 03:36:49.514 INFO 👾 ABCI call: ProcessProposal            height=69 proposer=256f65a
+26-04-30 03:36:49.741 INFO 👾 ABCI call: FinalizeBlock              height=69 proposer=256f65a
+26-04-30 03:36:49.760 INFO 👾 ABCI call: Commit                    
+26-04-30 03:36:52.448 INFO 👾 ABCI call: ProcessProposal            height=70 proposer=08e6a65
+26-04-30 03:36:52.682 INFO 👾 ABCI call: FinalizeBlock              height=70 proposer=08e6a65
+26-04-30 03:36:52.690 DEBU Undelegate Info                          module=x/staking delegator_addr=story1l07twgekk6armd5k5sxtkrkkapp38tmvelayfd validator_addr=storyvaloper1l07twgekk6armd5k5sxtkrkkapp38tmvhsf9zx period_delegation_id=0 token_amount=286240559955792 shares=286240559955792.000000000000000000 rewards_shares=286240559955792.000000000000000000
+26-04-30 03:36:52.692 DEBU Unbond Info                              module=x/staking delegator_addr=story1l07twgekk6armd5k5sxtkrkkapp38tmvelayfd validator_addr=storyvaloper1l07twgekk6armd5k5sxtkrkkapp38tmvhsf9zx force_unbond=false period_delegation_id=0 unbond_token_amount=286240559955792 unbond_shares=286240559955792.000000000000000000 unbond_rewards_shares=286240559955792.000000000000000000 period_delegation_shares=0.000000000000000000 period_delegation_rewards_shares=0.000000000000000000 delegation_shares=0.000000000000000000 delegation_rewards_shares=0.000000000000000000 validator_tokens=4096000000000 validator_rewards_tokens=4660224000000.000000000000000000 validator_shares=4096000000000.000000000000000000 validator_shares=4660224000000.000000000000000000
+26-04-30 03:36:52.723 INFO 👾 ABCI call: Commit                    
+26-04-30 03:36:55.373 INFO 👾 ABCI call: ProcessProposal            height=71 proposer=067aa90
+26-04-30 03:36:55.617 INFO 👾 ABCI call: FinalizeBlock              height=71 proposer=067aa90
+26-04-30 03:36:55.683 INFO 👾 ABCI call: Commit                    
+26-04-30 03:36:58.390 INFO 👾 ABCI call: ProcessProposal            height=72 proposer=5eb618b
+26-04-30 03:36:58.616 INFO 👾 ABCI call: FinalizeBlock              height=72 proposer=5eb618b
+26-04-30 03:36:58.673 INFO 👾 ABCI call: Commit                    
+26-04-30 03:37:01.325 INFO 👾 ABCI call: ProcessProposal            height=73 proposer=58f9577
+26-04-30 03:37:01.558 INFO 👾 ABCI call: FinalizeBlock              height=73 proposer=58f9577
+26-04-30 03:37:01.591 INFO 👾 ABCI call: Commit                    
+26-04-30 03:37:04.263 INFO 👾 ABCI call: ProcessProposal            height=74 proposer=2a386e0
+26-04-30 03:37:04.579 INFO 👾 ABCI call: FinalizeBlock              height=74 proposer=2a386e0
+26-04-30 03:37:04.587 DEBU Undelegate Info                          module=x/staking delegator_addr=story14gzs979j939g4d7nuvt0fluymrlpyrfkf6pqnp validator_addr=storyvaloper14gzs979j939g4d7nuvt0fluymrlpyrfk844pc2 period_delegation_id=0 token_amount=266202962035973 shares=266202962035973.000000000000000000 rewards_shares=6655074050899.325000000000000000
+26-04-30 03:37:04.587 DEBU Unbond Info                              module=x/staking delegator_addr=story14gzs979j939g4d7nuvt0fluymrlpyrfkf6pqnp validator_addr=storyvaloper14gzs979j939g4d7nuvt0fluymrlpyrfk844pc2 force_unbond=false period_delegation_id=0 unbond_token_amount=266202962035973 unbond_shares=266202962035973.000000000000000000 unbond_rewards_shares=6655074050899.325000000000000000 period_delegation_shares=0.000000000000000000 period_delegation_rewards_shares=0.000000000000000000 delegation_shares=0.000000000000000000 delegation_rewards_shares=0.000000000000000000 validator_tokens=1024000000000 validator_rewards_tokens=25600000000.000000000000000000 validator_shares=1024000000000.000000000000000000 validator_shares=25600000000.000000000000000000
+26-04-30 03:37:04.604 INFO 👾 ABCI call: Commit                    
+26-04-30 03:37:07.277 INFO 👾 ABCI call: ProcessProposal            height=75 proposer=56b7e00
+26-04-30 03:37:07.520 INFO 👾 ABCI call: FinalizeBlock              height=75 proposer=56b7e00
+26-04-30 03:37:07.556 INFO 👾 ABCI call: Commit                    
+26-04-30 03:37:10.219 INFO 👾 ABCI call: ProcessProposal            height=76 proposer=7252780
+26-04-30 03:37:10.532 INFO 👾 ABCI call: FinalizeBlock              height=76 proposer=7252780
+26-04-30 03:37:10.554 INFO 👾 ABCI call: Commit                    
+26-04-30 03:37:13.145 INFO 👾 ABCI call: ProcessProposal            height=77 proposer=eac3027
+26-04-30 03:37:13.384 INFO 👾 ABCI call: FinalizeBlock              height=77 proposer=eac3027
+26-04-30 03:37:13.387 DEBU Undelegate Info                          module=x/staking delegator_addr=story17w0adeg64ky0daxwd2ugyuneellmjgnxpupef6 validator_addr=storyvaloper1l07twgekk6armd5k5sxtkrkkapp38tmvhsf9zx period_delegation_id=0 token_amount=1024000000000 shares=1024000000000.000000000000000000 rewards_shares=1024000000000.000000000000000000
+26-04-30 03:37:13.387 DEBU Unbond Info                              module=x/staking delegator_addr=story17w0adeg64ky0daxwd2ugyuneellmjgnxpupef6 validator_addr=storyvaloper1l07twgekk6armd5k5sxtkrkkapp38tmvhsf9zx force_unbond=false period_delegation_id=0 unbond_token_amount=1024000000000 unbond_shares=1024000000000.000000000000000000 unbond_rewards_shares=1024000000000.000000000000000000 period_delegation_shares=0.000000000000000000 period_delegation_rewards_shares=0.000000000000000000 delegation_shares=0.000000000000000000 delegation_rewards_shares=0.000000000000000000 validator_tokens=3072000000000 validator_rewards_tokens=3636224000000.000000000000000000 validator_shares=3072000000000.000000000000000000 validator_shares=3636224000000.000000000000000000
+26-04-30 03:37:13.407 INFO 👾 ABCI call: Commit                    
+26-04-30 03:37:16.077 INFO 👾 ABCI call: ProcessProposal            height=78 proposer=8a1dd90
+26-04-30 03:37:16.304 INFO 👾 ABCI call: FinalizeBlock              height=78 proposer=8a1dd90
+26-04-30 03:37:16.313 INFO 👾 ABCI call: Commit                    
+26-04-30 03:37:19.088 INFO 👾 ABCI call: ProcessProposal            height=79 proposer=8cbe74f
+26-04-30 03:37:19.308 INFO 👾 ABCI call: FinalizeBlock              height=79 proposer=8cbe74f
+26-04-30 03:37:19.327 INFO 👾 ABCI call: Commit                    
+26-04-30 03:37:22.050 INFO 👾 ABCI call: ProcessProposal            height=80 proposer=256f65a
+26-04-30 03:37:22.360 INFO 👾 ABCI call: FinalizeBlock              height=80 proposer=256f65a
+26-04-30 03:37:22.389 INFO 👾 ABCI call: Commit                    
+26-04-30 03:37:25.065 INFO 👾 ABCI call: ProcessProposal            height=81 proposer=b8e348b
+26-04-30 03:37:25.328 INFO 👾 ABCI call: FinalizeBlock              height=81 proposer=b8e348b
+26-04-30 03:37:25.347 INFO 👾 ABCI call: Commit                    
+26-04-30 03:37:28.077 INFO 👾 ABCI call: ProcessProposal            height=82 proposer=4ca2067
+26-04-30 03:37:28.309 INFO 👾 ABCI call: FinalizeBlock              height=82 proposer=4ca2067
+26-04-30 03:37:28.323 INFO 👾 ABCI call: Commit                    
+26-04-30 03:37:31.092 INFO 👾 ABCI call: ProcessProposal            height=83 proposer=2a386e0
+26-04-30 03:37:31.407 INFO 👾 ABCI call: FinalizeBlock              height=83 proposer=2a386e0
+26-04-30 03:37:31.424 DEBU Undelegate Info                          module=x/staking delegator_addr=story17w0adeg64ky0daxwd2ugyuneellmjgnxpupef6 validator_addr=storyvaloper14gzs979j939g4d7nuvt0fluymrlpyrfk844pc2 period_delegation_id=0 token_amount=1024000000000 shares=1024000000000.000000000000000000 rewards_shares=25600000000.000000000000000000
+26-04-30 03:37:31.425 DEBU Unbond Info                              module=x/staking delegator_addr=story17w0adeg64ky0daxwd2ugyuneellmjgnxpupef6 validator_addr=storyvaloper14gzs979j939g4d7nuvt0fluymrlpyrfk844pc2 force_unbond=false period_delegation_id=0 unbond_token_amount=1024000000000 unbond_shares=1024000000000.000000000000000000 unbond_rewards_shares=25600000000.000000000000000000 period_delegation_shares=0.000000000000000000 period_delegation_rewards_shares=0.000000000000000000 delegation_shares=0.000000000000000000 delegation_rewards_shares=0.000000000000000000 validator_tokens=0 validator_rewards_tokens=0.000000000000000000 validator_shares=0.000000000000000000 validator_shares=0.000000000000000000
+26-04-30 03:37:31.446 INFO 👾 ABCI call: Commit                    
+26-04-30 03:37:34.113 INFO 👾 ABCI call: ProcessProposal            height=84 proposer=308740e
+26-04-30 03:37:34.421 INFO 👾 ABCI call: FinalizeBlock              height=84 proposer=308740e
+26-04-30 03:37:34.435 INFO 👾 ABCI call: Commit                    
+26-04-30 03:37:37.039 INFO 👾 ABCI call: ProcessProposal            height=85 proposer=5eb618b
+26-04-30 03:37:37.369 INFO 👾 ABCI call: FinalizeBlock              height=85 proposer=5eb618b
+26-04-30 03:37:37.419 INFO 👾 ABCI call: Commit                    

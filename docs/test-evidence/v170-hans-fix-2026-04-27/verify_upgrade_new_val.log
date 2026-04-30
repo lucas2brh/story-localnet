@@ -1,0 +1,60 @@
+[36m[newval][0m Phase 0 — generate val-21 CometBFT key at /tmp/val21-home/config/priv_validator_key.json
+[36m[newval][0m   pub_key=A4MYU1tUEF1Keq5gwI/EX5aHGBtP38YlvRp1P6c5f+11
+[36m[newval][0m Phase 1 — start localnet
+   RPC WS:       ws://localhost:8546
+   Blockscout:   http://localhost:3080
+   Grafana:      http://localhost:3000
+[36m[newval][0m Phase 2 — wait for block 60 (upgrade+10)
+[32m[newval][0m PASS chain advanced to [36m[newval][0m   at block 7, waiting for 60
+[36m[newval][0m   at block 10, waiting for 60
+[36m[newval][0m   at block 14, waiting for 60
+[36m[newval][0m   at block 17, waiting for 60
+[36m[newval][0m   at block 20, waiting for 60
+[36m[newval][0m   at block 24, waiting for 60
+[36m[newval][0m   at block 27, waiting for 60
+[36m[newval][0m   at block 29, waiting for 60
+[36m[newval][0m   at block 32, waiting for 60
+[36m[newval][0m   at block 36, waiting for 60
+[36m[newval][0m   at block 39, waiting for 60
+[36m[newval][0m   at block 42, waiting for 60
+[36m[newval][0m   at block 46, waiting for 60
+[36m[newval][0m   at block 49, waiting for 60
+[36m[newval][0m   at block 51, waiting for 60
+[36m[newval][0m   at block 54, waiting for 60
+[36m[newval][0m   at block 58, waiting for 60
+61
+[36m[newval][0m Phase 3 — record current rank-16 baseline
+[36m[newval][0m   rank-16 operator=0x32489be2de9efde93e0d7a81a4c0e3d4e9a8fb1f
+[36m[newval][0m   rank-16 tokens  =307785548339562 (stake units)
+[36m[newval][0m   val-21 stake    =369342658007474000000000 wei (120% of rank-16 × 1000000000 wei/stake)
+[36m[newval][0m Phase 4 — story validator create for val-21
+    Warning: No .env file found
+    Signing transaction with account address: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+    No staking API is provided. Skip validator existence check.
+    Transaction hash: 0x888b25fca45e5f892f009c7a4b2dfd9914bf4a9c308536e59971c95e44df85f2
+    Explorer URL: https://storyscan.xyz/tx/0x888b25fca45e5f892f009c7a4b2dfd9914bf4a9c308536e59971c95e44df85f2
+    Transaction sent, waiting for confirmation...
+    Transaction confirmed successfully!
+    Validator created successfully!
+[32m[newval][0m PASS validator create submitted
+[36m[newval][0m Phase 5 — wait 10 blocks for VSU (current=62, target=72)
+[32m[newval][0m PASS chain advanced to [36m[newval][0m   at block 62, waiting for 72
+[36m[newval][0m   at block 64, waiting for 72
+[36m[newval][0m   at block 67, waiting for 72
+[36m[newval][0m   at block 70, waiting for 72
+74 after tx
+[36m[newval][0m Phase 6 — verify val-21 in bonded set, old rank-16 kicked
+[32m[newval][0m PASS bonded=16
+[32m[newval][0m PASS val-21 in bonded set (status=3)
+[32m[newval][0m PASS old rank-16 kicked (status=1)
+[36m[newval][0m   top validators around boundary (sorted by tokens):
+    localnet-val-14  status=3  tokens=355862985611231  operator=0x876955b6a3cc6c3f45092cb8002661a14cc16373
+    localnet-val-15  status=3  tokens=330952192686368  operator=0xe31856549b4a3f1ebc9e99c83e697b7f1c016957
+[36m[newval][0m Phase 7 — invariant log + panic scan
+[36m[newval][0m     MISS validator9-node
+[32m[newval][0m PASS invariant log on all 20 validators
+[32m[newval][0m PASS no panic / CONSENSUS FAILURE
+[36m[newval][0m Phase 8 — teardown
+Deleted: sha256:3bdf672154a920823a31b06f0ddcae1860f704d0e9a3b7110c160f338da155ec
+🎉 All containers stopped and volumes removed successfully!
+[32m[newval][0m PASS L2 NEW-VAL TEST PASS (elapsed 287s)

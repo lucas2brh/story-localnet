@@ -1,0 +1,40 @@
+syntax OK
+[36m[slash][0m Phase 0 — start fresh localnet with signed_blocks_window=20 (default 200 would take ~10 min to trigger jail)
+Rewrote /Users/lucas/workspace/lucas-workspace/story-localnet/config/story/genesis-node.json: 20 validators, supply=9999999999999991, max_validators=20, singularity_height=0
+[36m[slash][0m   patched slashing.signed_blocks_window=20 min_signed_per_window=0.05 downtime_jail_duration=10s
+   Blockscout:   http://localhost:3080
+   Grafana:      http://localhost:3000
+[36m[slash][0m   rpc1 sync ok h=8
+[36m[slash][0m Phase 1 — wait past V170=50 to block 65 and identify rank-16 BONDED val
+[36m[slash][0m   chain at 65
+[36m[slash][0m   bonded count pre-pause: 16 (expected 16)
+[36m[slash][0m   rank-16 BONDED target: moniker=localnet-val-16 op=0x32489be2de9efde93e0d7a81a4c0e3d4e9a8fb1f tokens=307785548339562
+[32m[slash][0m PASS baseline captured
+[36m[slash][0m Phase 2 — docker pause validator16-node (target val's consensus container)
+      validator16-node
+[36m[slash][0m   container state: paused
+[36m[slash][0m Phase 3 — wait 30 blocks past pause to give signed_blocks_window=20 + min_signed_per_window=0.05 time to trigger jail
+[36m[slash][0m   pause height ~65, will check jail at block 95
+[36m[slash][0m Phase 4 — verify localnet-val-16 jailed and observe bonded count behavior
+[36m[slash][0m   localnet-val-16 post-jail: status=1 jailed=true
+[32m[slash][0m PASS target val correctly jailed for downtime
+[36m[slash][0m   bonded count post-jail: 16
+[33m[slash][0m OBSERVED cap-fill: cosmos-sdk auto-promoted a previously-UNBONDED val to refill the slot. Bonded count restored to 16.
+[36m[slash][0m   new rank-16 (auto-promoted): localnet-val-17
+[36m[slash][0m Phase 5 — verify chain still progressing despite jailed val
+[32m[slash][0m PASS chain produced 5+ blocks post-jail (no halt)
+[32m[slash][0m PASS no panic / CONSENSUS FAILURE in healthy validator logs
+[36m[slash][0m Phase 6 — docker unpause validator16-node (cleanup)
+      validator16-node
+
+========== SLASHING-FOR-DOWNTIME PROBE CONCLUSIONS ==========
+Target: localnet-val-16 op=0x32489be2de9efde93e0d7a81a4c0e3d4e9a8fb1f
+  Pre-pause:  status=BONDED(3) tokens=307785548339562; bonded count=16
+  Action:     docker pause validator16-node for 30 blocks (signed_blocks_window=20, min_signed_per_window=0.05)
+  Post-jail:  status=1 jailed=true; bonded count=16
+  Cap-fill behavior: auto-fill (rank-17 promoted from UNBONDED)
+  Final chain height: 100 (no halt)
+=============================================================
+[36m[slash][0m Phase 7 — teardown
+Deleted: sha256:609d6a758fd96308e75592d0169d9269cd739cc0e5adc57ac9a558b8eafa6164
+🎉 All containers stopped and volumes removed successfully!

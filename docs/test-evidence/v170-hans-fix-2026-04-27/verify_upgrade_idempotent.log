@@ -1,0 +1,23 @@
+[36m[idem][0m Phase 0 — regen genesis with MAX_VALIDATORS_INIT=16
+Rewrote /Users/lucas/workspace/lucas-workspace/story-localnet/config/story/genesis-node.json: 20 validators, supply=9999999999999991, max_validators=16, singularity_height=0
+[32m[idem][0m PASS genesis assembled with max_validators=16
+[36m[idem][0m Phase 1 — start localnet
+   RPC WS:       ws://localhost:8546
+   Blockscout:   http://localhost:3080
+   Grafana:      http://localhost:3000
+[36m[idem][0m Phase 2 — pre-upgrade sample at block 45 (= upgrade - 5)
+[32m[idem][0m PASS bonded=16 (already at target)
+[32m[idem][0m PASS max_validators=16 (already at target)
+[32m[idem][0m PASS pre-upgrade UBD count=0 (baseline for delta check)
+[36m[idem][0m Phase 3 — post-upgrade sample at block 65 (= upgrade + 15)
+[32m[idem][0m PASS bonded=16 (unchanged)
+[32m[idem][0m PASS max_validators=16 (unchanged)
+[32m[idem][0m PASS UBD count=0 unchanged (no new UBDs added by handler)
+[36m[idem][0m Phase 4 — no-op invariant + panic scan (idempotency: log line MUST be absent)
+[32m[idem][0m PASS upgrade log absent on all 20 validators (no-op confirmed)
+[32m[idem][0m PASS no panic / CONSENSUS FAILURE
+[36m[idem][0m Phase 5 — teardown
+Deleted: sha256:6d148c6b3172ca71d2004c803cf213aedd904f628a555694f1e912aebb3b7332
+🎉 All containers stopped and volumes removed successfully!
+[32m[idem][0m PASS L4 IDEMPOTENCY TEST PASS (elapsed 245s)
+[36m[idem][0m   genesis-node.json restored from backup

@@ -1,0 +1,19 @@
+HistoricalInfo valset length capture (Hans claim verification)
+Captured 2026-04-27 against piplabs/story-private-fork@yao/v170-test-hans-fix
+on story-localnet 20-validator setup, V170 height = 50.
+
+Query: GET http://localhost:1317/staking/historical_info/<height>
+Field: msg.hist.valset (array length)
+
+height=49  valset length = 20  (pre-upgrade baseline)
+height=50  valset length = 20  (UPGRADE BLOCK — records OLD set, matches CometBFT 20 signers)
+height=51  valset length = 16  (post-upgrade — records NEW pruned set)
+
+Counterfactual: with the rejected Yao Option B (PreBlocker prune of LastValidatorPowerKey),
+HistoricalInfo[50] would record the post-prune set (16) while CometBFT block 50 was signed
+by the pre-prune set (20). Off-by-one historical record. Hans's EndBlock-deferred SetParams
+moves the prune to AFTER BeginBlocker.TrackHistoricalInfo runs, so HistoricalInfo[50] stays
+accurate at 20.
+
+ABCI val_updates at upgrade block (from validator1-node logs):
+height=50 val_updates=4 pubkey_0=03017cd power_0=0 pubkey_1=02a9844 power_1=0 pubkey_2=038d956 power_2=0 pubkey_3=0364dfb power_3=0

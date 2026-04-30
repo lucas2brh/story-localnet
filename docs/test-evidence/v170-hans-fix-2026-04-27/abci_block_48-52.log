@@ -1,0 +1,10 @@
+26-04-27 06:12:00.744 INFO 👾 ABCI call: FinalizeBlock              height=48 proposer=1409d61
+26-04-27 06:12:00.782 INFO 👾 ABCI response: FinalizeBlock          val_updates=0 height=48
+26-04-27 06:12:03.804 INFO 👾 ABCI call: FinalizeBlock              height=49 proposer=dab9160
+26-04-27 06:12:03.847 INFO 👾 ABCI response: FinalizeBlock          val_updates=0 height=49
+26-04-27 06:12:06.734 INFO 👾 ABCI call: FinalizeBlock              height=50 proposer=c295e0e
+26-04-27 06:12:06.774 INFO 👾 ABCI response: FinalizeBlock          val_updates=4 height=50 pubkey_0=03017cd power_0=0 pubkey_1=02a9844 power_1=0 pubkey_2=038d956 power_2=0 pubkey_3=0364dfb power_3=0
+26-04-27 06:12:09.742 INFO 👾 ABCI call: FinalizeBlock              height=51 proposer=a1eb97f
+26-04-27 06:12:09.763 INFO 👾 ABCI response: FinalizeBlock          val_updates=0 height=51
+26-04-27 06:12:12.680 INFO 👾 ABCI call: FinalizeBlock              height=52 proposer=7afe63b
+26-04-27 06:12:12.690 INFO 👾 ABCI response: FinalizeBlock          val_updates=0 height=52

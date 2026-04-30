@@ -1,0 +1,55 @@
+[36m[unstake][0m Phase 0 — start fresh localnet
+[36m[unstake][0m   re-assemble genesis with MAX_VALIDATORS_INIT=20
+Rewrote /Users/lucas/workspace/lucas-workspace/story-localnet/config/story/genesis-node.json: 20 validators, supply=9999999999999991, max_validators=20, singularity_height=0
+   Blockscout:   http://localhost:3080
+   Grafana:      http://localhost:3000
+[36m[unstake][0m   rpc1 sync good, height=8
+[36m[unstake][0m Phase 1 — wait past upgrade + unbonding settled (block 65)
+[36m[unstake][0m   chain at 65
+[36m[unstake][0m   CASE A: val-17 op=0xa8c17e8e33e58778819b49633aa7e45bacf9dfb7 tokens=286240559955792 status=1 jailed=null delegator=story14rqhar3nukrh3qvmf93n4flytwk0nhahuzcnpr
+[36m[unstake][0m   CASE B: val-18 op=0xfc30cdaf7bd022981c6c1899988fc42b8f7916bc tokens=266202962035973 status=1 jailed=null delegator=story1lscvmtmm6q3fs8rvrzve3r7y9w8hj94u353dpn
+[32m[unstake][0m PASS both target vals confirmed UNBONDED
+[36m[unstake][0m Phase 2 — Case B setup: Anvil stakes 2048 IP to val-18
+[36m[unstake][0m   Anvil stakes 2048000000000000000000 wei to localnet-val-18
+      Explorer URL: https://storyscan.xyz/tx/0x975bf82d8c843171c76472f72dfb20ba9b047c3c74eb3d54c80f0feace59cd49
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens staked successfully! Extracting delegation ID...
+      Delegation ID: 0
+[36m[unstake][0m   val-18 post-stake: tokens=268250962035973 delegator_shares=268250962035973.000000000000000000
+[32m[unstake][0m PASS Case B external del injected
+[36m[unstake][0m Phase 3 — fund operator EVM wallets for Case A and Case B
+[36m[unstake][0m   Funding localnet-val-17 operator 0xA8C17E8e33E58778819b49633aa7e45bacF9dFb7 with 10 IP
+[36m[unstake][0m     post-fund balance=12237137843000000000 wei
+[36m[unstake][0m   Funding localnet-val-18 operator 0xfc30Cdaf7Bd022981C6C1899988fc42B8F7916bc with 10 IP
+[36m[unstake][0m     post-fund balance=12080532272000000000 wei
+[32m[unstake][0m PASS both operator wallets funded
+[36m[unstake][0m Phase 4 — Case A: val-17 operator 100% unstake
+[36m[unstake][0m   A: rc=0 tx=0x4640fdb66645eb279ac9ac6d6f38ad16bd046f607833020c68c63dfd333d5b95
+[36m[unstake][0m Phase 4 — Case B: val-18 operator 100% self-unstake (keeps external del)
+[36m[unstake][0m   B: rc=0 tx=0x373a91119c858bde4bec8aca32c5543e7fbd63831e27b42ba45344ce37cea80c
+[36m[unstake][0m Phase 5 — verify post-unstake state
+[36m[unstake][0m   rpc1-node Failed-to-process-withdraw log count: 0
+[36m[unstake][0m   CASE A val-17: in_store= UBD_count_for_operator=
+[36m[unstake][0m   CASE B val-18: in_store=1 jailed=true tokens=2048000000000 UBD_count_for_operator=
+[36m[unstake][0m Phase 6 — record pre-mature EVM balances, wait past unbonding_time, re-record
+[36m[unstake][0m   pre-mature A EVM bal=286251795522666686923889  B EVM bal=266214040996029317314702
+[36m[unstake][0m   post-mature A EVM bal=286251795522666686923889 (delta=0)
+[36m[unstake][0m   post-mature B EVM bal=266214040996029317314702 (delta=0)
+
+========== UNSTAKE PROBE CONCLUSIONS ==========
+CASE A (val-17, self-del only, 100% unstake):
+  CLI rc=0 tx=0x4640fdb66645eb279ac9ac6d6f38ad16bd046f607833020c68c63dfd333d5b95
+  val-17 in store post-tx:  (expected 'GONE' per source analysis: RemoveValidator fires)
+  UBD entries for operator:  (expected >=1)
+  operator EVM balance delta: 0 wei (expected ~ 286240559955792000000000 wei after mature)
+
+CASE B (val-18, external del, 100% self-unstake):
+  CLI rc=0 tx=0x373a91119c858bde4bec8aca32c5543e7fbd63831e27b42ba45344ce37cea80c
+  val-18 in store post-tx: 1 (expected '1' UNBONDED, NOT removed — Anvil del keeps shares>0)
+  val-18 jailed: true (expected 'true' — self-del drop below MinSelfDelegation triggers jail)
+  val-18 tokens: 2048000000000 (expected ~2048e9 = anvil only)
+  UBD entries for operator:  (expected >=1)
+  operator EVM balance delta: 0 wei (expected ~ 266202962035973000000000 wei after mature)
+===============================================
+[36m[unstake][0m Phase 8 — SKIP_TEARDOWN

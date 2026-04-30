@@ -1,0 +1,45 @@
+syntax OK
+---teardown stale cluster from FAIL run---
+Deleted: sha256:8e1618bea480085f39abf3bb07956f6ba9a6b0a29117f7cd6c7f017917a0d9cd
+🎉 All containers stopped and volumes removed successfully!
+---re-run probe_external_del_unstake.sh---
+[36m[ext-del][0m Phase 0 — start fresh localnet
+Rewrote /Users/lucas/workspace/lucas-workspace/story-localnet/config/story/genesis-node.json: 20 validators, supply=9999999999999991, max_validators=20, singularity_height=0
+   Blockscout:   http://localhost:3080
+   Grafana:      http://localhost:3000
+[36m[ext-del][0m   rpc1 sync ok h=7
+[36m[ext-del][0m Phase 1 — wait past upgrade (65), sample localnet-val-19 baseline
+[36m[ext-del][0m   chain at 65
+[36m[ext-del][0m   localnet-val-19 op=0x71f9Fc09c05EA26Dc534B681b1497D09D2A95F8c status=1 tokens=247568544444937 shares=247568544444937.000000000000000000
+[32m[ext-del][0m PASS target val confirmed UNBONDED
+[36m[ext-del][0m Phase 2 — Anvil stakes 2048 IP to localnet-val-19
+[36m[ext-del][0m   Anvil pre-stake balance=100000000000000000000000000 wei
+      Explorer URL: https://storyscan.xyz/tx/0xac535c485c8e93dbc56cf5fa48629eb0f5b8031b9dc638f92615ca88495d727a
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens staked successfully! Extracting delegation ID...
+      Delegation ID: 0
+[36m[ext-del][0m   Anvil post-stake balance=99997951997988688189222874 wei (delta=-413419130050547750)
+[36m[ext-del][0m   localnet-val-19 post-stake tokens=249616544444937 shares=249616544444937.000000000000000000
+[32m[ext-del][0m PASS external delegation injected
+[36m[ext-del][0m Phase 3 — Anvil 100% unstakes from localnet-val-19 (delegation-id=0)
+[36m[ext-del][0m   tx=0x3c95f63c067d39b05e97ae20945230a8ac5e183de1dd3ab248990aba84d6c5c8 rc=0
+[36m[ext-del][0m Phase 4 — verify post-unstake state
+[36m[ext-del][0m   localnet-val-19 post-unstake: status=1 jailed=GONE tokens=247568544444937 shares=247568544444937.000000000000000000
+[36m[ext-del][0m   tokens went pre=247568544444937 post-stake=249616544444937 post-unstake=247568544444937 (Anvil portion = 2048000000000 stake; expected 2048e9)
+[32m[ext-del][0m PASS chain still progressing post-unstake (no halt)
+[36m[ext-del][0m Phase 5 — wait past unbonding_time (10s on localnet), sample Anvil EVM balance
+[36m[ext-del][0m   Anvil after-mature balance=99999998996420958436328794 wei (delta vs post-stake=-590159911513123456)
+[36m[ext-del][0m   expected ~ 2048 IP refund = 2048000000000000000000 wei
+
+========== EXTERNAL-DEL UNSTAKE PROBE CONCLUSIONS ==========
+Target: localnet-val-19 op=0x71f9Fc09c05EA26Dc534B681b1497D09D2A95F8c
+  CLI rc=0 tx=0x3c95f63c067d39b05e97ae20945230a8ac5e183de1dd3ab248990aba84d6c5c8
+  val in store post-unstake: status=1 jailed=GONE
+  tokens pre=247568544444937 post=247568544444937
+  Anvil balance: pre-stake=100000000000000000000000000 post-stake=99997951997988688189222874 after-ubd=99999998996420958436328794
+  Final chain height: 89 (no halt)
+===========================================================
+[36m[ext-del][0m Phase 7 — teardown
+Deleted: sha256:a23eceb1c7c99eb4363390af48ec413eb1c097b59ffbe78388d18255d2641daa
+🎉 All containers stopped and volumes removed successfully!

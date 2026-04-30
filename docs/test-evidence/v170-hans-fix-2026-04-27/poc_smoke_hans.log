@@ -1,0 +1,17 @@
+[36m[poc][0m Phase 0: fresh localnet
+Rewrote /Users/lucas/workspace/lucas-workspace/story-localnet/config/story/genesis-node.json: 20 validators, supply=9999999999999991, max_validators=20, singularity_height=0
+   Blockscout:   http://localhost:3080
+   Grafana:      http://localhost:3000
+[36m[poc][0m rpc1 sync ok h=8
+[36m[poc][0m Phase 1: wait block 60
+[36m[poc][0m Phase 2: fund localnet-val-17 op 0xA8C17E8e33E58778819b49633aa7e45bacF9dFb7 with 10 IP
+status               1 (success)
+[36m[poc][0m Phase 3: localnet-val-17 100% self-unstake
+    Transaction sent, waiting for confirmation...
+    Transaction confirmed successfully!
+    Tokens unstaked successfully!
+[36m[poc][0m tx=0x7967e37d0d65b6eb4fdc94605ab1647816b1f69f37bd69054e0e5b0ca744dc87
+[36m[poc][0m Phase 4: observe 60s; start=64 target=84 (delta=20)
+[36m[poc][0m final height=84 (stuck_count=0, progressed=0)
+[36m[poc][0m OBSERVED=halt  EXPECT=progress
+[31m[poc][0m FAIL outcome halt != expected progress — containers left running for debugging

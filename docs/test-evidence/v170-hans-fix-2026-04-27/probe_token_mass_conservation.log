@@ -1,0 +1,48 @@
+syntax OK
+[36m[mass][0m Phase 0 — start fresh localnet (no tx-level activity will occur during this probe)
+Rewrote /Users/lucas/workspace/lucas-workspace/story-localnet/config/story/genesis-node.json: 20 validators, supply=9999999999999991, max_validators=20, singularity_height=0
+   Blockscout:   http://localhost:3080
+   Grafana:      http://localhost:3000
+[36m[mass][0m   rpc1 sync ok h=8
+[36m[mass][0m Phase 1 — wait to block 10 (well before V170=50) and sample stake totals
+[36m[mass][0m   pre-V170 sample at block 10:
+[36m[mass][0m     sum(val.tokens)        = 9999999999999992
+[36m[mass][0m     pool.bonded_tokens     = 9999999999999991
+[36m[mass][0m     pool.not_bonded_tokens = 0
+[36m[mass][0m     pool total             = 9999999999999991
+[32m[mass][0m PASS pre-V170 stake totals captured
+[36m[mass][0m Phase 2 — wait past V170=50 to block 65 and sample stake totals
+[36m[mass][0m   post-V170 sample at block 65:
+[36m[mass][0m     sum(val.tokens)              = 9999999999999992
+[36m[mass][0m     sum(bonded vals tokens)      = 8969749351771817
+[36m[mass][0m     sum(unbonded vals tokens)    = 1030250648228174
+[36m[mass][0m     pool.bonded_tokens           = 8969749351771817
+[36m[mass][0m     pool.not_bonded_tokens       = 1030250648228174
+[36m[mass][0m     pool total                   = 9999999999999991
+[32m[mass][0m PASS post-V170 stake totals captured
+[36m[mass][0m Phase 3 — assert token-mass conservation across V170 prune
+[32m[mass][0m PASS sum(val.tokens) preserved exactly: 9999999999999992 stake (no stake lost or duplicated through prune)
+[32m[mass][0m PASS pool total preserved: 9999999999999991 stake (re-classification only, no leakage)
+[32m[mass][0m PASS post-V170 bonded_tokens_pool == sum(top-16 vals tokens) = 8969749351771817
+[32m[mass][0m PASS post-V170 not_bonded_tokens_pool == sum(rank17-20 vals tokens) = 1030250648228174
+
+========== TOKEN-MASS CONSERVATION PROBE CONCLUSIONS ==========
+Pre-V170 (block 10):
+  sum(val.tokens)        = 9999999999999992
+  pool.bonded            = 9999999999999991
+  pool.not_bonded        = 0
+  pool total             = 9999999999999991
+Post-V170 (block 65):
+  sum(val.tokens)        = 9999999999999992
+  sum(bonded vals)       = 8969749351771817
+  sum(unbonded vals)     = 1030250648228174
+  pool.bonded            = 8969749351771817
+  pool.not_bonded        = 1030250648228174
+  pool total             = 9999999999999991
+Conservation deltas:
+  sum(val.tokens):  9999999999999992 -> 9999999999999992 (delta=0)
+  pool total:       9999999999999991 -> 9999999999999991 (delta=0)
+================================================================
+[36m[mass][0m Phase 5 — teardown
+Deleted: sha256:9240d679c058ae851fc8f2af6090c7ff0ff89c06a59104826f352fc55a6817a9
+🎉 All containers stopped and volumes removed successfully!

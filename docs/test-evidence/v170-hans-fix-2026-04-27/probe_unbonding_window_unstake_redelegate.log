@@ -1,0 +1,51 @@
+[36m[unbond-win][0m Phase 0 — fresh 20-val localnet, patch unbonding_time=90s so V170-pruned vals stay UNBONDING for the test window
+Rewrote /Users/lucas/workspace/lucas-workspace/story-localnet/config/story/genesis-node.json: 20 validators, supply=9999999999999991, max_validators=20, singularity_height=0
+[36m[unbond-win][0m   staking.unbonding_time=90s (post-patch)
+   Blockscout:   http://localhost:3080
+   Grafana:      http://localhost:3000
+[36m[unbond-win][0m   rpc1 sync ok h=8
+[36m[unbond-win][0m Phase 1 — wait past V170=50 to block 55; capture pre-state
+[36m[unbond-win][0m   chain at 55
+[36m[unbond-win][0m   localnet-val-19 op=0x71f9Fc09c05EA26Dc534B681b1497D09D2A95F8c status=2 tokens=247568544444937
+[36m[unbond-win][0m   localnet-val-20 op=0x0d87c3beB755E4AF98bEB057372D666bf7cdCFEC status=2 tokens=230238581791472
+[36m[unbond-win][0m   localnet-val-1 op=0x65Bb14E42381513F901c28e5C16cA42bbf5ab3Bd status=3 tokens=914123992692492
+[32m[unbond-win][0m PASS both src vals confirmed UNBONDING (status=2); dst val BONDED
+[36m[unbond-win][0m Phase 1.1 — fund operator EVM wallets for tx gas (operator wallets are not pre-funded in genesis)
+[36m[unbond-win][0m   localnet-val-19 operator EVM balance post-fund: 11934893366000000000 wei
+[36m[unbond-win][0m Phase 2 — submit unstake + redelegate within UNBONDING window
+[36m[unbond-win][0m   localnet-val-19: 100% self-unstake 247568544444937 stake = 247568544444937000000000 wei
+[36m[unbond-win][0m     tx=0x4b8a9c3d7aa388c38cf44a91261a562b04328dc12344ffcbbb7346a28b7041f6 rc=0
+[36m[unbond-win][0m   localnet-val-20 -> localnet-val-1: 100% self-redelegate 230238581791472 stake = 230238581791472000000000 wei
+[36m[unbond-win][0m     tx=0xdf69512e493b5269d6dc49403ecaa6e83dd83f0b21d9b5a86c7337acdb375e59 rc=0
+[36m[unbond-win][0m   wait for both tx receipts
+[36m[unbond-win][0m     unstake EVM tx status: 1
+[36m[unbond-win][0m     redelegate EVM tx status: 1
+[36m[unbond-win][0m Phase 3 — immediate post-tx state check (atomic redelegate token transfer + unstake src val drain)
+[36m[unbond-win][0m   localnet-val-19 tokens: 247568544444937 -> 0 (expected 0; full self-stake unbonded)
+[36m[unbond-win][0m   localnet-val-20 tokens: 230238581791472 -> 0 (expected 0; full self-stake redelegated)
+[36m[unbond-win][0m   localnet-val-1 tokens: 914123992692492 -> 1144362574483964 (expected 914123992692492 + 230238581791472)
+[32m[unbond-win][0m PASS redelegate atomic transfer: val-1 received exactly 230238581791472 stake; src vals drained to 0 as expected
+[32m[unbond-win][0m PASS no silent-rollback signature in any validator-node log
+[36m[unbond-win][0m Phase 4 — wait 55 blocks (66 -> 121) for unbonding queue maturity (90s) + evmstaking refund
+[36m[unbond-win][0m   chain at 121
+[36m[unbond-win][0m   localnet-val-19 operator EVM balance: pre=11934893366000000000 post=247579477289809409551936 delta=247567542396443409551936 wei
+[36m[unbond-win][0m   expected refund: 247568544444937000000000 wei (= 247568544444937 stake × 10^9)
+[36m[unbond-win][0m   shortfall vs expected: 1002048493590448064 wei (gas tolerance: 3000000000000000000 wei)
+[32m[unbond-win][0m PASS EVM balance delta 247567542396443409551936 within gas tolerance (1002048493590448064 <= 3000000000000000000) of expected refund 247568544444937000000000
+[36m[unbond-win][0m Phase 5 — verify chain still progressing
+[32m[unbond-win][0m PASS chain produced 5+ blocks past UBD maturity (no halt)
+[32m[unbond-win][0m PASS no panic / CONSENSUS FAILURE in any validator-node log
+
+========== UNBONDING-WINDOW UNSTAKE+REDELEGATE PROBE CONCLUSIONS ==========
+  unbonding_time = 90s (patched for test deterministic UNBONDING window)
+  Both vals confirmed UNBONDING (status=2) at tx submission.
+  Unstake (localnet-val-19 100%, 247568544444937 stake): tx 0x4b8a9c3d7aa388c38cf44a91261a562b04328dc12344ffcbbb7346a28b7041f6 status=1; src tokens drained to 0; operator EVM balance refunded after UBD maturity.
+  Redelegate (localnet-val-20 -> localnet-val-1, 230238581791472 stake): tx 0xdf69512e493b5269d6dc49403ecaa6e83dd83f0b21d9b5a86c7337acdb375e59 status=1; src tokens drained to 0; dst tokens increased by exact pre-amount.
+  No silent-rollback signature in any validator-node log.
+  Conclusion: post-V170 unbonding window IS a free-escape window — both unstake and redelegate from a single-delegator UNBONDING val execute end-to-end without triggering #619 silent rollback.
+  Final chain height: 126
+============================================================================
+[36m[unbond-win][0m Phase 7 — teardown
+Deleted: sha256:38788784619d26343cea69de4b3ebade77965b8a50c37f58505a10c7fbe61100
+🎉 All containers stopped and volumes removed successfully!
+EXIT=0

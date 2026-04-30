@@ -1,0 +1,38 @@
+Deleted: sha256:59086bfae8323174823cb2d9831bff042398e200f0d93e576b576598676486fb
+🎉 All containers stopped and volumes removed successfully!
+syntax OK
+[36m[autosweep][0m Phase 0 — start fresh localnet
+Rewrote /Users/lucas/workspace/lucas-workspace/story-localnet/config/story/genesis-node.json: 20 validators, supply=9999999999999991, max_validators=20, singularity_height=0
+   Blockscout:   http://localhost:3080
+   Grafana:      http://localhost:3000
+[36m[autosweep][0m   rpc1 sync ok h=8
+[36m[autosweep][0m Phase 1 — wait past V170=50 to block 65, sample localnet-val-17 baseline
+[36m[autosweep][0m   chain at 65
+[36m[autosweep][0m   localnet-val-17 op=0xA8C17E8e33E58778819b49633aa7e45bacF9dFb7 status=1 tokens=286240559955792
+[32m[autosweep][0m PASS target val confirmed UNBONDED with operator-only self-del
+[36m[autosweep][0m Phase 2 — Anvil sends 10 IP to localnet-val-17 operator wallet for gas
+[36m[autosweep][0m   operator 0xA8C17E8e33E58778819b49633aa7e45bacF9dFb7 pre-fund balance=2237137843000000000 wei
+[36m[autosweep][0m   operator post-fund balance=12237137843000000000 wei
+[36m[autosweep][0m Phase 3 — operator partial unstake 286140559955792 stake (residual 100000000000 stake = 100 IP, below 1024 IP MinSelfDelegation)
+[36m[autosweep][0m   localnet-val-17 operator unstakes 286140559955792 stake = 286140559955792000000000 wei (delegation-id=0)
+[36m[autosweep][0m   tx=0x1ba91f64d450c4f2e4b9c84a42a9cd7d3fd65df54dbb9694aa1f04cee0f1cfb4 rc=0
+[36m[autosweep][0m Phase 4 — verify auto-sweep collapsed partial -> 100%, val GONE, chain alive
+[36m[autosweep][0m   localnet-val-17 post-unstake: status=GONE tokens=GONE shares=GONE
+[32m[autosweep][0m PASS val GONE + chain still progressing (auto-sweep collapsed to 100%, RemoveValidator fired, no halt)
+[32m[autosweep][0m PASS no panic / CONSENSUS FAILURE in any validator log
+[36m[autosweep][0m Phase 5 — wait past unbonding_time (10s), verify operator EVM credited full self-del refund
+[36m[autosweep][0m   operator after-mature balance=286251795042644446560172 wei (vs pre-fund 2237137843000000000 wei)
+[36m[autosweep][0m   expected refund ~ 286240559955792 stake = 286240559955792000000000 wei (full balance via auto-sweep)
+
+========== AUTO-SWEEP PARTIAL-UNSTAKE PROBE CONCLUSIONS ==========
+Target: localnet-val-17 op=0xA8C17E8e33E58778819b49633aa7e45bacF9dFb7
+  Pre-unstake: status=UNBONDED(1) tokens=286240559955792
+  Partial unstake requested: 286140559955792 stake (residual 100000000000 stake = 100 IP, below 1024 IP MinSelfDelegation)
+  CLI rc=0 tx=0x1ba91f64d450c4f2e4b9c84a42a9cd7d3fd65df54dbb9694aa1f04cee0f1cfb4
+  val status post-unstake: GONE (expected GONE — auto-sweep collapsed to 100%, RemoveValidator fired)
+  Operator EVM bal: pre-fund=2237137843000000000 after-ubd=286251795042644446560172 (expected delta ~ 286240559955792000000000 wei = full self-del refund via auto-sweep)
+  Final chain height: 85 (no halt)
+==================================================================
+[36m[autosweep][0m Phase 7 — teardown
+Deleted: sha256:eb1081236a5c8821cfd7e9c9f139efbf536d7cabbebe0220b287fb848c2026ca
+🎉 All containers stopped and volumes removed successfully!

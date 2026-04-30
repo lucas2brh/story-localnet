@@ -1,0 +1,72 @@
+[36m[restart][0m Phase 1 — start localnet
+   RPC WS:       ws://localhost:8546
+   Blockscout:   http://localhost:3080
+   Grafana:      http://localhost:3000
+[36m[restart][0m Phase 2 — wait block 70 (upgrade done, UBD drained)
+[32m[restart][0m PASS chain advanced to [36m[restart][0m   at block 8, waiting for 70
+[36m[restart][0m   at block 10, waiting for 70
+[36m[restart][0m   at block 12, waiting for 70
+[36m[restart][0m   at block 13, waiting for 70
+[36m[restart][0m   at block 15, waiting for 70
+[36m[restart][0m   at block 17, waiting for 70
+[36m[restart][0m   at block 18, waiting for 70
+[36m[restart][0m   at block 20, waiting for 70
+[36m[restart][0m   at block 22, waiting for 70
+[36m[restart][0m   at block 23, waiting for 70
+[36m[restart][0m   at block 25, waiting for 70
+[36m[restart][0m   at block 27, waiting for 70
+[36m[restart][0m   at block 28, waiting for 70
+[36m[restart][0m   at block 30, waiting for 70
+[36m[restart][0m   at block 32, waiting for 70
+[36m[restart][0m   at block 33, waiting for 70
+[36m[restart][0m   at block 35, waiting for 70
+[36m[restart][0m   at block 37, waiting for 70
+[36m[restart][0m   at block 38, waiting for 70
+[36m[restart][0m   at block 40, waiting for 70
+[36m[restart][0m   at block 42, waiting for 70
+[36m[restart][0m   at block 43, waiting for 70
+[36m[restart][0m   at block 45, waiting for 70
+[36m[restart][0m   at block 47, waiting for 70
+[36m[restart][0m   at block 48, waiting for 70
+[36m[restart][0m   at block 50, waiting for 70
+[36m[restart][0m   at block 52, waiting for 70
+[36m[restart][0m   at block 54, waiting for 70
+[36m[restart][0m   at block 55, waiting for 70
+[36m[restart][0m   at block 57, waiting for 70
+[36m[restart][0m   at block 59, waiting for 70
+[36m[restart][0m   at block 60, waiting for 70
+[36m[restart][0m   at block 62, waiting for 70
+[36m[restart][0m   at block 64, waiting for 70
+[36m[restart][0m   at block 65, waiting for 70
+[36m[restart][0m   at block 67, waiting for 70
+[36m[restart][0m   at block 69, waiting for 70
+70 pre-restart
+[36m[restart][0m Phase 3 — sample pre-restart state
+[36m[restart][0m   H_PRE=70 bonded=16 max=16 UBD=0
+[32m[restart][0m PASS pre-restart: all 20 validators each logged invariant exactly once
+[36m[restart][0m Phase 4 — docker stop all cluster containers
+[36m[restart][0m   stopping 44 containers
+[32m[restart][0m PASS all 44 containers stopped
+[36m[restart][0m Phase 5 — pause 5s for FS sync
+[36m[restart][0m Phase 6 — docker start all stopped containers
+[36m[restart][0m   starting 44 containers
+[32m[restart][0m PASS issued docker start for 44 containers
+[36m[restart][0m Phase 7 — wait for chain to resume: height > 70 + 5 = 75
+[32m[restart][0m PASS chain resumed, advanced to [36m[restart][0m   at block 0, waiting for 75
+[36m[restart][0m   at block 0, waiting for 75
+[36m[restart][0m   at block 71, waiting for 75
+[36m[restart][0m   at block 73, waiting for 75
+75
+[36m[restart][0m Phase 8 — verify post-restart state matches pre-restart
+[36m[restart][0m   H_POST=75 bonded_count=16 max=16 UBD=0
+[32m[restart][0m PASS height advanced 70 -> 75
+[32m[restart][0m PASS bonded operator set unchanged
+[32m[restart][0m PASS max_validators unchanged (16)
+[32m[restart][0m PASS UBD count unchanged (0) — handler did not replay
+[32m[restart][0m PASS invariant log count still exactly 1 on all 20 validators
+[36m[restart][0m   scanning logs --since 2026-04-27T08:49:08.999913383Z for panic
+[32m[restart][0m PASS no panic / CONSENSUS FAILURE in post-restart logs
+[36m[restart][0m Phase 9 — teardown
+Deleted: sha256:e875c2132096ee34b710f6521a7d880d0336272fa8cce29df9efcd5184293660
+🎉 All containers stopped and volumes removed successfully!
+[32m[restart][0m PASS L6 RESTART TEST PASS (elapsed 292s)

@@ -1,0 +1,90 @@
+[36m[redel][0m Phase 0 — start fresh 20-val localnet, patch unbonding_time=300s
+Deleted: sha256:f6f13a1a005405434b447c13222e4cec7002715ab458e75cc97468f63bd735d9
+🎉 All containers stopped and volumes removed successfully!
+Rewrote /Users/lucas/workspace/lucas-workspace/story-localnet/config/story/genesis-node.json: 20 validators, supply=9999999999999991, max_validators=20, singularity_height=0
+[36m[redel][0m   patched staking.unbonding_time=300s
+   Blockscout:   http://localhost:3080
+   Grafana:      http://localhost:3000
+[36m[redel][0m   rpc1 sync ok h=8
+[36m[redel][0m Phase 1 — wait past V170=50 to block 65, capture bonded + pruned sets
+[36m[redel][0m   chain at 65
+[36m[redel][0m   bonded count: 16 (expected 16)
+[36m[redel][0m   rank-1: localnet-val-1 op=0x65bb14e42381513f901c28e5c16ca42bbf5ab3bd tokens=914123992692492 status=3
+[36m[redel][0m   rank-2: localnet-val-2 op=0x18d240a903f9564c4d101b13754668e564180d25 tokens=850135313204018 status=3
+[36m[redel][0m   rank-3: localnet-val-3 op=0xd1371be89b89bd847f769d2bce2a8494bbab04cb tokens=790625841279737 status=3
+[36m[redel][0m   rank-4: localnet-val-4 op=0x52661fe2b9af13b6b6bd966781e96b2772ebb735 tokens=735282032390155 status=3
+[36m[redel][0m   rank-5: localnet-val-5 op=0x26560a63cf164161e0ba221e8ff25e13c8c6e500 tokens=683812280981604 status=3
+[36m[redel][0m   rank-6: localnet-val-6 op=0x868960a13ec4383b6da312a2d791331bd3c6b924 tokens=635945092228254 status=3
+[36m[redel][0m   rank-7: localnet-val-7 op=0x0746baf23425c22430532735a30a187d97c2d95d tokens=591429082032116 status=3
+[36m[redel][0m   rank-8: localnet-val-8 op=0x5490c05e8fe29449156ccdabb21eb1615cc1dbd2 tokens=550029320527065 status=3
+[36m[redel][0m   rank-9: localnet-val-9 op=0x239e77a3df8aa108e9440ce3e88a1eb113411149 tokens=511527332078850 status=3
+[36m[redel][0m   rank-10: localnet-val-10 op=0x9af940c5ccf4fa0897b5c04e67a4045851c19e0b tokens=475720181161092 status=3
+[36m[redel][0m   rank-11: localnet-val-11 op=0x1ca24116102a6b7155e1d3f4a045e8d221eb977f tokens=442419558231298 status=3
+[36m[redel][0m   rank-12: localnet-val-12 op=0x312754308a1f3c199662ea7b592bb537b48b6c65 tokens=411449951482869 status=3
+[36m[redel][0m   rank-13: localnet-val-13 op=0x58e17289ab1b8a08838afa4c7604d92816e16e1e tokens=382648646845106 status=3
+[36m[redel][0m   rank-14: localnet-val-14 op=0x876955b6a3cc6c3f45092cb8002661a14cc16373 tokens=355862985611231 status=3
+[36m[redel][0m   rank-15: localnet-val-15 op=0xe31856549b4a3f1ebc9e99c83e697b7f1c016957 tokens=330952192686368 status=3
+[36m[redel][0m   rank-16: localnet-val-16 op=0x32489be2de9efde93e0d7a81a4c0e3d4e9a8fb1f tokens=307785548339562 status=3
+[36m[redel][0m   rank-17: localnet-val-17 op=0xa8c17e8e33e58778819b49633aa7e45bacf9dfb7 tokens=286240559955792 status=2
+[36m[redel][0m   rank-18: localnet-val-18 op=0xfc30cdaf7bd022981c6c1899988fc42b8f7916bc tokens=266202962035973 status=2
+[36m[redel][0m   rank-19: localnet-val-19 op=0x71f9fc09c05ea26dc534b681b1497d09d2a95f8c tokens=247568544444937 status=2
+[36m[redel][0m   rank-20: localnet-val-20 op=0x0d87c3beb755e4af98beb057372d666bf7cdcfec tokens=230238581791472 status=2
+[36m[redel][0m   anchors:
+[36m[redel][0m     DEST_ACTIVE   rank-1  localnet-val-1  tokens=914123992692492
+[36m[redel][0m     SOURCE_ACTIVE rank-2  localnet-val-2  tokens=850135313204018
+[36m[redel][0m     rank-16       localnet-val-16  tokens=307785548339562  (cap boundary)
+[36m[redel][0m     DEST_PRUNED   rank-18 localnet-val-18  tokens=266202962035973
+[36m[redel][0m     SOURCE_PRUNED rank-19 localnet-val-19  tokens=247568544444937
+[36m[redel][0m   SOURCE_PRUNED status=2; DEST_PRUNED status=2
+[32m[redel][0m PASS baseline captured
+[36m[redel][0m Phase 2 — redelegate 1024 IP from SOURCE_PRUNED (localnet-val-19) -> DEST_ACTIVE (localnet-val-1)
+[36m[redel][0m   tx=0xd8c9e212ad0fdb2da33489551ca9512579931739ccfad7fb65db72e3385d6f6b rc=0
+[36m[redel][0m   SOURCE_PRUNED tokens: 247568544444937 -> 246544544444937 (delta=-1024000000000, expected -1024000000000)
+[36m[redel][0m   DEST_ACTIVE   tokens: 914123992692492 -> 915147992692492 (delta=1024000000000, expected +1024000000000)
+[36m[redel][0m   bonded count: 16
+[36m[redel][0m   SOURCE_PRUNED status post-redelegate: 2 (must NOT be 3=BONDED)
+[32m[redel][0m PASS Phase 2 pruned->active redelegate succeeded; bonded count stable
+[36m[redel][0m Phase 3 — redelegate 1024 IP from SOURCE_ACTIVE (localnet-val-2) -> DEST_PRUNED (localnet-val-18); insufficient to cross rank-16 boundary
+[36m[redel][0m   rank-16 tokens=307785548339562, DEST_PRUNED tokens=266202962035973; would need >41582586303590 stake to cross
+[36m[redel][0m   redelegating 1024000000000 stake (= 1024 IP, far less than 41582586303590 stake) — boundary NOT crossed
+[36m[redel][0m   tx=0xb9737f9cb7fd83d94d4af303db90533b65ddabb76fb3aa853165fa9294aba028 rc=0
+[36m[redel][0m   SOURCE_ACTIVE tokens: 850135313204018 -> 849111313204018 (delta=-1024000000000)
+[36m[redel][0m   DEST_PRUNED   tokens: 266202962035973 -> 267226962035973 (delta=1024000000000)
+[36m[redel][0m   DEST_PRUNED   status: 2 (must NOT be 3=BONDED — boundary not crossed)
+[36m[redel][0m   bonded count: 16
+[32m[redel][0m PASS Phase 3 active->pruned (no boundary cross) succeeded; pruned val gained tokens but stayed UNBONDING
+[36m[redel][0m Phase 4 — redelegate 40559 IP (= 40559000000000 stake, > 40558586303590 stake needed) from SOURCE_ACTIVE (localnet-val-2) -> DEST_PRUNED (localnet-val-18) to CROSS rank-16/17 boundary
+[36m[redel][0m   tx=0x920c43d40e6e15e6c77e9e840f395ee5381a4288b4de4f7917d5067c24730b8a rc=0
+[36m[redel][0m   DEST_PRUNED status post-cross: 3 (expected 3=BONDED via standard cosmos-sdk churn)
+[36m[redel][0m   former rank-16 (localnet-val-16) status: 2 (expected 1 or 2 = demoted)
+[36m[redel][0m   bonded count: 16 (must remain 16)
+[32m[redel][0m PASS Phase 4: cosmos-sdk standard churn applied — DEST_PRUNED promoted, former rank-16 demoted, bonded count stayed at 16
+[36m[redel][0m Phase 5 — repeat redelegate 1024 IP from localnet-val-3 -> localnet-val-4 7 times (each succeeds), then 1 more (must fail with ErrMaxRedelegationEntries)
+[36m[redel][0m   src op=0xd1371Be89b89Bd847f769d2BCe2A8494bBab04cB  dst op=0x52661Fe2b9aF13b6b6bd966781E96B2772EbB735
+[36m[redel][0m   attempt 1/7 — expect SUCCESS
+[36m[redel][0m     tx=0x3f8d4eab91e719d7b9f8f64e1831e4d5273c29fad20960f8c4b4db972170a808 status=1
+[36m[redel][0m   attempt 2/7 — expect SUCCESS
+[36m[redel][0m     tx=0xdcd2559d404ba5cca28994a77fe42389f50b9cf43819ddc2e41d2d0fdc5ba0c9 status=1
+[36m[redel][0m   attempt 3/7 — expect SUCCESS
+[36m[redel][0m     tx=0x70392320219bb8d9aef4e898bd9e3e73e532d54c58d031a501a76e5b8cf5a665 status=1
+[36m[redel][0m   attempt 4/7 — expect SUCCESS
+[36m[redel][0m     tx=0xb2e6430e566babb7faf7dd241ae335b9cda7d76a3765d4d5f2ef5ab11d5d723d status=1
+[36m[redel][0m   attempt 5/7 — expect SUCCESS
+[36m[redel][0m     tx=0x93585b83d6bf078f5df4a2428303ab9aa82500c29a02b841efb0cd1dc2784ff1 status=1
+[36m[redel][0m   attempt 6/7 — expect SUCCESS
+[36m[redel][0m     tx=0x484b3c1a0a171369792047eebcef00aefdb3d70b5320533286683003e53803fb status=1
+[36m[redel][0m   attempt 7/7 — expect SUCCESS
+[36m[redel][0m     tx=0x0b560bda2a35a29cd296031d7bad271638282507cff34dfbd6cb5731bb4e69bf status=1
+[36m[redel][0m   attempt 8/8 — expect FAILURE (ErrMaxRedelegationEntries)
+[36m[redel][0m     CLI rc=0 tx=0xac8b4276dfd8470f9a407c127ea45e263aa60c115ad1e755932078ac784a9d24
+[36m[redel][0m     out:
+      Warning: No .env file found
+      Signing transaction with account address: 0xd1371Be89b89Bd847f769d2BCe2A8494bBab04cB
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0xac8b4276dfd8470f9a407c127ea45e263aa60c115ad1e755932078ac784a9d24
+      Explorer URL: https://storyscan.xyz/tx/0xac8b4276dfd8470f9a407c127ea45e263aa60c115ad1e755932078ac784a9d24
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens redelegated successfully!
+[36m[redel][0m     tx mined? status=1
+[31m[redel][0m FAIL Phase 5 attempt 8 succeeded (status=1) — MaxEntries=7 cap NOT enforced. SoT entry needs re-verification.

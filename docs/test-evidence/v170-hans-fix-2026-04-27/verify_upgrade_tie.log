@@ -1,0 +1,53 @@
+[36m[tie][0m Phase 0 — tie rank-16 and rank-17 in distribution.json
+[36m[tie][0m   before: rank-16=307785548339562  rank-17=286240559955792
+[36m[tie][0m   after:  rank-16=307785548339562  rank-17=307785548339562  (tied)
+[36m[tie][0m   rebuild genesis with tied distribution
+Rewrote /Users/lucas/workspace/lucas-workspace/story-localnet/config/story/genesis-node.json: 20 validators, supply=10021544988383761, max_validators=20, singularity_height=0
+[36m[tie][0m Phase 1 — start localnet
+   RPC WS:       ws://localhost:8546
+   Blockscout:   http://localhost:3080
+   Grafana:      http://localhost:3000
+[36m[tie][0m Phase 2 — wait for block 80 (upgrade at 50 + liveness 30)
+[36m[tie][0m   at block 7, waiting for 80
+[36m[tie][0m   at block 10, waiting for 80
+[36m[tie][0m   at block 14, waiting for 80
+[36m[tie][0m   at block 17, waiting for 80
+[36m[tie][0m   at block 20, waiting for 80
+[36m[tie][0m   at block 23, waiting for 80
+[36m[tie][0m   at block 26, waiting for 80
+[36m[tie][0m   at block 29, waiting for 80
+[36m[tie][0m   at block 32, waiting for 80
+[36m[tie][0m   at block 35, waiting for 80
+[36m[tie][0m   at block 38, waiting for 80
+[36m[tie][0m   at block 42, waiting for 80
+[36m[tie][0m   at block 45, waiting for 80
+[36m[tie][0m   at block 48, waiting for 80
+[36m[tie][0m   at block 50, waiting for 80
+[36m[tie][0m   at block 53, waiting for 80
+[36m[tie][0m   at block 57, waiting for 80
+[36m[tie][0m   at block 60, waiting for 80
+[36m[tie][0m   at block 64, waiting for 80
+[36m[tie][0m   at block 65, waiting for 80
+[36m[tie][0m   at block 69, waiting for 80
+[36m[tie][0m   at block 72, waiting for 80
+[36m[tie][0m   at block 76, waiting for 80
+[36m[tie][0m   at block 79, waiting for 80
+[32m[tie][0m PASS chain advanced to 82
+[36m[tie][0m Phase 3 — verify post-upgrade state + tie resolution
+[32m[tie][0m PASS bonded=16
+[32m[tie][0m PASS unbonded=4
+[32m[tie][0m PASS max_validators=16
+[36m[tie][0m   tie resolution:
+    localnet-val-15  status=3  tokens=330952192686368  operator=0xe31856549b4a3f1ebc9e99c83e697b7f1c016957
+    localnet-val-16  status=3  tokens=307785548339562  operator=0x32489be2de9efde93e0d7a81a4c0e3d4e9a8fb1f
+    localnet-val-17  status=1  tokens=307785548339562  operator=0xa8c17e8e33e58778819b49633aa7e45bacf9dfb7
+    localnet-val-18  status=1  tokens=266202962035973  operator=0xfc30cdaf7bd022981c6c1899988fc42b8f7916bc
+[36m[tie][0m Phase 4 — invariant log + panic scan
+[36m[tie][0m     MISS validator9-node
+[32m[tie][0m PASS invariant log on all 20 validators
+[32m[tie][0m PASS no panic / CONSENSUS FAILURE
+[36m[tie][0m Phase 5 — teardown
+Deleted: sha256:d864952d59f9c7b6613b4c5e6d4f845a1c06a9c1b749699b84fc66cad6e15929
+🎉 All containers stopped and volumes removed successfully!
+[32m[tie][0m PASS L1 TIE TEST PASS (elapsed 315s)
+[36m[tie][0m   distribution.json restored from backup
