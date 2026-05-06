@@ -238,6 +238,34 @@ phase_1_baseline() {
   [[ "$stt_cs" == "0" || -z "$stt_cs" ]] || fail "expected $CHARLIE_SRC_MONIKER LOCKED (stt=0/empty), got '$stt_cs'"
   [[ "$stt_cd" == "0" || -z "$stt_cd" ]] || fail "expected $CHARLIE_DST_MONIKER LOCKED (stt=0/empty), got '$stt_cd'"
 
+  # All-val BFT health check: every genesis validator must be BOND_STATUS_BONDED
+  # and chain must be producing blocks (BFT quorum 2/3+ proven by height growth).
+  local h0=$(get_height)
+  for K in $(seq 1 "$N_VALS"); do
+    local op_k s_k
+    op_k=$(meta_op_evm "localnet-val-$K")
+    s_k=$(val_field "$op_k" status) || fail "REST: val-$K status read failed"
+    [[ "$s_k" == "3" ]] || fail "val-$K not BOND_STATUS_BONDED (status=3), got status=$s_k"
+  done
+  sleep 4
+  local h1=$(get_height)
+  [[ $h1 -gt $h0 ]] || fail "chain not producing blocks: h0=$h0 h1=$h1 (BFT quorum likely missing)"
+  log "  all $N_VALS vals BOND_STATUS_BONDED; chain height $h0 → $h1 (producing)"
+
+  # Proposer rotation audit: every val must propose ≥1 block in the next 2*N_VALS
+  # blocks. CometBFT proposer is deterministic round-robin weighted by voting power.
+  local need=$((N_VALS * 2))
+  while [[ $(get_height) -lt $((h1 + need)) ]]; do sleep 2; done
+  local audit_h=$(get_height)
+  local audit_start=$((audit_h - need + 1))
+  local proposer_resp distinct
+  proposer_resp=$(docker exec rpc1-node wget -q -O- --timeout=5 \
+    "http://localhost:26657/blockchain?minHeight=${audit_start}&maxHeight=${audit_h}" 2>/dev/null)
+  distinct=$(echo "$proposer_resp" | jq -r '.result.block_metas[].header.proposer_address' 2>/dev/null | sort -u | wc -l | tr -d ' ')
+  echo "$proposer_resp" > "$EV_DIR/01-proposer-audit-h${audit_start}-${audit_h}.json"
+  [[ "$distinct" == "$N_VALS" ]] || fail "proposer rotation: expected $N_VALS distinct, got $distinct in h=${audit_start}..${audit_h}"
+  log "  proposer rotation: $distinct/$N_VALS distinct proposers in h=${audit_start}..${audit_h} (every val propsed ≥1 block)"
+
   cast send --rpc-url http://localhost:8545 --private-key "$ALICE_PK" "$BOB_ADDR" \
     --value "${SEED_IP}ether" --legacy --gas-price 50gwei >/dev/null 2>&1
   cast send --rpc-url http://localhost:8545 --private-key "$ALICE_PK" "$CHARLIE_ADDR" \
