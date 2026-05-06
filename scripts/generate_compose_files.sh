@@ -38,6 +38,21 @@ fi
 
 echo "Generating $N docker-compose-validator{1..$N}.yml from $TEMPLATE"
 
+# Delete stale docker-compose-validator{N+1..}.yml from previous higher-N
+# runs. `start.sh` glob `for f in docker-compose-validator*.yml` would
+# otherwise pick them up and start ghost vals not in genesis — silent
+# extra containers polluting the cluster.
+shopt -s nullglob
+for stale_yml in "$LOCALNET_DIR"/docker-compose-validator*.yml; do
+    base=$(basename "$stale_yml" .yml)
+    K_stale="${base#docker-compose-validator}"
+    if [[ "$K_stale" =~ ^[0-9]+$ ]] && [[ "$K_stale" -gt "$N" ]]; then
+        echo "  removing stale $stale_yml (K=$K_stale > N=$N)" >&2
+        rm -f "$stale_yml"
+    fi
+done
+shopt -u nullglob
+
 # Snapshot template into a tmp file before the loop so K=1 doesn't read
 # from the same path it's about to truncate (`> docker-compose-validator1.yml`
 # would zero out the template before awk reads it).

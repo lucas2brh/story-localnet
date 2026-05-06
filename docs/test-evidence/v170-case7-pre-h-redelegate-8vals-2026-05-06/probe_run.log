@@ -1,0 +1,115 @@
+[36m[case7][0m Phase 0 — start fresh 8-val localnet, val-1 + val-8 UNLOCKED, others LOCKED, NEW_MAX=4
+Wrote 8 validator dirs + /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/validators_meta.json
+Pruning them would halt mainnet BFT; test distribution not safe.
+Rewrote /Users/lucas/workspace/lucas-workspace/story-localnet/config/story/genesis-node.json: 8 validators, supply=9999999999999996, max_validators=8, singularity_height=0, unlocked_vals=[1,8]
+[36m[case7][0m   periods[1..3].duration set to 1800s (locked-short stays unmatured throughout probe)
+Done. Last val IP range: 10.0.1.34 (geth) / 10.0.1.35 (node).
+   Grafana:      http://localhost:3000
+[36m[case7][0m   rpc1 sync ok h=9
+[36m[case7][0m Phase 1 — wait h=10 + capture baseline + seed Bob + Charlie
+[36m[case7][0m   Bob src     (localnet-val-8):     status=3 support_token_type=1 (expect 3 / 1)
+[36m[case7][0m   Bob dst     (localnet-val-1):     status=3 support_token_type=1 (expect 3 / 1)
+[36m[case7][0m   Charlie src (localnet-val-7): status=3 support_token_type= (expect 3 / 0)
+[36m[case7][0m   Charlie dst (localnet-val-2): status=3 support_token_type= (expect 3 / 0)
+[36m[case7][0m   Bob balance=2000000000000000000000 wei
+[36m[case7][0m   Charlie balance=2000000000000000000000 wei
+[32m[case7][0m PASS baseline + seed complete; Bob path UNLOCKED→UNLOCKED, Charlie path LOCKED→LOCKED
+[36m[case7][0m   evidence captured to /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/probe-case7-evidence/{cl,health}-*-01-baseline.log
+[36m[case7][0m Phase 2 — Bob stake (UNLOCKED src) + Charlie stake (LOCKED src)
+[36m[case7][0m   pre-stake: bob_src=807753484131516 bob_dst=1896371221824665 charlie_src=834953744897255 charlie_dst=1789671442664718
+[36m[case7][0m   Bob stake short (1024 IP) → 0203f5cae4fd2025a8ab4097557a1f856c3bea45ce647b6b93d8e9f2e8d2f88baf
+      Warning: No .env file found
+      Signing transaction with account address: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0xf426590e8a5d2969112a34b55aeae9a780f6c2f580e4299f095e9358a591be0e
+      Explorer URL: https://storyscan.xyz/tx/0xf426590e8a5d2969112a34b55aeae9a780f6c2f580e4299f095e9358a591be0e
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens staked successfully! Extracting delegation ID...
+      Delegation ID: 1
+Delegation ID: 1
+[36m[case7][0m   Charlie stake short (1024 IP) → 031e583a1790449e73a4ddce0bb45a080a1722c82c3ba7817377524cfdde9a8ba9
+      Warning: No .env file found
+      Signing transaction with account address: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0x9e87d71bb2f69b479d866c8800927ca1dc558e9016ec1ca82a9ee1d42b434e35
+      Explorer URL: https://storyscan.xyz/tx/0x9e87d71bb2f69b479d866c8800927ca1dc558e9016ec1ca82a9ee1d42b434e35
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens staked successfully! Extracting delegation ID...
+      Delegation ID: 2
+Delegation ID: 2
+[32m[case7][0m PASS both stakes committed; Bob has locked-short on UNLOCKED src, Charlie has locked-short (coerced flexible) on LOCKED src
+[36m[case7][0m   evidence captured to /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/probe-case7-evidence/{cl,health}-*-02-stake.log
+[36m[case7][0m Phase 3 — capture pre-redelegate state for both delegators
+[36m[case7][0m   pre-redel @ h=18: bob_src=808777484131516 bob_dst=1896371221824665 charlie_src=835977744897255 charlie_dst=1789671442664718
+[36m[case7][0m   height assertion: h=18 < UPGRADE_HEIGHT=100 (V170 has not fired)
+[36m[case7][0m Phase 4 — Bob + Charlie redelegate pre-H (V170 not fired, all src vals BONDED)
+[36m[case7][0m   post-redel @ h=22 (still < UPGRADE_HEIGHT=100)
+[36m[case7][0m Phase 5 — assert chain deltas + val statuses for both paths
+[36m[case7][0m   Bob:     src.tokens delta=-1024000000000, dst.tokens delta=1024000000000
+[36m[case7][0m   Charlie: src.tokens delta=-1024000000000, dst.tokens delta=1024000000000
+[32m[case7][0m PASS both redelegates moved 1024 IP src→dst; all 4 vals remain BONDED; pre-H path verified for UNLOCKED + LOCKED
+[36m[case7][0m   evidence captured to /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/probe-case7-evidence/{cl,health}-*-05-redelegate.log
+[36m[case7][0m Phase 6 — verify rewards_multiplier on dst (rewards_shares / shares) for both paths
+[36m[case7][0m   Bob:     rewards_multiplier on dst = 1.051  (expect ~1.051 — UNLOCKED val, period_short)
+[36m[case7][0m   Charlie: rewards_multiplier on dst = 0.025  (expect ~0.025 — LOCKED val, coerced flexible)
+[32m[case7][0m PASS rewards_multiplier preserved across redelegate: Bob=1.051 (UNLOCKED short), Charlie=0.025 (LOCKED flexible)
+[36m[case7][0m   evidence captured to /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/probe-case7-evidence/{cl,health}-*-06-period-metadata.log
+[36m[case7][0m Phase 7 — final on-chain val state snapshot
+[36m[case7][0m   localnet-val-8 final: status=3 jailed= tokens=807753484131516 shares=807753484131516.000000000000000000
+[36m[case7][0m   localnet-val-1 final: status=3 jailed= tokens=1897395221824665 shares=1897395221824665.000000000000000000
+[36m[case7][0m   localnet-val-7 final: status=3 jailed= tokens=834953744897255 shares=834953744897255.000000000000000000
+[36m[case7][0m   localnet-val-2 final: status=3 jailed= tokens=1790695442664718 shares=1790695442664718.000000000000000000
+[36m[case7][0m   chain height 23
+[36m[case7][0m   Bob redelegate tx:     [36m[case7][0m   Bob redelegate amt=1024000000000000000000 del_id=1 src→dst
+      Warning: No .env file found
+      Signing transaction with account address: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0x9b6ad5473b679beaab3f8b8a4edb2701a78080e90611a05ae96d44c527837114
+      Explorer URL: https://storyscan.xyz/tx/0x9b6ad5473b679beaab3f8b8a4edb2701a78080e90611a05ae96d44c527837114
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens redelegated successfully!
+Transaction hash: 0x9b6ad5473b679beaab3f8b8a4edb2701a78080e90611a05ae96d44c527837114
+[36m[case7][0m   Charlie redelegate tx: [36m[case7][0m   Charlie redelegate amt=1024000000000000000000 del_id=1 src→dst
+      Warning: No .env file found
+      Signing transaction with account address: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0xe802d216391e3556fcb24d1777bb3bc30858df5dd92aac98ebbe20bba787df77
+      Explorer URL: https://storyscan.xyz/tx/0xe802d216391e3556fcb24d1777bb3bc30858df5dd92aac98ebbe20bba787df77
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens redelegated successfully!
+Transaction hash: 0xe802d216391e3556fcb24d1777bb3bc30858df5dd92aac98ebbe20bba787df77
+
+========== CASE 7 PROBE — PRE-H REDELEGATE (LOCKED + UNLOCKED) ==========
+  Cluster: 8 vals, NEW_MAX=4 → out-of-top-4 includes val-7 LOCKED + val-8 UNLOCKED
+  Bob path:     localnet-val-8 (UNLOCKED out-21) → localnet-val-1 (UNLOCKED top-21)
+  Charlie path: localnet-val-7 (LOCKED   out-21) → localnet-val-2 (LOCKED   top-21)
+  Action: pre-H redelegate (height < UPGRADE_HEIGHT=100, V170 NOT fired)
+  Bob redelegate tx:     [36m[case7][0m   Bob redelegate amt=1024000000000000000000 del_id=1 src→dst
+      Warning: No .env file found
+      Signing transaction with account address: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0x9b6ad5473b679beaab3f8b8a4edb2701a78080e90611a05ae96d44c527837114
+      Explorer URL: https://storyscan.xyz/tx/0x9b6ad5473b679beaab3f8b8a4edb2701a78080e90611a05ae96d44c527837114
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens redelegated successfully!
+Transaction hash: 0x9b6ad5473b679beaab3f8b8a4edb2701a78080e90611a05ae96d44c527837114
+  Charlie redelegate tx: [36m[case7][0m   Charlie redelegate amt=1024000000000000000000 del_id=1 src→dst
+      Warning: No .env file found
+      Signing transaction with account address: 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC
+      No staking API is provided. Skip validator existence check.
+      Transaction hash: 0xe802d216391e3556fcb24d1777bb3bc30858df5dd92aac98ebbe20bba787df77
+      Explorer URL: https://storyscan.xyz/tx/0xe802d216391e3556fcb24d1777bb3bc30858df5dd92aac98ebbe20bba787df77
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens redelegated successfully!
+Transaction hash: 0xe802d216391e3556fcb24d1777bb3bc30858df5dd92aac98ebbe20bba787df77
+  Final chain height:    23
+  Evidence: /Users/lucas/workspace/lucas-workspace/story-localnet/tmp/probe-case7-evidence/
+==========================================================================
+[36m[case7][0m Phase 9 — teardown
+🎉 All containers stopped and volumes removed successfully!
