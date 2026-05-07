@@ -1,0 +1,6 @@
+# claim: phase2b-anvil-unstake-val8-preH
+# desc:  Phase 2b (PRE-V170, Raul Case 4 strict CORE): Anvil 100% unstaked from val-8 BEFORE H — Delegation removed event chain-asserts the preemptive undelegate
+# source: cl-validator1-node.log
+# pattern: 📚 Delegation removed.*acc_addr=F39FD6E51AAD88F6F4CE6AB8827279CFFFB92266.*val_addr=27D632B0FA47C7A9F9B8A9F2F5A8E6F10C49F17F
+---
+1041:26-05-07 07:07:59.005 DEBU 📚 Delegation removed                    acc_addr=F39FD6E51AAD88F6F4CE6AB8827279CFFFB92266 val_addr=27D632B0FA47C7A9F9B8A9F2F5A8E6F10C49F17F

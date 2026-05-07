@@ -1,0 +1,15 @@
+# claim: chain-liveness-no-halt
+# desc:  No panic / CONSENSUS FAILURE in any val-node CL log (chain didn't halt)
+# pattern: panic|CONSENSUS FAILURE
+# scope: cl-validator{1..8}-node.log
+---
+cl-validator1-node.log: 0 hits
+cl-validator2-node.log: 0 hits
+cl-validator3-node.log: 0 hits
+cl-validator4-node.log: 0 hits
+cl-validator5-node.log: 0 hits
+cl-validator6-node.log: 0 hits
+cl-validator7-node.log: 0 hits
+cl-validator8-node.log: 0 hits
+TOTAL: 0
+PASS: chain liveness — no halt

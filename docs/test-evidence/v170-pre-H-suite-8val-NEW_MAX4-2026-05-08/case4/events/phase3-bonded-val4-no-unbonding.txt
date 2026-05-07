@@ -1,0 +1,6 @@
+# claim: phase3-bonded-val4-no-unbonding
+# desc:  Phase 3: top-4 val-4 should NOT have 'begin unbonding' (stays BONDED). 0 hits = PASS.
+# source: cl-validator1-node.log
+# pattern: 📚 Validator begin unbonding.*val_addr=0FD780E873582DE79276BF47D47102C323C07A9E
+---
+(no matches — claim not supported by log evidence)

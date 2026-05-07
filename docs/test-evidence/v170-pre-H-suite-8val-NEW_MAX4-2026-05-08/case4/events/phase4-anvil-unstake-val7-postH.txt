@@ -1,0 +1,6 @@
+# claim: phase4-anvil-unstake-val7-postH
+# desc:  Phase 4 (POST-V170): Anvil 100% unstaked from val-7 (the existing post-V170 scenario)
+# source: cl-validator1-node.log
+# pattern: 📚 Delegation removed.*acc_addr=F39FD6E51AAD88F6F4CE6AB8827279CFFFB92266.*val_addr=265A3C2291B9706398B6F279B97F566943944BB7
+---
+3381:26-05-07 07:10:39.854 DEBU 📚 Delegation removed                    acc_addr=F39FD6E51AAD88F6F4CE6AB8827279CFFFB92266 val_addr=265A3C2291B9706398B6F279B97F566943944BB7

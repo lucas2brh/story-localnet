@@ -31,9 +31,14 @@
 #   Phase 6  Verify period_delegation rewards_multiplier on dst:
 #              UNLOCKED→UNLOCKED: 1.051x preserved (period[1] short multiplier)
 #              LOCKED→LOCKED:     1.0 (period was coerced flexible at deposit)
-#   Phase 7  Final snapshot for evidence
-#   Phase 8  Summary
-#   Phase 9  Teardown (skipped if SKIP_TEARDOWN=1)
+#   Phase 7  Final pre-V170 snapshot for evidence
+#   Phase 8  POST-V170 chain assertion (wait past UPGRADE_HEIGHT, assert
+#            staking/params.max_validators == NEW_MAX, assert val-5..N_VALS
+#            actually pruned to status ∈ {1,2}, top-NEW_MAX stays BONDED).
+#            This is what closes the gap exposed 2026-05-08: prior runs
+#            stopped at Phase 7 and never confirmed V170 actually fired.
+#   Phase 9  Summary
+#   Phase 10 Teardown (skipped if SKIP_TEARDOWN=1)
 #
 # Usage:
 #   ./scripts/probe_pre_upgrade_redelegate_locked_unlocked.sh
@@ -440,10 +445,38 @@ phase_7_final_snapshot() {
   log "  Charlie redelegate tx: $CHARLIE_REDEL_TX"
 }
 
-# ---------------- Phase 8 — summary ----------------
-phase_8_summary() {
+# ---------------- Phase 8 — POST-V170 chain assertion (binary↔probe sanity) ----------------
+phase_8_post_v170_assert() {
+  log "Phase 8 — wait past V170 + assert prune actually fired"
+  source "${LOCALNET}/scripts/lib/post_v170_asserts.sh"
+
+  # Top-NEW_MAX (val-1..NEW_MAX) should stay BONDED. Out-of-top (val-(NEW_MAX+1)..N_VALS) should prune.
+  local bonded_list="" pruned_list=""
+  local i
+  for ((i=1; i<=NEW_MAX; i++));     do bonded_list+=" localnet-val-$i"; done
+  for ((i=NEW_MAX+1; i<=N_VALS; i++)); do pruned_list+=" localnet-val-$i"; done
+
+  PRUNED_VALS="${pruned_list# }" \
+    BONDED_VALS="${bonded_list# }" \
+    EXPECTED_NEW_MAX="$NEW_MAX" \
+    UPGRADE_HEIGHT="$UPGRADE_HEIGHT" \
+    META="$META" \
+    POST_V170_GRACE=5 \
+    SNAPSHOT_FILE="$EV_DIR/08-post-v170-val-state.txt" \
+    assert_post_v170_state
+
+  # Also confirm Bob/Charlie's redelegated tokens are still on dst (not rolled back by V170).
+  local bob_dst_tokens charlie_dst_tokens
+  bob_dst_tokens=$(val_field "$BOB_DST_OP" tokens)
+  charlie_dst_tokens=$(val_field "$CHARLIE_DST_OP" tokens)
+  log "  post-V170: Bob dst $BOB_DST_MONIKER tokens=$bob_dst_tokens, Charlie dst $CHARLIE_DST_MONIKER tokens=$charlie_dst_tokens"
+  pass "post-V170 assertion complete — V170 truly fired, val-$((NEW_MAX+1))..val-$N_VALS pruned, redelegated tokens preserved on dst"
+}
+
+# ---------------- Phase 9 — summary ----------------
+phase_9_summary() {
   printf "\n========== CASE 7 PROBE — PRE-H REDELEGATE (LOCKED + UNLOCKED) ==========\n"
-  printf "  Cluster: %d vals, NEW_MAX=%d → out-of-top-%d includes val-7 LOCKED + val-8 UNLOCKED\n" "$N_VALS" "$NEW_MAX" "$NEW_MAX"
+  printf "  Cluster: %d vals, NEW_MAX=%d → out-of-top-%d includes val-%d LOCKED + val-%d UNLOCKED\n" "$N_VALS" "$NEW_MAX" "$NEW_MAX" "$((NEW_MAX+3))" "$((NEW_MAX+4))"
   printf "  Bob path:     %s (UNLOCKED out-21) → %s (UNLOCKED top-21)\n" "$BOB_SRC_MONIKER" "$BOB_DST_MONIKER"
   printf "  Charlie path: %s (LOCKED   out-21) → %s (LOCKED   top-21)\n" "$CHARLIE_SRC_MONIKER" "$CHARLIE_DST_MONIKER"
   printf "  Action: pre-H redelegate (height < UPGRADE_HEIGHT=%d, V170 NOT fired)\n" "$UPGRADE_HEIGHT"
@@ -454,9 +487,9 @@ phase_8_summary() {
   printf "==========================================================================\n"
 }
 
-phase_9_teardown() {
-  if [[ "$SKIP_TEARDOWN" == "1" ]]; then log "Phase 9 — SKIP_TEARDOWN"; return; fi
-  log "Phase 9 — teardown"
+phase_10_teardown() {
+  if [[ "$SKIP_TEARDOWN" == "1" ]]; then log "Phase 10 — SKIP_TEARDOWN"; return; fi
+  log "Phase 10 — teardown"
   (cd "$LOCALNET" && bash terminate.sh 2>&1 | tail -1)
 }
 
@@ -469,5 +502,6 @@ phase_4_pre_h_redelegate
 phase_5_post_redelegate_assertions
 phase_6_verify_period_metadata
 phase_7_final_snapshot
-phase_8_summary
-phase_9_teardown
+phase_8_post_v170_assert
+phase_9_summary
+phase_10_teardown

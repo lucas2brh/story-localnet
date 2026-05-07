@@ -1,0 +1,6 @@
+# claim: phase2b-anvil-stake-val8
+# desc:  Phase 2b (PRE-V170, Raul Case 4 strict): Anvil delegated 2048 IP to val-8 to set up multi-del shape
+# source: cl-validator1-node.log
+# pattern: 📚 Delegation created.*acc_addr=F39FD6E51AAD88F6F4CE6AB8827279CFFFB92266.*val_addr=27D632B0FA47C7A9F9B8A9F2F5A8E6F10C49F17F
+---
+868:26-05-07 07:07:47.339 DEBU 📚 Delegation created                    acc_addr=F39FD6E51AAD88F6F4CE6AB8827279CFFFB92266 val_addr=27D632B0FA47C7A9F9B8A9F2F5A8E6F10C49F17F

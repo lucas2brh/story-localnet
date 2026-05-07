@@ -1,0 +1,64 @@
+[36m[autosweep][0m Phase 0 — start fresh localnet
+Rewrote /Users/lucas/workspace/lucas-workspace/story-localnet/config/story/genesis-node.json: 8 validators, supply=9999999999999996, max_validators=8, singularity_height=0, unlocked_vals=[none]
+   Blockscout:   http://localhost:3080
+   Grafana:      http://localhost:3000
+[36m[autosweep][0m   rpc1 sync ok h=9
+[36m[autosweep][0m Phase 1 — pre-V170 partial self-unstake on localnet-val-6 (Raul Case 3a strict: residual ≥ MinSelfDel, val stays BONDED pre-H)
+[36m[autosweep][0m   chain at 10 (pre-V170)
+[36m[autosweep][0m   localnet-val-6 op=0x79e3E09239dd3a46c598332d8A16F048dA734A00 pre-unstake status=3 tokens=976822321301387
+[36m[autosweep][0m   partial unstake 488411160650693 stake = 488411160650693000000000 wei (50% of self-stake)
+[36m[autosweep][0m   expected residual: 488411160650694 stake = 488411 IP (must be > 1024 IP MinSelfDel)
+[36m[autosweep][0m   tx=0xf214e8f992a4253f2d64c0579b508b3c3badefbf9cc05be342196253389c30ca rc=0
+[36m[autosweep][0m   localnet-val-6 post-unstake (still pre-V170): status=3 tokens=488411160650694
+[32m[autosweep][0m PASS pre-V170 partial unstake (Raul Case 3a strict): localnet-val-6 still BONDED, tokens delta=-488411160650693 stake (residual ≈ 488411 IP > MinSelfDel)
+[36m[autosweep][0m Phase 2 — wait past V170=50 to block 55, sample localnet-val-5 baseline + verify pre-V170 unstake carried through
+[36m[autosweep][0m   chain at 55
+[36m[autosweep][0m post-V170 assert: waiting height >= 50 (V170=50 + grace=0)
+[36m[autosweep][0m   chain at h=55
+[32m[autosweep][0m PASS binary↔probe consistent: staking/params.max_validators = 4 == NEW_MAX
+[36m[autosweep][0m   localnet-val-5 op=0x11E947Df18681c9Eb4765d74ac4fd5EB88461612 status=1 (pruned ✓)
+[36m[autosweep][0m   localnet-val-6 op=0x79e3E09239dd3a46c598332d8A16F048dA734A00 status=1 (pruned ✓)
+[36m[autosweep][0m   localnet-val-7 op=0x265a3c2291b9706398B6f279B97F566943944bB7 status=1 (pruned ✓)
+[36m[autosweep][0m   localnet-val-8 op=0x27d632b0fA47C7A9F9b8a9F2f5a8e6F10c49f17f status=1 (pruned ✓)
+[32m[autosweep][0m PASS pruned vals (localnet-val-5, localnet-val-6, localnet-val-7, localnet-val-8) all in status ∈ {1,2} post-V170
+[36m[autosweep][0m   localnet-val-1 op=0x9Ff27702E187F1B80183F1aA60800aA745a9ea57 status=3 (bonded ✓)
+[36m[autosweep][0m   localnet-val-2 op=0xd2a608Ff79FFbA2C8f6C312912aC9A4c4dBCdc21 status=3 (bonded ✓)
+[36m[autosweep][0m   localnet-val-3 op=0x96577E46c58864c8E138B0358728F6915c0f8f81 status=3 (bonded ✓)
+[36m[autosweep][0m   localnet-val-4 op=0x0fD780E873582De79276Bf47D47102c323c07A9e status=3 (bonded ✓)
+[32m[autosweep][0m PASS bonded vals (localnet-val-1, localnet-val-2, localnet-val-3, localnet-val-4) all in status=3 post-V170
+[36m[autosweep][0m   localnet-val-6 post-V170: status=1 tokens=488411160650694 (expected status=1, tokens == pre-V170-post-unstake 488411160650694)
+[32m[autosweep][0m PASS Raul Case 3a strict: pre-V170 partial unstake on localnet-val-6 carried through V170 prune cleanly (BONDED→UNBONDED, tokens preserved)
+[36m[autosweep][0m   localnet-val-5 op=0x11E947Df18681c9Eb4765d74ac4fd5EB88461612 status=1 tokens=1108879682985100
+[32m[autosweep][0m PASS target val confirmed UNBONDED with operator-only self-del
+[36m[autosweep][0m Phase 3 — Anvil sends 10 IP to localnet-val-5 operator wallet for gas
+[36m[autosweep][0m   operator 0x11E947Df18681c9Eb4765d74ac4fd5EB88461612 pre-fund balance=8909248304000000000 wei
+[36m[autosweep][0m   operator post-fund balance=18909248304000000000 wei
+[36m[autosweep][0m Phase 4 — operator partial unstake 1108779682985100 stake (residual 100000000000 stake = 100 IP, below 1024 IP MinSelfDelegation)
+[36m[autosweep][0m   localnet-val-5 operator unstakes 1108779682985100 stake = 1108779682985100000000000 wei (delegation-id=0)
+[36m[autosweep][0m   tx=0x7aed349636efe3078682cbff4da46dd149dffe428c0a9ff704c5ac4b03dc7e72 rc=0
+[36m[autosweep][0m Phase 5 — verify auto-sweep collapsed partial -> 100%, val GONE, chain alive
+[36m[autosweep][0m   localnet-val-5 post-unstake: status=GONE tokens=GONE shares=GONE
+[32m[autosweep][0m PASS val GONE + chain still progressing (auto-sweep collapsed to 100%, RemoveValidator fired, no halt)
+[32m[autosweep][0m PASS no panic / CONSENSUS FAILURE in any validator log
+[36m[autosweep][0m Phase 6 — wait past unbonding_time (10s), verify operator EVM credited full self-del refund
+[36m[autosweep][0m   operator after-mature balance=1108897590661112736291044 wei (vs pre-fund 8909248304000000000 wei)
+[36m[autosweep][0m   expected refund ~ 1108879682985100 stake = 1108879682985100000000000 wei (full balance via auto-sweep)
+
+========== AUTO-SWEEP PARTIAL-UNSTAKE PROBE CONCLUSIONS ==========
+Pre-V170 scenario (Raul Case 3a strict):
+  Target: localnet-val-6 op=0x79e3E09239dd3a46c598332d8A16F048dA734A00
+  Action: 50% partial self-unstake at h~10 (BONDED, residual ≥ MinSelfDel)
+  Result: pre-V170 BONDED → post-V170 UNBONDED, tokens preserved across prune
+  Pre-unstake tokens=976822321301387, post-unstake tokens=488411160650694, post-V170 tokens=488411160650694 (drift=0 expected)
+  Pre-V170 unstake tx=0xf214e8f992a4253f2d64c0579b508b3c3badefbf9cc05be342196253389c30ca
+
+Post-V170 scenario (auto-sweep on residual < MinSelfDel):
+  Target: localnet-val-5 op=0x11E947Df18681c9Eb4765d74ac4fd5EB88461612
+  Pre-unstake: status=UNBONDED(1) tokens=1108879682985100
+  Partial unstake requested: 1108779682985100 stake (residual 100000000000 stake = 100 IP, below 1024 IP MinSelfDelegation)
+  CLI rc=0 tx=0x7aed349636efe3078682cbff4da46dd149dffe428c0a9ff704c5ac4b03dc7e72
+  val status post-unstake: GONE (expected GONE — auto-sweep collapsed to 100%, RemoveValidator fired)
+  Operator EVM bal: pre-fund=8909248304000000000 after-ubd=1108897590661112736291044 (expected delta ~ 1108879682985100000000000 wei = full self-del refund via auto-sweep)
+  Final chain height: 75 (no halt)
+==================================================================
+[36m[autosweep][0m Phase 8 — SKIP_TEARDOWN

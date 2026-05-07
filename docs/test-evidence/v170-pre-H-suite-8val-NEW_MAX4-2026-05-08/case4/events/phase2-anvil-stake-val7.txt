@@ -1,0 +1,6 @@
+# claim: phase2-anvil-stake-val7
+# desc:  Phase 2 (PRE-V170): Anvil delegated 2048 IP to val-7
+# source: cl-validator1-node.log
+# pattern: 📚 Delegation created.*acc_addr=F39FD6E51AAD88F6F4CE6AB8827279CFFFB92266.*val_addr=265A3C2291B9706398B6F279B97F566943944BB7
+---
+607:26-05-07 07:07:29.828 DEBU 📚 Delegation created                    acc_addr=F39FD6E51AAD88F6F4CE6AB8827279CFFFB92266 val_addr=265A3C2291B9706398B6F279B97F566943944BB7

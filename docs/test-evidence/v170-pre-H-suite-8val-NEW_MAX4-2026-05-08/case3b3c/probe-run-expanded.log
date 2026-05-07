@@ -1,0 +1,72 @@
+[36m[pre-multidel][0m Phase 0 — start fresh localnet
+Rewrote /Users/lucas/workspace/lucas-workspace/story-localnet/config/story/genesis-node.json: 8 validators, supply=9999999999999996, max_validators=8, singularity_height=0, unlocked_vals=[none]
+   Blockscout:   http://localhost:3080
+   Grafana:      http://localhost:3000
+[36m[pre-multidel][0m   rpc1 sync ok h=9
+[36m[pre-multidel][0m Phase 1 — wait to block 10 and capture localnet-val-6 baseline
+[36m[pre-multidel][0m   chain at 10
+[36m[pre-multidel][0m   localnet-val-6 op=0x79e3E09239dd3a46c598332d8A16F048dA734A00 status=3 genesis_tokens=976822321301387 (= operator self-del; no external dels yet)
+[32m[pre-multidel][0m PASS target val confirmed BONDED pre-upgrade
+[36m[pre-multidel][0m Phase 2 — Anvil stakes 2048 IP to localnet-val-6 (pre-upgrade, val still BONDED)
+      Explorer URL: https://storyscan.xyz/tx/0xc673a3019cc88fc34276a8c45898e3da6a5fbf32d074510d8ca6f10e4e2f1c6d
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens staked successfully! Extracting delegation ID...
+      Delegation ID: 0
+[36m[pre-multidel][0m   localnet-val-6 post-stake status=3 tokens=978870321301387 shares=978870321301387.000000000000000000
+[32m[pre-multidel][0m PASS external delegation injected pre-upgrade, multi-del shape established
+[36m[pre-multidel][0m Phase 2b — pre-V170 scenario on localnet-val-7 (Raul Case 3c strict: external del present + op fully self-unstakes BEFORE H)
+[36m[pre-multidel][0m   localnet-val-7 op=0x265a3c2291b9706398B6f279B97F566943944bB7 genesis tokens=834953744897255
+[36m[pre-multidel][0m   Anvil delegated 2048 IP → localnet-val-7, tx=0xa7af55a4bb47b6612d5188eafb0c8cb2778046f83984646602432366f09d99df
+[36m[pre-multidel][0m   localnet-val-7 post-del tokens=837001744897255
+[36m[pre-multidel][0m   localnet-val-7 op fully self-unstakes 834953744897255 stake = 834953744897255000000000 wei
+[36m[pre-multidel][0m   localnet-val-7 op self-unstake tx=0xa52942de47b891cd7cfa1c8b86dc1c6625e1d869bb02985c8e98b3bb38dd7dd0
+[36m[pre-multidel][0m   localnet-val-7 post-self-unstake (pre-V170): status=1 jailed=true tokens=2048000000000
+[32m[pre-multidel][0m PASS Raul Case 3c strict pre-V170: localnet-val-7 op fully self-unstaked, val survives (Anvil del present), jailed=true
+[36m[pre-multidel][0m Phase 3 — wait past V170=70 to block 75
+[36m[pre-multidel][0m post-V170 assert: waiting height >= 70 (V170=70 + grace=0)
+[36m[pre-multidel][0m   chain at h=75
+[32m[pre-multidel][0m PASS binary↔probe consistent: staking/params.max_validators = 4 == NEW_MAX
+[36m[pre-multidel][0m   localnet-val-5 op=0x11E947Df18681c9Eb4765d74ac4fd5EB88461612 status=1 (pruned ✓)
+[36m[pre-multidel][0m   localnet-val-6 op=0x79e3E09239dd3a46c598332d8A16F048dA734A00 status=1 (pruned ✓)
+[36m[pre-multidel][0m   localnet-val-7 op=0x265a3c2291b9706398B6f279B97F566943944bB7 status=1 (pruned ✓)
+[36m[pre-multidel][0m   localnet-val-8 op=0x27d632b0fA47C7A9F9b8a9F2f5a8e6F10c49f17f status=1 (pruned ✓)
+[32m[pre-multidel][0m PASS pruned vals (localnet-val-5, localnet-val-6, localnet-val-7, localnet-val-8) all in status ∈ {1,2} post-V170
+[36m[pre-multidel][0m   localnet-val-1 op=0x9Ff27702E187F1B80183F1aA60800aA745a9ea57 status=3 (bonded ✓)
+[36m[pre-multidel][0m   localnet-val-2 op=0xd2a608Ff79FFbA2C8f6C312912aC9A4c4dBCdc21 status=3 (bonded ✓)
+[36m[pre-multidel][0m   localnet-val-3 op=0x96577E46c58864c8E138B0358728F6915c0f8f81 status=3 (bonded ✓)
+[36m[pre-multidel][0m   localnet-val-4 op=0x0fD780E873582De79276Bf47D47102c323c07A9e status=3 (bonded ✓)
+[32m[pre-multidel][0m PASS bonded vals (localnet-val-1, localnet-val-2, localnet-val-3, localnet-val-4) all in status=3 post-V170
+[36m[pre-multidel][0m   localnet-val-7 post-V170: status=1 jailed=true tokens=2048000000000 (expected status=1, jailed=true, tokens == pre-V170-post-unstake 2048000000000)
+[32m[pre-multidel][0m PASS Raul Case 3c strict: pre-V170 op self-unstake on localnet-val-7 carried through V170 prune cleanly
+[36m[pre-multidel][0m   localnet-val-6 post-upgrade status=1 tokens=978870321301387 (multi-del shape carried through prune)
+[32m[pre-multidel][0m PASS target val pruned to UNBONDED while carrying multi-del shape
+[36m[pre-multidel][0m Phase 4 — Anvil sends 10 IP to localnet-val-6 operator wallet for unstake gas
+[36m[pre-multidel][0m   operator 0x79e3E09239dd3a46c598332d8A16F048dA734A00 pre-fund balance=10200718460194780132 wei
+[36m[pre-multidel][0m   operator post-fund balance=20200718460194780132 wei
+[36m[pre-multidel][0m Phase 5 — operator 100% self-unstakes (amount = genesis tokens = 976822321301387 stake)
+[36m[pre-multidel][0m   localnet-val-6 operator unstakes 976822321301387 stake = 976822321301387000000000 wei (delegation-id=0)
+[36m[pre-multidel][0m   tx=0x2b56edcde0d74fd093defef1ee5fe82e360fa042acf5476511d69797442df76b rc=0
+[36m[pre-multidel][0m Phase 6 — verify post-unstake state
+[36m[pre-multidel][0m   localnet-val-6 post-unstake: status=1 jailed=true tokens=2048000000000 shares=2048000000000.000000000000000000
+[36m[pre-multidel][0m   tokens went genesis=976822321301387 post-stake=978870321301387 post-unstake=2048000000000
+[36m[pre-multidel][0m   operator portion drained = 976822321301387 stake (expected ~976822321301387)
+[32m[pre-multidel][0m PASS chain still progressing post-unstake (no halt)
+[36m[pre-multidel][0m Phase 7 — wait past unbonding_time (10s), sample operator EVM balance
+[36m[pre-multidel][0m   operator after-mature balance=976841520447631118714490 wei (vs pre-fund 10200718460194780132 wei)
+[36m[pre-multidel][0m   expected refund ~ 976822321301387 stake = 976822321301387000000000 wei
+[36m[pre-multidel][0m Phase 7b — RUN_BOB_PHASES=0, skip
+[36m[pre-multidel][0m Phase 7c — RUN_BOB_PHASES=0, skip
+[36m[pre-multidel][0m Phase 7d — RUN_BOB_PHASES=0, skip
+
+========== PRE-UPGRADE MULTIDEL SELF-UNSTAKE PROBE CONCLUSIONS ==========
+Target: localnet-val-6 op=0x79e3E09239dd3a46c598332d8A16F048dA734A00
+  Anvil stake timing:    PRE-UPGRADE (block 10, val BONDED)
+  Operator unstake:      POST-UPGRADE (after V170=70)
+  CLI rc=0 tx=0x2b56edcde0d74fd093defef1ee5fe82e360fa042acf5476511d69797442df76b
+  val status: pre=BONDED(3) post-prune=UNBONDED(1) post-unstake=1 jailed=true
+  tokens genesis=976822321301387 post-stake=978870321301387 post-unstake=2048000000000 (operator drained = 976822321301387 stake; Anvil retained ~2048e9)
+  operator EVM bal pre-fund=10200718460194780132 after-ubd=976841520447631118714490
+  Final chain height: 96 (no halt)
+=========================================================================
+[36m[pre-multidel][0m Phase 9 — SKIP_TEARDOWN

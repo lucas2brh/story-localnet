@@ -1,0 +1,9 @@
+# 3b/3c expanded final state @ 2026-05-07T15:04:24
+# binary: yao-v170-maxval-4-localnet-rev3 sha256=d320c17e...
+{"max_validators":4,"min_self_delegation":null}
+
+# val-7 (pre-V170 Raul Case 3c strict — op fully self-unstaked pre-H, Anvil del kept val alive):
+{"moniker":"localnet-val-7","status":1,"jailed":true,"tokens":"2048000000000","delegator_shares":"2048000000000.000000000000000000","unbonding_height":"27","unbonding_time":"2026-05-07T06:59:15.162591381Z"}
+
+# val-6 (existing post-V170 scenario — op self-unstake on V170-pruned multi-del val):
+{"moniker":"localnet-val-6","status":1,"jailed":true,"tokens":"2048000000000","delegator_shares":"2048000000000.000000000000000000"}

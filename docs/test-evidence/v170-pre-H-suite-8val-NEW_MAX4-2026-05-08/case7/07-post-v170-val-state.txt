@@ -1,0 +1,8 @@
+# post-V170 chain-asserted val state @ 2026-05-07T13:49:46
+# binary: yao/v170-maxval-4-localnet sha256=79193e36275c61bd3109b701a64fc1619ac82307adcbd73fb3223e57739a2c36
+# height=166
+
+{"moniker":"localnet-val-5","op":"0x11E947Df18681c9Eb4765d74ac4fd5EB88461612","status":1,"jailed":false,"tokens":"1108879682985100","unbonding_height":"100","unbonding_time":"2026-05-07T05:46:35.026113219Z"}
+{"moniker":"localnet-val-6","op":"0x79e3E09239dd3a46c598332d8A16F048dA734A00","status":1,"jailed":false,"tokens":"976822321301387","unbonding_height":"100","unbonding_time":"2026-05-07T05:46:35.026113219Z"}
+{"moniker":"localnet-val-7","op":"0x265a3c2291b9706398B6f279B97F566943944bB7","status":1,"jailed":false,"tokens":"834953744897255","unbonding_height":"100","unbonding_time":"2026-05-07T05:46:35.026113219Z"}
+{"moniker":"localnet-val-8","op":"0x27d632b0fA47C7A9F9b8a9F2f5a8e6F10c49f17f","status":1,"jailed":false,"tokens":"807753484131516","unbonding_height":"100","unbonding_time":"2026-05-07T05:46:35.026113219Z"}

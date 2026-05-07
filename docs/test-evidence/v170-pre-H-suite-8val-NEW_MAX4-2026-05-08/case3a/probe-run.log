@@ -1,0 +1,46 @@
+[36m[autosweep][0m Phase 0 — start fresh localnet
+Rewrote /Users/lucas/workspace/lucas-workspace/story-localnet/config/story/genesis-node.json: 8 validators, supply=9999999999999996, max_validators=8, singularity_height=0, unlocked_vals=[none]
+   Blockscout:   http://localhost:3080
+   Grafana:      http://localhost:3000
+[36m[autosweep][0m   rpc1 sync ok h=9
+[36m[autosweep][0m Phase 1 — wait past V170=50 to block 55, sample localnet-val-5 baseline
+[36m[autosweep][0m   chain at 55
+[36m[autosweep][0m post-V170 assert: waiting height >= 50 (V170=50 + grace=0)
+[36m[autosweep][0m   chain at h=55
+[32m[autosweep][0m PASS binary↔probe consistent: staking/params.max_validators = 4 == NEW_MAX
+[36m[autosweep][0m   localnet-val-5 op=0x11E947Df18681c9Eb4765d74ac4fd5EB88461612 status=1 (pruned ✓)
+[36m[autosweep][0m   localnet-val-6 op=0x79e3E09239dd3a46c598332d8A16F048dA734A00 status=1 (pruned ✓)
+[36m[autosweep][0m   localnet-val-7 op=0x265a3c2291b9706398B6f279B97F566943944bB7 status=1 (pruned ✓)
+[36m[autosweep][0m   localnet-val-8 op=0x27d632b0fA47C7A9F9b8a9F2f5a8e6F10c49f17f status=1 (pruned ✓)
+[32m[autosweep][0m PASS pruned vals (localnet-val-5, localnet-val-6, localnet-val-7, localnet-val-8) all in status ∈ {1,2} post-V170
+[36m[autosweep][0m   localnet-val-1 op=0x9Ff27702E187F1B80183F1aA60800aA745a9ea57 status=3 (bonded ✓)
+[36m[autosweep][0m   localnet-val-2 op=0xd2a608Ff79FFbA2C8f6C312912aC9A4c4dBCdc21 status=3 (bonded ✓)
+[36m[autosweep][0m   localnet-val-3 op=0x96577E46c58864c8E138B0358728F6915c0f8f81 status=3 (bonded ✓)
+[36m[autosweep][0m   localnet-val-4 op=0x0fD780E873582De79276Bf47D47102c323c07A9e status=3 (bonded ✓)
+[32m[autosweep][0m PASS bonded vals (localnet-val-1, localnet-val-2, localnet-val-3, localnet-val-4) all in status=3 post-V170
+[36m[autosweep][0m   localnet-val-5 op=0x11E947Df18681c9Eb4765d74ac4fd5EB88461612 status=1 tokens=1108879682985100
+[32m[autosweep][0m PASS target val confirmed UNBONDED with operator-only self-del
+[36m[autosweep][0m Phase 2 — Anvil sends 10 IP to localnet-val-5 operator wallet for gas
+[36m[autosweep][0m   operator 0x11E947Df18681c9Eb4765d74ac4fd5EB88461612 pre-fund balance=8666545151000000000 wei
+[36m[autosweep][0m   operator post-fund balance=18666545151000000000 wei
+[36m[autosweep][0m Phase 3 — operator partial unstake 1108779682985100 stake (residual 100000000000 stake = 100 IP, below 1024 IP MinSelfDelegation)
+[36m[autosweep][0m   localnet-val-5 operator unstakes 1108779682985100 stake = 1108779682985100000000000 wei (delegation-id=0)
+[36m[autosweep][0m   tx=0x7262d920db8963e71b711d8544d01cdfaf9079f7da5578f1c8d065314affa355 rc=0
+[36m[autosweep][0m Phase 4 — verify auto-sweep collapsed partial -> 100%, val GONE, chain alive
+[36m[autosweep][0m   localnet-val-5 post-unstake: status=GONE tokens=GONE shares=GONE
+[32m[autosweep][0m PASS val GONE + chain still progressing (auto-sweep collapsed to 100%, RemoveValidator fired, no halt)
+[32m[autosweep][0m PASS no panic / CONSENSUS FAILURE in any validator log
+[36m[autosweep][0m Phase 5 — wait past unbonding_time (10s), verify operator EVM credited full self-del refund
+[36m[autosweep][0m   operator after-mature balance=1108897347477955713638888 wei (vs pre-fund 8666545151000000000 wei)
+[36m[autosweep][0m   expected refund ~ 1108879682985100 stake = 1108879682985100000000000 wei (full balance via auto-sweep)
+
+========== AUTO-SWEEP PARTIAL-UNSTAKE PROBE CONCLUSIONS ==========
+Target: localnet-val-5 op=0x11E947Df18681c9Eb4765d74ac4fd5EB88461612
+  Pre-unstake: status=UNBONDED(1) tokens=1108879682985100
+  Partial unstake requested: 1108779682985100 stake (residual 100000000000 stake = 100 IP, below 1024 IP MinSelfDelegation)
+  CLI rc=0 tx=0x7262d920db8963e71b711d8544d01cdfaf9079f7da5578f1c8d065314affa355
+  val status post-unstake: GONE (expected GONE — auto-sweep collapsed to 100%, RemoveValidator fired)
+  Operator EVM bal: pre-fund=8666545151000000000 after-ubd=1108897347477955713638888 (expected delta ~ 1108879682985100000000000 wei = full self-del refund via auto-sweep)
+  Final chain height: 76 (no halt)
+==================================================================
+[36m[autosweep][0m Phase 7 — SKIP_TEARDOWN

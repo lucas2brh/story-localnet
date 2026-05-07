@@ -1,0 +1,66 @@
+[36m[pre-ext-del][0m Phase 0 — start fresh localnet
+Rewrote /Users/lucas/workspace/lucas-workspace/story-localnet/config/story/genesis-node.json: 8 validators, supply=9999999999999996, max_validators=8, singularity_height=0, unlocked_vals=[none]
+   Blockscout:   http://localhost:3080
+   Grafana:      http://localhost:3000
+[36m[pre-ext-del][0m   rpc1 sync ok h=9
+[36m[pre-ext-del][0m Phase 1 — wait to block 10 (well before V170=70) and capture localnet-val-7 baseline
+[36m[pre-ext-del][0m   chain at 10
+[36m[pre-ext-del][0m   localnet-val-7 op=0x265a3c2291b9706398B6f279B97F566943944bB7 status=3 tokens=834953744897255 shares=834953744897255.000000000000000000
+[32m[pre-ext-del][0m PASS target val confirmed BONDED pre-upgrade
+[36m[pre-ext-del][0m Phase 2 — Anvil stakes 2048 IP to localnet-val-7 (pre-upgrade, val still BONDED)
+[36m[pre-ext-del][0m   Anvil pre-stake balance=100000000000000000000000000 wei
+      Explorer URL: https://storyscan.xyz/tx/0x4e755390193913bff0d8e1aaca845f730a2a0ee2ddf871f1305b68fa8e85293d
+      Transaction sent, waiting for confirmation...
+      Transaction confirmed successfully!
+      Tokens staked successfully! Extracting delegation ID...
+      Delegation ID: 0
+[36m[pre-ext-del][0m   Anvil post-stake balance=99997951997927630210807552 wei (delta=-413480188028963072)
+[36m[pre-ext-del][0m   localnet-val-7 post-stake status=3 tokens=837001744897255 shares=837001744897255.000000000000000000
+[32m[pre-ext-del][0m PASS external delegation injected pre-upgrade, val still BONDED
+[36m[pre-ext-del][0m Phase 2b — pre-V170 scenario on localnet-val-8 (Raul Case 4 strict: Anvil delegates + 100% unstakes BEFORE H)
+[36m[pre-ext-del][0m   localnet-val-8 op=0x27d632b0fA47C7A9F9b8a9F2f5a8e6F10c49f17f genesis tokens=807753484131516
+[36m[pre-ext-del][0m   Anvil delegated 2048 IP → localnet-val-8, tx=0x3ce5cd0fa79f6c4388f157a6bdf50d523f18c47e605f440ce2b600c1402e8b19
+[36m[pre-ext-del][0m   localnet-val-8 post-del tokens=809801484131516
+[36m[pre-ext-del][0m   Anvil 100% unstaked from localnet-val-8 pre-V170, tx=0x86503da37a2bd5b22cfbb6d863a03d542f88581ddedd2d7e6aa7c777cbf4e640
+[36m[pre-ext-del][0m   localnet-val-8 post-unstake (pre-V170): status=3 jailed=GONE tokens=807753484131516 (expected status=3, jailed=false, tokens ≈ genesis 807753484131516)
+[32m[pre-ext-del][0m PASS Raul Case 4 strict pre-V170: Anvil 100% unstaked from localnet-val-8, val still BONDED + not jailed (operator self-del intact)
+[36m[pre-ext-del][0m Phase 3 — wait past V170=70 to block 75 (let prune settle)
+[36m[pre-ext-del][0m post-V170 assert: waiting height >= 70 (V170=70 + grace=0)
+[36m[pre-ext-del][0m   chain at h=75
+[32m[pre-ext-del][0m PASS binary↔probe consistent: staking/params.max_validators = 4 == NEW_MAX
+[36m[pre-ext-del][0m   localnet-val-5 op=0x11E947Df18681c9Eb4765d74ac4fd5EB88461612 status=1 (pruned ✓)
+[36m[pre-ext-del][0m   localnet-val-6 op=0x79e3E09239dd3a46c598332d8A16F048dA734A00 status=1 (pruned ✓)
+[36m[pre-ext-del][0m   localnet-val-7 op=0x265a3c2291b9706398B6f279B97F566943944bB7 status=1 (pruned ✓)
+[36m[pre-ext-del][0m   localnet-val-8 op=0x27d632b0fA47C7A9F9b8a9F2f5a8e6F10c49f17f status=1 (pruned ✓)
+[32m[pre-ext-del][0m PASS pruned vals (localnet-val-5, localnet-val-6, localnet-val-7, localnet-val-8) all in status ∈ {1,2} post-V170
+[36m[pre-ext-del][0m   localnet-val-1 op=0x9Ff27702E187F1B80183F1aA60800aA745a9ea57 status=3 (bonded ✓)
+[36m[pre-ext-del][0m   localnet-val-2 op=0xd2a608Ff79FFbA2C8f6C312912aC9A4c4dBCdc21 status=3 (bonded ✓)
+[36m[pre-ext-del][0m   localnet-val-3 op=0x96577E46c58864c8E138B0358728F6915c0f8f81 status=3 (bonded ✓)
+[36m[pre-ext-del][0m   localnet-val-4 op=0x0fD780E873582De79276Bf47D47102c323c07A9e status=3 (bonded ✓)
+[32m[pre-ext-del][0m PASS bonded vals (localnet-val-1, localnet-val-2, localnet-val-3, localnet-val-4) all in status=3 post-V170
+[36m[pre-ext-del][0m   localnet-val-8 post-V170: status=1 jailed=GONE tokens=807753484131516 (expected status=1, jailed=false, tokens ≈ genesis 807753484131516 — Anvil unbonded pre-V170)
+[32m[pre-ext-del][0m PASS Raul Case 4 strict: pre-V170 Anvil 100% unstake on localnet-val-8 carried through V170 prune
+[36m[pre-ext-del][0m   Anvil EVM balance after localnet-val-8 unstake mature: 99997951008332648336242164 wei
+[36m[pre-ext-del][0m   localnet-val-7 post-upgrade status=1 tokens=837001744897255
+[32m[pre-ext-del][0m PASS target val pruned to UNBONDED, multi-del shape carried through
+[36m[pre-ext-del][0m Phase 4 — Anvil 100% unstakes from localnet-val-7 (delegation-id=0, post-upgrade)
+[36m[pre-ext-del][0m   tx=0x3004099ca15beff43a54323e681b1b629c09a842b3820223201607552d43e408 rc=0
+[36m[pre-ext-del][0m Phase 5 — verify post-unstake state
+[36m[pre-ext-del][0m   localnet-val-7 post-unstake: status=1 jailed=GONE tokens=834953744897255 shares=834953744897255.000000000000000000
+[36m[pre-ext-del][0m   tokens went pre=834953744897255 post-stake=837001744897255 post-unstake=834953744897255 (Anvil portion = 2048000000000 stake; expected 2048e9)
+[32m[pre-ext-del][0m PASS chain still progressing post-unstake (no halt)
+[36m[pre-ext-del][0m Phase 6 — wait past unbonding_time (10s on localnet), sample Anvil EVM balance
+[36m[pre-ext-del][0m   Anvil after-mature balance=99999998007591194667388264 wei (delta vs post-stake=-1578928617303648664)
+[36m[pre-ext-del][0m   expected ~ 2048 IP refund = 2048000000000000000000 wei
+
+========== PRE-UPGRADE EXTERNAL-DEL UNSTAKE PROBE CONCLUSIONS ==========
+Target: localnet-val-7 op=0x265a3c2291b9706398B6f279B97F566943944bB7
+  Anvil stake timing:   PRE-UPGRADE (block 10, val BONDED at the time)
+  Anvil unstake timing: POST-UPGRADE (after V170=70)
+  CLI rc=0 tx=0x3004099ca15beff43a54323e681b1b629c09a842b3820223201607552d43e408
+  val status: pre=BONDED(3) post-prune=UNBONDED(1) post-unstake=1 jailed=GONE
+  tokens pre=834953744897255 post-stake=837001744897255 post-unstake=834953744897255 (Anvil portion drained = 2048000000000 stake)
+  Anvil balance: pre-stake=100000000000000000000000000 post-stake=99997951997927630210807552 after-ubd=99999998007591194667388264
+  Final chain height: 92 (no halt)
+========================================================================
+[36m[pre-ext-del][0m Phase 8 — SKIP_TEARDOWN

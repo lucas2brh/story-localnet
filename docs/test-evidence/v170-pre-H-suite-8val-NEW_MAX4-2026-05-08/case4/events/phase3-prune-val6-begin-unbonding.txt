@@ -1,0 +1,6 @@
+# claim: phase3-prune-val6-begin-unbonding
+# desc:  Phase 3: V170 prune — val-6 BONDED→UNBONDING at h=70
+# source: cl-validator1-node.log
+# pattern: 📚 Validator begin unbonding.*val_addr=79E3E09239DD3A46C598332D8A16F048DA734A00
+---
+3072:26-05-07 07:10:16.527 DEBU 📚 Validator begin unbonding             cons_addr=89112C537880C96D64767DE9EE86F4192D53EC54 val_addr=79E3E09239DD3A46C598332D8A16F048DA734A00

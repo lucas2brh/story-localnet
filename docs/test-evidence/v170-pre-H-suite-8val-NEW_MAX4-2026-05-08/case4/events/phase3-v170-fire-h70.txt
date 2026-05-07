@@ -1,0 +1,9 @@
+# claim: phase3-v170-fire-h70
+# desc:  Phase 3: V170 fires at h=70 — ABCI val_updates=4 with power_0..3=0 (4 vals removed from active set)
+# source: cl-validator1-node.log
+# pattern: FinalizeBlock.*height=70|val_updates=4.*power_0=0.*power_1=0.*power_2=0.*power_3=0|prune.*height=70
+---
+3055:26-05-07 07:10:16.523 INFO 👾 ABCI call: FinalizeBlock              height=70 proposer=d3b8ec5
+3096:26-05-07 07:10:16.533 INFO 👾 ABCI response: FinalizeBlock          val_updates=4 height=70 pubkey_0=03cdfc8 power_0=0 pubkey_1=03c95a4 power_1=0 pubkey_2=022fae6 power_2=0 pubkey_3=03da35d power_3=0
+3098:26-05-07 07:10:16.537 DEBU prune start                              height=70
+3100:26-05-07 07:10:16.537 DEBU prune end                                height=70

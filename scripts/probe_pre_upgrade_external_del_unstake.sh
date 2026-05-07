@@ -30,9 +30,11 @@
 
 set -u
 
-UPGRADE_HEIGHT=${UPGRADE_HEIGHT:-50}
+N_VALS=${N_VALS:-8}
+NEW_MAX=${NEW_MAX:-4}
+UPGRADE_HEIGHT=${UPGRADE_HEIGHT:-70}
 PRE_UPGRADE_STAKE_BLOCK=${PRE_UPGRADE_STAKE_BLOCK:-10}
-POST_UPGRADE_BLOCK=${POST_UPGRADE_BLOCK:-65}
+POST_UPGRADE_BLOCK=${POST_UPGRADE_BLOCK:-75}
 STORY_BIN=${STORY_BIN:-/tmp/story}
 CHAIN_ID=${CHAIN_ID:-1399}
 ANVIL_PK=${ANVIL_PK:-ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80}
@@ -40,9 +42,14 @@ ANVIL_ADDR=${ANVIL_ADDR:-0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266}
 LOCALNET="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 META="${LOCALNET}/tmp/validators_meta.json"
 SKIP_TEARDOWN=${SKIP_TEARDOWN:-0}
-TARGET_MONIKER="localnet-val-19"
+TARGET_MONIKER=${TARGET_MONIKER:-localnet-val-7}
 EXTERNAL_STAKE_IP=2048
 EXTERNAL_STAKE_WEI="2048000000000000000000"
+
+# ---- Phase 2b: pre-V170 scenario (Raul Case 4 strict) ----
+# Different target val. Anvil delegates pre-V170, then Anvil 100% UNSTAKES BEFORE H.
+# This is the strict Raul Case 4: external delegator preemptively undelegates before H.
+PRE_H_TARGET_MONIKER=${PRE_H_TARGET_MONIKER:-localnet-val-8}
 
 C_CYAN='\033[36m'; C_RED='\033[31m'; C_GREEN='\033[32m'; C_RESET='\033[0m'
 log()  { printf "${C_CYAN}[pre-ext-del]${C_RESET} %s\n" "$*"; }
@@ -82,7 +89,7 @@ phase_0_start() {
   if docker ps --format '{{.Names}}' | grep -qE '^validator[0-9]+-'; then
     (cd "$LOCALNET" && bash terminate.sh 2>&1 | tail -2); sleep 5
   fi
-  MAX_VALIDATORS_INIT=20 STORY_BIN="$STORY_BIN" bash "${LOCALNET}/scripts/assemble_genesis.sh" 20 2>&1 | tail -1
+  MAX_VALIDATORS_INIT="$N_VALS" STORY_BIN="$STORY_BIN" bash "${LOCALNET}/scripts/assemble_genesis.sh" "$N_VALS" 2>&1 | tail -1
   (cd "$LOCALNET" && bash start.sh 2>&1 | tail -2)
   local deadline=$(( $(date +%s) + 90 )) h=0
   while :; do
@@ -135,10 +142,87 @@ phase_2_anvil_stake_pre_upgrade() {
   pass "external delegation injected pre-upgrade, val still BONDED"
 }
 
-# ---------------- Phase 3 — wait past upgrade, val gets pruned ----------------
+# ---------------- Phase 2b — pre-V170 Anvil 100% unstake on val-8 (Raul Case 4 strict) ----------------
+PRE_H_VAL_OP=""; PRE_H_VAL_TOKENS_PRE=""; PRE_H_VAL_TOKENS_POST_DEL=""; PRE_H_VAL_TOKENS_POST_UNSTAKE=""
+PRE_H_DELEGATE_TX=""; PRE_H_UNSTAKE_TX=""; PRE_H_ANVIL_BAL_AFTER_UNSTAKE=""
+phase_2b_pre_v170_external_unstake() {
+  log "Phase 2b — pre-V170 scenario on $PRE_H_TARGET_MONIKER (Raul Case 4 strict: Anvil delegates + 100% unstakes BEFORE H)"
+  PRE_H_VAL_OP=$(meta_op_evm "$PRE_H_TARGET_MONIKER")
+  PRE_H_VAL_TOKENS_PRE=$(val_field "$PRE_H_VAL_OP" tokens)
+  log "  $PRE_H_TARGET_MONIKER op=$PRE_H_VAL_OP genesis tokens=$PRE_H_VAL_TOKENS_PRE"
+
+  # Step 1: Anvil delegates 2048 IP to val-8 pre-V170
+  local pub; pub=$(meta_pubkey_hex "$PRE_H_TARGET_MONIKER")
+  local out rc
+  out=$(PRIVATE_KEY="$ANVIL_PK" "$STORY_BIN" validator stake \
+    --validator-pubkey "$pub" --stake "$EXTERNAL_STAKE_WEI" --staking-period flexible \
+    --rpc http://localhost:8545 --chain-id "$CHAIN_ID" 2>&1)
+  rc=$?
+  PRE_H_DELEGATE_TX=$(grep -oE '0x[0-9a-f]{64}' <<<"$out" | head -1)
+  [[ $rc -eq 0 ]] || fail "Anvil delegate to $PRE_H_TARGET_MONIKER: rc=$rc"
+  log "  Anvil delegated ${EXTERNAL_STAKE_IP} IP → $PRE_H_TARGET_MONIKER, tx=$PRE_H_DELEGATE_TX"
+  wait_height "$(( $(get_height) + 3 ))" >/dev/null
+  PRE_H_VAL_TOKENS_POST_DEL=$(val_field "$PRE_H_VAL_OP" tokens)
+  log "  $PRE_H_TARGET_MONIKER post-del tokens=$PRE_H_VAL_TOKENS_POST_DEL"
+  [[ "$PRE_H_VAL_TOKENS_POST_DEL" -gt "$PRE_H_VAL_TOKENS_PRE" ]] || fail "post-del tokens did not grow"
+
+  # Step 2: Anvil 100% UNSTAKES from val-8 (preemptive, BEFORE H)
+  out=$(PRIVATE_KEY="$ANVIL_PK" "$STORY_BIN" validator unstake \
+    --validator-pubkey "$pub" --unstake "$EXTERNAL_STAKE_WEI" --delegation-id 0 \
+    --rpc http://localhost:8545 --chain-id "$CHAIN_ID" 2>&1)
+  rc=$?
+  PRE_H_UNSTAKE_TX=$(grep -oE '0x[0-9a-f]{64}' <<<"$out" | head -1)
+  [[ $rc -eq 0 ]] || fail "Anvil pre-V170 unstake from $PRE_H_TARGET_MONIKER: rc=$rc ($out)"
+  log "  Anvil 100% unstaked from $PRE_H_TARGET_MONIKER pre-V170, tx=$PRE_H_UNSTAKE_TX"
+  wait_height "$(( $(get_height) + 5 ))" >/dev/null
+
+  # Verify pre-V170: val-8 still BONDED (operator self-stake intact > MinSelfDel),
+  # tokens reduced back near genesis (Anvil's portion in unbonding)
+  local pre_st pre_jailed pre_tk
+  pre_st=$(val_field "$PRE_H_VAL_OP" status)
+  pre_jailed=$(val_field "$PRE_H_VAL_OP" jailed)
+  pre_tk=$(val_field "$PRE_H_VAL_OP" tokens)
+  PRE_H_VAL_TOKENS_POST_UNSTAKE=$pre_tk
+  log "  $PRE_H_TARGET_MONIKER post-unstake (pre-V170): status=$pre_st jailed=$pre_jailed tokens=$pre_tk (expected status=3, jailed=false, tokens ≈ genesis $PRE_H_VAL_TOKENS_PRE)"
+  [[ "$pre_st" == "3" ]] || fail "$PRE_H_TARGET_MONIKER expected still BONDED pre-V170 (operator self-stake intact), got $pre_st"
+  [[ "$pre_jailed" != "true" ]] || fail "$PRE_H_TARGET_MONIKER unexpectedly jailed (operator self-stake unchanged), got jailed=$pre_jailed"
+  [[ "$pre_tk" == "$PRE_H_VAL_TOKENS_PRE" ]] || fail "$PRE_H_TARGET_MONIKER tokens drift after Anvil unstake: pre=$PRE_H_VAL_TOKENS_PRE post=$pre_tk (expected ≈ genesis since Anvil portion goes to unbonding)"
+  pass "Raul Case 4 strict pre-V170: Anvil 100% unstaked from $PRE_H_TARGET_MONIKER, val still BONDED + not jailed (operator self-del intact)"
+}
+
+# ---------------- Phase 3 — wait past upgrade + cluster sanity ----------------
 phase_3_post_upgrade_state() {
   log "Phase 3 — wait past V170=$UPGRADE_HEIGHT to block $POST_UPGRADE_BLOCK (let prune settle)"
   wait_height "$POST_UPGRADE_BLOCK" >/dev/null
+
+  # Cluster-wide post-V170 sanity check (binary↔probe consistency, all expected vals pruned)
+  source "${LOCALNET}/scripts/lib/post_v170_asserts.sh"
+  local pruned_list="" bonded_list="" i
+  for ((i=1; i<=NEW_MAX; i++));     do bonded_list+=" localnet-val-$i"; done
+  for ((i=NEW_MAX+1; i<=N_VALS; i++)); do pruned_list+=" localnet-val-$i"; done
+  PRUNED_VALS="${pruned_list# }" \
+    BONDED_VALS="${bonded_list# }" \
+    EXPECTED_NEW_MAX="$NEW_MAX" \
+    UPGRADE_HEIGHT="$UPGRADE_HEIGHT" \
+    META="$META" \
+    POST_V170_GRACE=0 \
+    assert_post_v170_state
+
+  # Verify pre-V170 target (val-8) carried through prune; Anvil's pre-V170 unstake
+  # should have completed (unbonding_time on localnet ~10s short, easily mature by now)
+  local pre_h_st pre_h_jailed pre_h_tk
+  pre_h_st=$(val_field "$PRE_H_VAL_OP" status)
+  pre_h_jailed=$(val_field "$PRE_H_VAL_OP" jailed)
+  pre_h_tk=$(val_field "$PRE_H_VAL_OP" tokens)
+  log "  $PRE_H_TARGET_MONIKER post-V170: status=$pre_h_st jailed=$pre_h_jailed tokens=$pre_h_tk (expected status=1, jailed=false, tokens ≈ genesis $PRE_H_VAL_TOKENS_PRE — Anvil unbonded pre-V170)"
+  [[ "$pre_h_st" == "1" ]] || fail "$PRE_H_TARGET_MONIKER expected UNBONDED (status=1) post-V170, got $pre_h_st"
+  [[ "$pre_h_jailed" != "true" ]] || fail "$PRE_H_TARGET_MONIKER jailed unexpectedly post-V170, got jailed=$pre_h_jailed"
+  pass "Raul Case 4 strict: pre-V170 Anvil 100% unstake on $PRE_H_TARGET_MONIKER carried through V170 prune"
+
+  # Anvil EVM balance check — pre-V170 unstake should have matured (10s unbonding_time on localnet)
+  PRE_H_ANVIL_BAL_AFTER_UNSTAKE=$(get_evm_balance "$ANVIL_ADDR")
+  log "  Anvil EVM balance after $PRE_H_TARGET_MONIKER unstake mature: $PRE_H_ANVIL_BAL_AFTER_UNSTAKE wei"
+
   local status; status=$(val_field "$VAL_OP" status)
   local tokens; tokens=$(val_field "$VAL_OP" tokens)
   log "  $TARGET_MONIKER post-upgrade status=$status tokens=$tokens"
@@ -219,6 +303,7 @@ phase_8_teardown() {
 phase_0_start
 phase_1_pre_upgrade_baseline
 phase_2_anvil_stake_pre_upgrade
+phase_2b_pre_v170_external_unstake
 phase_3_post_upgrade_state
 phase_4_anvil_unstake_post_upgrade
 phase_5_verify

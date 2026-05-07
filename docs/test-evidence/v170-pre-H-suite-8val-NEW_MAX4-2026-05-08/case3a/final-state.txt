@@ -1,0 +1,9 @@
+# 3a final state @ 2026-05-07T14:40:40
+# binary: yao-v170-maxval-4-localnet-rev2 sha256=73c95cfa...
+{"max_validators":4,"min_self_delegation":null}
+
+# val-6 (pre-V170 partial unstake target, Raul Case 3a strict):
+{"moniker":"localnet-val-6","status":1,"jailed":false,"tokens":"488411160650694","unbonding_height":"50","unbonding_time":"2026-05-07T06:34:29.7719628Z"}
+
+# val-5 (post-V170 partial-below-MinSelfDel auto-sweep target):
+curl: (22) The requested URL returned error: 500

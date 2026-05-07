@@ -1,0 +1,20 @@
+[autosweep]   expected refund ~ 1108879682985100 stake = 1108879682985100000000000 wei (full balance via auto-sweep)
+
+========== AUTO-SWEEP PARTIAL-UNSTAKE PROBE CONCLUSIONS ==========
+Pre-V170 scenario (Raul Case 3a strict):
+  Target: localnet-val-6 op=0x79e3E09239dd3a46c598332d8A16F048dA734A00
+  Action: 50% partial self-unstake at h~10 (BONDED, residual ≥ MinSelfDel)
+  Result: pre-V170 BONDED → post-V170 UNBONDED, tokens preserved across prune
+  Pre-unstake tokens=976822321301387, post-unstake tokens=488411160650694, post-V170 tokens=488411160650694 (drift=0 expected)
+  Pre-V170 unstake tx=0xf214e8f992a4253f2d64c0579b508b3c3badefbf9cc05be342196253389c30ca
+
+Post-V170 scenario (auto-sweep on residual < MinSelfDel):
+  Target: localnet-val-5 op=0x11E947Df18681c9Eb4765d74ac4fd5EB88461612
+  Pre-unstake: status=UNBONDED(1) tokens=1108879682985100
+  Partial unstake requested: 1108779682985100 stake (residual 100000000000 stake = 100 IP, below 1024 IP MinSelfDelegation)
+  CLI rc=0 tx=0x7aed349636efe3078682cbff4da46dd149dffe428c0a9ff704c5ac4b03dc7e72
+  val status post-unstake: GONE (expected GONE — auto-sweep collapsed to 100%, RemoveValidator fired)
+  Operator EVM bal: pre-fund=8909248304000000000 after-ubd=1108897590661112736291044 (expected delta ~ 1108879682985100000000000 wei = full self-del refund via auto-sweep)
+  Final chain height: 75 (no halt)
+==================================================================
+[autosweep] Phase 8 — SKIP_TEARDOWN
