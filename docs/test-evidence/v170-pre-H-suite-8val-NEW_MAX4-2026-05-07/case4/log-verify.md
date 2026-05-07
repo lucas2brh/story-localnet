@@ -1,7 +1,7 @@
 # Probe 4 — CL/EL log evidence verification
 
 **Probe**: `probe_pre_upgrade_external_del_unstake.sh` (expanded with Phase 2b for Raul Case 4 strict)
-**Run**: 2026-05-08
+**Run**: 2026-05-07
 **Binary**: [[yao-v170-maxval-4-localnet-rev3]] sha256=`d320c17e...` (NewMaxValidators=4, V170=70 on `StoryLocalnetID`)
 **Cluster**: 8-val localnet
 **Probe stdout**: `probe-run-expanded.log` (self-reported, NOT authoritative)

@@ -35,7 +35,7 @@
 #   Phase 8  POST-V170 chain assertion (wait past UPGRADE_HEIGHT, assert
 #            staking/params.max_validators == NEW_MAX, assert val-5..N_VALS
 #            actually pruned to status ∈ {1,2}, top-NEW_MAX stays BONDED).
-#            This is what closes the gap exposed 2026-05-08: prior runs
+#            This is what closes the gap exposed 2026-05-07: prior runs
 #            stopped at Phase 7 and never confirmed V170 actually fired.
 #   Phase 9  Summary
 #   Phase 10 Teardown (skipped if SKIP_TEARDOWN=1)
