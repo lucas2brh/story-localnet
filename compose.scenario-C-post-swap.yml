@@ -1,0 +1,22 @@
+# Scenario C — post-swap override
+# all 8 vals + bootnode on v1.7.0 (after rolling 1-by-1 swap)
+
+services:
+  validator1-node:
+    image: story-node:v1.7.0-localnet
+  validator2-node:
+    image: story-node:v1.7.0-localnet
+  validator3-node:
+    image: story-node:v1.7.0-localnet
+  validator4-node:
+    image: story-node:v1.7.0-localnet
+  validator5-node:
+    image: story-node:v1.7.0-localnet
+  validator6-node:
+    image: story-node:v1.7.0-localnet
+  validator7-node:
+    image: story-node:v1.7.0-localnet
+  validator8-node:
+    image: story-node:v1.7.0-localnet
+  bootnode1-node:
+    image: story-node:v1.7.0-localnet
