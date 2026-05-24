@@ -1,0 +1,33 @@
+# Scenario C — binary-swap-test-plan PRIORITY 1
+# 2 v1.6.3 + 6 v1.6.1 → all v1.7.0 swap test (2026-05-19)
+# val1+val2: v1.6.3 (mirror Aeneid DKG-node minority)
+# val3..val8: v1.6.1 (majority)
+#
+# Usage: docker compose -f docker-compose-bootnode1.yml \
+#   -f docker-compose-validator{1..8}.yml -f compose.scenario-C.yml \
+#   up -d
+
+services:
+  # ---- val1 + val2: v1.6.3 (DKG-class minority) ----
+  validator1-node:
+    image: story-node:v1.5.3-localnet
+  validator2-node:
+    image: story-node:v1.5.3-localnet
+
+  # ---- val3..val8: v1.6.1 (majority) ----
+  validator3-node:
+    image: story-node:v1.5.3-localnet
+  validator4-node:
+    image: story-node:v1.5.3-localnet
+  validator5-node:
+    image: story-node:v1.5.3-localnet
+  validator6-node:
+    image: story-node:v1.5.3-localnet
+  validator7-node:
+    image: story-node:v1.5.3-localnet
+  validator8-node:
+    image: story-node:v1.5.3-localnet
+
+  # ---- bootnode + rpc on v1.6.1 (consensus-irrelevant; default majority) ----
+  bootnode1-node:
+    image: story-node:v1.5.3-localnet
