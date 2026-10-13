@@ -63,6 +63,21 @@
 #   PREFLIGHT_ONLY=1 ./scripts/probe_v171_halt_v181_retire_8val.sh
 #   START_PHASE=4 ./scripts/probe_v171_halt_v181_retire_8val.sh
 #       resume on a chain already halted at H_FORK by v1.7.1
+#   TX_LOAD=1 ./scripts/probe_v171_halt_v181_retire_8val.sh
+#       also checks what the dropped fork-block payload does to EVM txs and
+#       staking events (T1-T5 below)
+#
+# TX_LOAD checks. One funded EL key (ANVIL_PK, anvil dev key 0 by default)
+# sends one tx per second from H_FORK-8 until H_FORK+10, alternating
+# transfers and stake() calls on val1, every tx with the next nonce, signed
+# offline and spread over the validators' geth nodes.
+#   T1 every sent tx ends up with a successful receipt
+#   T2 the sender's nonce equals the number of txs sent (no gap, no stall)
+#   T3 val1 tokens grew by exactly one calibrated stake unit per stake tx
+#      (no lost and no double-processed Deposit event)
+#   T4 coverage: how many of our txs were inside the dropped fork-block payload
+#   T5 coverage: whether a stake landed in the dropped payload's parent EL
+#      block, whose events the dropped tx carried
 
 set -u
 
@@ -76,6 +91,9 @@ H_POST_FORK=$((H_FORK + 10))
 H_END=${H_END:-145}
 SKIP_TEARDOWN=${SKIP_TEARDOWN:-0}
 START_PHASE=${START_PHASE:-0}
+TX_LOAD=${TX_LOAD:-0}
+ANVIL_PK=${ANVIL_PK:-ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80}
+STAKING=0xCCcCcC0000000000000000000000000000000001
 PREFLIGHT_ONLY=${PREFLIGHT_ONLY:-0}
 
 COMMIT_V170=6a9760693cf135cf069e7377d9ead0fdc8c044e8 # v1.7.0 stable, unpatched
@@ -97,7 +115,7 @@ GENESIS_BAK="${GENESIS}.pre-dkg-retire"
 DKG_JSON='{"params":{"registration_period":34560,"dealing_period":34560,"finalization_period":34560,"active_period":138240,"dkg_committee_reward_portion":"0.050000000000000000","min_req_registered_participants":5,"min_req_finalized_participants":5,"operational_threshold":500}}'
 
 log() { echo "[$(date +%H:%M:%S)] $*" >&2; }
-fail() { log "FAIL: $*"; dump_logs; log "genesis left patched; restore with: cp $GENESIS_BAK $GENESIS"; exit 1; }
+fail() { [ -n "${EV_DIR:-}" ] && touch "$EV_DIR/txload.stop"; log "FAIL: $*"; dump_logs; log "genesis left patched; restore with: cp $GENESIS_BAK $GENESIS"; exit 1; }
 
 rpc() {
   local N=$1
@@ -107,6 +125,47 @@ rpc() {
 
 el_head() {
   docker exec "validator${1}-geth" geth attach --exec 'eth.blockNumber' /root/.story/geth/data/geth.ipc 2>/dev/null | tr -d '\r'
+}
+
+el_exec() {
+  docker exec "validator${2:-1}-geth" geth attach --exec "$1" /root/.story/geth/data/geth.ipc 2>/dev/null | tr -d '\r'
+}
+
+el_val() {
+  el_exec "$1" "${2:-1}" | tr -d '"'
+}
+
+val1_tokens() {
+  docker exec validator1-node wget -qO- "http://localhost:1317/staking/validators?pagination.limit=100" 2>/dev/null \
+    | jq -r --arg op "$VAL1_OP" '.msg.validators[] | select(.operator_address==$op) | .tokens'
+}
+
+sign_tx() {
+  # $1 nonce, $2 kind (transfer|stake)
+  if [ "$2" = "stake" ]; then
+    cast mktx --private-key "$ANVIL_PK" --chain "$EL_CHAIN_ID" --nonce "$1" --gas-limit 500000 \
+      --gas-price "$GAS_PRICE_WEI" --legacy "$STAKING" "stake(bytes,uint8,bytes)" "$VAL1_CMP" 0 0x \
+      --value "$MIN_STAKE"
+  else
+    cast mktx --private-key "$ANVIL_PK" --chain "$EL_CHAIN_ID" --nonce "$1" --gas-limit 21000 \
+      --gas-price "$GAS_PRICE_WEI" --legacy 0x000000000000000000000000000000000000dEaD --value 1wei
+  fi
+}
+
+tx_sender() {
+  local nonce=$1 i=0 kind raw hash node
+  while [ "$(el_val eth.blockNumber)" -lt "$((H_FORK - 9))" ]; do sleep 1; done
+  while [ ! -f "$EV_DIR/txload.stop" ]; do
+    kind=transfer
+    [ $((i % 3)) = 2 ] && kind=stake
+    raw=$(sign_tx "$nonce" "$kind")
+    node=$(( (i % N_VALS) + 1 ))
+    hash=$(el_val "eth.sendRawTransaction('$raw')" "$node")
+    printf '%s\t%s\t%s\t%s\t%s\t%s\n' "$i" "$nonce" "$kind" "$node" "$hash" "$raw" >> "$EV_DIR/T-sent.tsv"
+    nonce=$((nonce + 1))
+    i=$((i + 1))
+    sleep 1
+  done
 }
 
 height_of() {
@@ -222,6 +281,12 @@ mkdir -p "$EV_DIR/containers" "$BUILD_DIR"
 log "evidence dir: $EV_DIR"
 
 # P1
+if [ "$TX_LOAD" = "1" ] && [ "$START_PHASE" != "0" ]; then
+  fail "P1 TX_LOAD=1 needs a full run (START_PHASE=0)"
+fi
+for t in cast python3 xxd; do
+  [ "$TX_LOAD" = "1" ] && { command -v "$t" >/dev/null || fail "P1 missing host tool for TX_LOAD: $t"; }
+done
 for t in docker jq go git strings base64 awk comm; do
   command -v "$t" >/dev/null || fail "P1 missing host tool: $t"
 done
@@ -364,6 +429,44 @@ echo "dkg store abci_query code before fork: $CODE" > "$EV_DIR/B3-dkg-store-pre.
 [ "$CODE" = "0" ] || fail "B3 dkg store query code=$CODE before the fork, want 0"
 log "B3 pass: dkg store mounted before the fork"
 
+if [ "$TX_LOAD" = "1" ]; then
+  EL_CHAIN_ID=$(jq -r '.config.chainId' "$LOCALNET/config/story/genesis-geth.json")
+  SENDER=$(cast wallet address --private-key "$ANVIL_PK")
+  # The builder ignores txs priced under its floor without any error.
+  GAS_PRICE_WEI=$(( 2 * ( $(el_val eth.maxPriorityFeePerGas) + $(el_val 'eth.getBlock("latest").baseFeePerGas') ) ))
+  MIN_STAKE=$(cast to-dec "$(el_val "eth.call({to:'$STAKING',data:'$(cast sig 'minStakeAmount()')'})")")
+  VAL1_JSON=$(docker exec validator1-node wget -qO- "http://localhost:1317/staking/validators?pagination.limit=100" \
+    | jq -c '[.msg.validators[] | select(.description.moniker=="localnet-val-1")][0]')
+  VAL1_OP=$(echo "$VAL1_JSON" | jq -r .operator_address)
+  VAL1_CMP=0x$(echo "$VAL1_JSON" | jq -r '.consensus_pubkey.value' | base64 -d | xxd -p | tr -d '\n')
+  [ "${#VAL1_CMP}" = "68" ] || fail "T setup: val1 compressed pubkey not 33 bytes ($VAL1_CMP)"
+  echo "sender=$SENDER chain=$EL_CHAIN_ID gas_price_wei=$GAS_PRICE_WEI min_stake=$MIN_STAKE val1=$VAL1_OP cmp=$VAL1_CMP" \
+    > "$EV_DIR/T-setup.txt"
+
+  # Calibrate: tokens added by one stake of MIN_STAKE.
+  N0=$(el_val "eth.getTransactionCount('$SENDER')")
+  TOK0=$(val1_tokens)
+  CAL_HASH=$(el_val "eth.sendRawTransaction('$(sign_tx "$N0" stake)')")
+  deadline=$(( $(date +%s) + 60 ))
+  until [ "$(el_val "eth.getTransactionCount('$SENDER')")" -gt "$N0" ]; do
+    [ "$(date +%s)" -ge "$deadline" ] && fail "T setup: calibration stake $CAL_HASH not mined in 60s"
+    sleep 2
+  done
+  sleep 6
+  TOK1=$(val1_tokens)
+  STAKE_UNIT=$(python3 -c "print($TOK1 - $TOK0)")
+  [ "$STAKE_UNIT" -gt 0 ] 2>/dev/null || fail "T setup: calibration stake moved val1 tokens by $STAKE_UNIT"
+  echo "calibration: tokens $TOK0 -> $TOK1, unit=$STAKE_UNIT" >> "$EV_DIR/T-setup.txt"
+  log "T setup: gas price ${GAS_PRICE_WEI} wei, one stake = $STAKE_UNIT val1 tokens"
+
+  TOK_BEFORE_LOAD=$TOK1
+  : > "$EV_DIR/T-sent.tsv"
+  rm -f "$EV_DIR/txload.stop"
+  tx_sender "$((N0 + 1))" &
+  SENDER_PID=$!
+  log "T setup: tx sender started (pid $SENDER_PID), sends from EL head $((H_FORK - 9))"
+fi
+
 fi # START_PHASE=0
 
 # --- Phase 4: B4 halt at H_FORK ---
@@ -428,6 +531,69 @@ R1_NEXT=$(jq -r '[.result.txs_results[]?.code] | tostring' "$EV_DIR/R1-H$((H_FOR
 echo "el_head_halted=$EL_HALT el_head_after_H${H_POST_FORK}=$EL_RESUME" > "$EV_DIR/R2-el-head.txt"
 log "R1: H=$H_FORK tx codes=$R1_CODE log=$R1_LOG; H=$((H_FORK + 1)) tx codes=$R1_NEXT"
 log "R2: EL head halted=$EL_HALT, after H=$H_POST_FORK=$EL_RESUME"
+
+if [ "$TX_LOAD" = "1" ]; then
+  touch "$EV_DIR/txload.stop"
+  wait "$SENDER_PID" 2>/dev/null
+  SENT=$(wc -l < "$EV_DIR/T-sent.tsv" | tr -d ' ')
+  N_STAKES=$(awk -F'\t' '$3=="stake"' "$EV_DIR/T-sent.tsv" | wc -l | tr -d ' ')
+  WANT_NONCE=$((N0 + 1 + SENT))
+  log "T: sent $SENT txs ($N_STAKES stakes), waiting for them to settle"
+  deadline=$(( $(date +%s) + 120 ))
+  until [ "$(el_val "eth.getTransactionCount('$SENDER')")" -ge "$WANT_NONCE" ]; do
+    [ "$(date +%s)" -ge "$deadline" ] && break
+    sleep 3
+  done
+  sleep 9
+
+  # T1 receipts
+  : > "$EV_DIR/T1-receipts.tsv"
+  BAD_RCPT=0
+  while IFS=$'\t' read -r i nonce kind node hash raw; do
+    r=$(el_exec "JSON.stringify(eth.getTransactionReceipt('$hash'))")
+    # geth console: status is "0x1", blockNumber is a decimal number, a missing receipt is null
+    st=$(echo "$r" | jq -r '(if type=="string" then fromjson else . end) | if . == null then "none" else (.status // "none") end' 2>/dev/null || echo none)
+    bn=$(echo "$r" | jq -r '(if type=="string" then fromjson else . end) | if . == null then "none" else (.blockNumber // "none") end' 2>/dev/null || echo none)
+    printf '%s\t%s\t%s\t%s\t%s\n' "$nonce" "$kind" "$hash" "$st" "$bn" >> "$EV_DIR/T1-receipts.tsv"
+    [ "$st" = "0x1" ] || BAD_RCPT=$((BAD_RCPT + 1))
+  done < "$EV_DIR/T-sent.tsv"
+
+  # T2 nonce
+  GOT_NONCE=$(el_val "eth.getTransactionCount('$SENDER')")
+  echo "nonce want=$WANT_NONCE got=$GOT_NONCE pending=$(el_exec 'JSON.stringify(txpool.status)')" > "$EV_DIR/T2-nonce.txt"
+
+  # T3 stake accounting
+  TOK_AFTER_LOAD=$(val1_tokens)
+  TOK_DELTA=$(python3 -c "print($TOK_AFTER_LOAD - $TOK_BEFORE_LOAD)")
+  TOK_WANT=$(python3 -c "print($N_STAKES * $STAKE_UNIT)")
+  echo "tokens before=$TOK_BEFORE_LOAD after=$TOK_AFTER_LOAD delta=$TOK_DELTA want=$TOK_WANT (stakes=$N_STAKES unit=$STAKE_UNIT)" \
+    > "$EV_DIR/T3-stake-accounting.txt"
+
+  # T4 our txs inside the dropped fork-block payload
+  FORK_HEX=$(rpc 1 "/block?height=$H_FORK" | jq -r '.result.block.data.txs[0]' | base64 -d | xxd -p | tr -d '\n')
+  IN_DROPPED=0
+  : > "$EV_DIR/T4-in-dropped-payload.tsv"
+  while IFS=$'\t' read -r i nonce kind node hash raw; do
+    if echo "$FORK_HEX" | grep -q "${raw#0x}"; then
+      IN_DROPPED=$((IN_DROPPED + 1))
+      awk -F'\t' -v n="$nonce" '$1==n' "$EV_DIR/T1-receipts.tsv" >> "$EV_DIR/T4-in-dropped-payload.tsv"
+    fi
+  done < "$EV_DIR/T-sent.tsv"
+
+  # T5 stake in the dropped payload's parent EL block (EL head at the halt)
+  STAKES_IN_PARENT=$(awk -F'\t' -v b="$EL_HALT" '$2=="stake" && $5==b' "$EV_DIR/T1-receipts.tsv" | wc -l | tr -d ' ')
+  echo "dropped payload parent EL block=$EL_HALT; stakes mined in it=$STAKES_IN_PARENT" > "$EV_DIR/T5-parent-events.txt"
+
+  log "T1: $((SENT - BAD_RCPT))/$SENT txs have status 0x1"
+  log "T2: nonce want=$WANT_NONCE got=$GOT_NONCE"
+  log "T3: val1 token delta=$TOK_DELTA, want=$TOK_WANT"
+  log "T4 coverage: $IN_DROPPED of our txs were in the dropped fork-block payload"
+  log "T5 coverage: $STAKES_IN_PARENT stake(s) in EL block $EL_HALT, whose events the dropped tx carried"
+  [ "$BAD_RCPT" = "0" ] || fail "T1 $BAD_RCPT txs without a successful receipt (see T1-receipts.tsv)"
+  [ "$GOT_NONCE" = "$WANT_NONCE" ] || fail "T2 nonce $GOT_NONCE, want $WANT_NONCE"
+  [ "$TOK_DELTA" = "$TOK_WANT" ] || fail "T3 val1 token delta $TOK_DELTA, want $TOK_WANT"
+  log "T1-T3 pass"
+fi
 
 # --- B6 handler ran ---
 dump_logs
