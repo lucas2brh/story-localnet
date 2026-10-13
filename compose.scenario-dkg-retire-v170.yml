@@ -1,0 +1,21 @@
+# DKG retirement probe (probe_v171_halt_v181_retire_8val.sh): all nodes on story-node:v1.7.0-clean-localnet
+
+services:
+  validator1-node:
+    image: story-node:v1.7.0-clean-localnet
+  validator2-node:
+    image: story-node:v1.7.0-clean-localnet
+  validator3-node:
+    image: story-node:v1.7.0-clean-localnet
+  validator4-node:
+    image: story-node:v1.7.0-clean-localnet
+  validator5-node:
+    image: story-node:v1.7.0-clean-localnet
+  validator6-node:
+    image: story-node:v1.7.0-clean-localnet
+  validator7-node:
+    image: story-node:v1.7.0-clean-localnet
+  validator8-node:
+    image: story-node:v1.7.0-clean-localnet
+  bootnode1-node:
+    image: story-node:v1.7.0-clean-localnet

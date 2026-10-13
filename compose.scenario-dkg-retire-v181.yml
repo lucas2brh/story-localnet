@@ -1,0 +1,21 @@
+# DKG retirement probe (probe_v171_halt_v181_retire_8val.sh): all nodes on story-node:v1.8.1-dkg-retire-localnet
+
+services:
+  validator1-node:
+    image: story-node:v1.8.1-dkg-retire-localnet
+  validator2-node:
+    image: story-node:v1.8.1-dkg-retire-localnet
+  validator3-node:
+    image: story-node:v1.8.1-dkg-retire-localnet
+  validator4-node:
+    image: story-node:v1.8.1-dkg-retire-localnet
+  validator5-node:
+    image: story-node:v1.8.1-dkg-retire-localnet
+  validator6-node:
+    image: story-node:v1.8.1-dkg-retire-localnet
+  validator7-node:
+    image: story-node:v1.8.1-dkg-retire-localnet
+  validator8-node:
+    image: story-node:v1.8.1-dkg-retire-localnet
+  bootnode1-node:
+    image: story-node:v1.8.1-dkg-retire-localnet
